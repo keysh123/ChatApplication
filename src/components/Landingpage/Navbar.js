@@ -29,17 +29,17 @@ export default function Navbar() {
           </ul>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link " aria-disabled="true">Creaters</a>
+          <a className="nav-link " href='#' aria-disabled="true">Creaters</a>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link " aria-disabled="true">Contact Us</a>
+          <a className="nav-link " href='#' aria-disabled="true">Contact Us</a>
         </li>
        
       </ul>
       <form className="d-flex" role="search">
         {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> */}
         {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
-        <button className="btn btn-primary" type="submit">GetStartrd</button>
+        <button className="btn btn-primary mx-3">Get Started</button>
       </form>
     </div>
   </div>

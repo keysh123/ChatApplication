@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Landingpage/Navbar';
+import LandingPage from './components/Landingpage/LandingPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
      {/* </div> */}
 
      <Navbar/>
+     <LandingPage/>
     </>
   );
 }
