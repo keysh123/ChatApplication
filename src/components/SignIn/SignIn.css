@@ -1,0 +1,118 @@
+.rhs{
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    145deg,
+    rgba(140, 167, 255, 1) 0,
+    rgba(139, 84, 249, 1) 50%,
+    rgba(131, 33, 243, 1) 100%
+  );
+}
+
+.preference {
+  padding: 10% 10%;
+  position: absolute;
+  color: white;
+  text-align: center;
+  margin: auto;
+}
+
+.preference h1 {
+  margin: 0px 0px 23px;
+  font-size: 46px;
+}
+
+.preference p{
+  font-size: 16px;
+  margin: 0px 0px 30px;
+  font-weight: 500;
+}
+
+.col-5,
+.col-7 {
+  padding: 0;
+}
+
+.signupbtn {
+  width: 70%;
+  border: none;
+  padding: 15px;
+  color: #2196F3;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.signupbtn:hover {
+  background-color: rgba(255, 255, 255, 0.879);
+}
+
+.lhs{
+  position: relative;
+  top: 25%;
+}
+
+.content{
+  position: relative;
+  padding: 5% auto;
+  margin: auto;
+  width: 60%;
+}
+
+.icon{
+  float: left;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+}
+
+.form-control{
+  border: 2px solid rgb(211, 141, 255);
+}
+
+.field{
+  display: flex;
+  margin: 8%;
+}
+
+.signinbtn{
+  width: 77%;
+  border: none;
+  padding: 15px;
+  margin: 10px 0px 20px 40px;
+  background-color: rgb(189, 104, 255);
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+}
+
+.signinbtn:hover{
+  background-color: rgb(157, 0, 255);
+  color: white;
+}
+
+@media (max-width: 700px){
+  
+  .rhs{
+    display: none;
+  }
+
+  .temp{
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .content{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* .lhs{
+    padding: 0px;
+  } */
+
+}
