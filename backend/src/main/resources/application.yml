@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: chatapp
+
+  datasource:
+    url: jdbc:mysql://localhost:3301/chatapp
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      database: mysql
+
+server:
+  port: 3000
