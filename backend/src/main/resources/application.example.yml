@@ -3,9 +3,9 @@ spring:
     name: chatapp
 
   datasource:
-    url: jdbc:mysql://localhost:3301/chatapp
+    url: jdbc:mysql://localhost:3306/chatapp
     username: root
-    password:
+    password: unnatininama@20
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
