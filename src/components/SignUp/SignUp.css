@@ -1,0 +1,76 @@
+/* LHS */
+.lhs {
+    background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgba(131, 33, 243, 1) 100%);
+    height: 100vh;
+    position: relative;
+}
+
+.preference {
+    padding: 45% 10%;
+    position: absolute;
+    color: white;
+}
+
+h1{
+    margin: 30px 0;
+}
+
+.col-4, .col-8{
+    padding: 0;
+}
+
+.signinbtn{
+    width: 70%;
+    border: none;
+    padding: 10px;
+    color: rgb(144, 0, 255);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.signinbtn:hover{
+    background-color: rgb(231, 196, 253);
+}
+
+/* RHS */
+.rhs{
+    position: relative;
+    top: 10%;
+}
+.content{
+    position: relative;
+    padding: 5% auto;
+    margin: auto;
+    width: 60%;
+}
+
+.icon{
+    float: left;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+}
+
+.form-control{
+    border: 2px solid rgb(211, 141, 255);
+}
+
+.field{
+    display: flex;
+    margin: 20px;
+}
+
+.signupbtn{
+    width: 81%;
+    border: none;
+    padding: 10px;
+    margin: 10px 0 5px 40px;
+    background-color: rgb(189, 104, 255);
+    font-weight: bold;
+    color: white;
+}
+
+.signupbtn:hover{
+    background-color: rgb(157, 0, 255);
+    color: white;
+}
