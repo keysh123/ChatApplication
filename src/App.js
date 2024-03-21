@@ -14,7 +14,7 @@ function App() {
      
      {/* </div> */}
 
-     <Navbar/>
+     {/* <Navbar/> */}
      <LandingPage/>
     </>
   );
