@@ -22,7 +22,7 @@ public class SecurityConfig {
     @Autowired
     private final JwtAuthFilter jwtAuthFilter;
     @Autowired
-    private final AuthenticationProvider authenticationProvider;
+    private final CustomAuthProvider authenticationProvider;
 
     @Bean
     @Primary
@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         System.out.println("All good till now");
+//        System.out.println(http.getObject());
         return http.build();
     }
 }

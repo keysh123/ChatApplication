@@ -13,6 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +28,7 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin
-//@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     @Autowired
@@ -29,7 +37,7 @@ public class AuthController {
     @Autowired
     private ContentService contentService;
 
-    @PostMapping("/api/v1/auth/register")
+    @PostMapping("/register")
     public ResponseEntity<?> register(
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
@@ -39,27 +47,50 @@ public class AuthController {
         Cookie cookie = new Cookie("Authorization", authResponse.getToken());
         cookie.setMaxAge(1000*60*60*24);
         cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         httpServletResponse.addCookie(cookie);
 
-        return new ResponseEntity(new SuccessDto(authResponse.getUser(),HttpStatus.CREATED.value()),HttpStatus.CREATED);
-//        try {
-//            UserDto u = authService.saveUser(user);
-//            return new ResponseEntity<>(new SuccessDto(u,HttpStatus.CREATED.value()),HttpStatus.CREATED);
-//        }catch (DuplicateKeyException e){
-//            System.out.println(e);
-//            return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.CONFLICT.value()),HttpStatus.CONFLICT);
-//        }catch (Exception e){
-//            System.out.println(e);
-//            return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);
-//        }
+        return new ResponseEntity(new SuccessDto(HttpStatus.CREATED.value(),authResponse.getUser()),HttpStatus.CREATED);
     }
 
-    @PostMapping("/api/v1/auth/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticate(
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse,
             @RequestBody AuthenticationRequest request
     ){
-        System.out.println("-------------------------------------------------authen");
-        return ResponseEntity.ok(authService.authenticate(request));
+
+        AuthenticationResponse authResponse = null;
+        try {
+            authResponse = authService.authenticate(request);
+        } catch (UsernameNotFoundException e) {
+           return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.NOT_FOUND.value()),HttpStatus.NOT_FOUND);
+        }catch (BadCredentialsException e){
+           return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.UNAUTHORIZED.value()),HttpStatus.UNAUTHORIZED);
+        }catch (Exception e){
+           return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);
+        }
+
+
+        System.out.println(authResponse);
+        Cookie cookie = new Cookie("Authorization", authResponse.getToken());
+        cookie.setMaxAge(1000*60*60*24);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        httpServletResponse.addCookie(cookie);
+        return new ResponseEntity(new SuccessDto(HttpStatus.ACCEPTED.value(),authResponse.getUser()),HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        SecurityContextHolder.clearContext();
+        authService.removeAuthCookie(request,response);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.NO_CONTENT.value(),"Done"),HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/upload")
