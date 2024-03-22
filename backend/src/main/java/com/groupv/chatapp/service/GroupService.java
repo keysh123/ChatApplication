@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class GroupService {
@@ -17,22 +19,25 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
-    public Group updateDescription(String groupId,String description){
+    public Group updateDescription(Integer groupId,String description){
         Group group=groupRepository.getReferenceById(groupId);
         group.setDescription(description);
         return groupRepository.save(group);
     }
-    public Group updateName(String groupId,String name){
+    public Group updateName(Integer groupId,String name){
         Group group=groupRepository.getReferenceById(groupId);
         group.setGroupName(name);
         return groupRepository.save(group);
     }
 
-    public Group addGroupPhoto(String groupId, Content contentId){
+    public Group addGroupPhoto(Integer groupId, Content contentId){
         Group group=groupRepository.getReferenceById(groupId);
         group.setGroupImg(contentId);
         return groupRepository.save(group);
     }
 
+    public List<Group> findAllGroups(){
+        return groupRepository.findAll();
+    }
 
 }

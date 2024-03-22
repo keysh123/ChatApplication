@@ -15,7 +15,7 @@ public class ContentService {
 
 
     @Transactional
-    public String saveContent(Content content){
+    public Integer saveContent(Content content){
         entityManager.persist(content);
         return content.getContentId();
     }

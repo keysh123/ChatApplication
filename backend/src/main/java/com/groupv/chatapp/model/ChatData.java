@@ -13,12 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 public class ChatData {
 
     @Id
     @GeneratedValue
-    private String chatId;
+    private Integer chatId;
 
     @ManyToOne
     @JoinColumn(

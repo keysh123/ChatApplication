@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChatRoomRepository extends JpaRepository<ChatRoom,String> {
+public interface ChatRoomRepository extends JpaRepository<ChatRoom,Integer> {
 
 
 }

@@ -13,11 +13,8 @@ public class ChatRoomService {
     @Autowired
     private ChatRoomRepository chatRoomRepository;
 
-    public ChatRoom createChatRoom(User user1, User user2){
-        ChatRoom chatRoom=ChatRoom.builder()
-                .user1(user1)
-                .user2(user2)
-                .build();
+    public ChatRoom createChatRoom(ChatRoom chatRoom){
+
         return chatRoomRepository.save(chatRoom);
     }
 

@@ -2,7 +2,6 @@ package com.groupv.chatapp.controller;
 
 import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.Content;
-import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.service.AuthService;
 import com.groupv.chatapp.service.ContentService;
 import jakarta.servlet.http.Cookie;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +61,7 @@ public class AuthController {
     }
 
     @PostMapping("/upload")
-    public String uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
+    public Integer uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
         System.out.println(file.getName());
         System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
         return contentService.saveContent(new Content(file.getContentType(), file.getBytes()));

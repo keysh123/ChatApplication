@@ -1,5 +1,6 @@
 package com.groupv.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +21,8 @@ public class GroupParticipant {
     @Id
     @ManyToOne
     @JoinColumn(
-            name = "group_id"
-    )
+            name = "group_id")
+    @JsonBackReference
     private Group groupId; //foreign key primary key
 
     @Id

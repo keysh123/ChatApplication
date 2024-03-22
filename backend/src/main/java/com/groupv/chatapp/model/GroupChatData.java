@@ -1,5 +1,6 @@
 package com.groupv.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,19 +14,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 public class GroupChatData {
-
-
 
     @Id
     @GeneratedValue
-    private String chatId;
+    private Integer chatId;
 
     @ManyToOne
     @JoinColumn(
-            name = "group_id"
-    )
+            name = "group_id")
+    @JsonBackReference
     private Group groupId;
 
     @ManyToOne

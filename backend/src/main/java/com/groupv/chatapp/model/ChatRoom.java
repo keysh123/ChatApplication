@@ -10,12 +10,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 public class ChatRoom {
 
     @Id
     @GeneratedValue
-    private String chatRoomId;
+    private Integer chatRoomId;
 
     @OneToOne
     @JoinColumn(

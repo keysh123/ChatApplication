@@ -1,5 +1,6 @@
 package com.groupv.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -60,8 +61,8 @@ public class User implements UserDetails {
     private Content profileImg; // foreign key of image table
 
     @OneToMany(
-            mappedBy = "creator"
-    )
+            mappedBy = "creator")
+    @JsonManagedReference
     private List<Group> creator;
 
     @OneToOne(

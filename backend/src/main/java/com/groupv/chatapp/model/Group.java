@@ -1,6 +1,8 @@
 package com.groupv.chatapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -16,21 +18,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "group_chat")
+@Table(name="Group_chat")
 public class Group {
 
     @Id
-    @GeneratedValue
-    private String groupId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer groupId;
 
     @NotEmpty(message = "group name cannot be empty")
     private String groupName;
-
+    //@NotEmpty(message = "group creator name cannot be empty")
     @ManyToOne
     @JoinColumn(
-            name = "username"
-    )
-    @NotEmpty(message = "group name cannot be empty")
+            name = "username")
+    @JsonBackReference
     private User creator; //fk
 
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -38,19 +39,19 @@ public class Group {
     // foreign key
     @OneToOne
     @JoinColumn(
-            name="groupProfileImage"
-    )
+            name="groupProfileImage")
     private Content groupImg;
     private String description;
 
     @OneToMany(
-            mappedBy = "groupId"
-    )
+            mappedBy = "groupId")
+    @JsonManagedReference
     private List<GroupParticipant> groupParticipants;
 
     @OneToMany(
             mappedBy = "groupId"
     )
+    @JsonManagedReference
     private List<GroupChatData> groupChatData;
 
 

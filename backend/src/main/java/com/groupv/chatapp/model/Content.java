@@ -13,12 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 public class Content {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String contentId;
+    private Integer contentId;
     private String format;
 
     @Lob
