@@ -2,6 +2,7 @@ package com.groupv.chatapp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupv.chatapp.dto.ErrorDto;
+import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -28,8 +30,10 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+
     private final UserDetailsService userDetailService;
     private final ObjectMapper mapper;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(
@@ -42,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         Cookie[] cookies = request.getCookies();
         Cookie authCookie = null;
         if (cookies != null) {
-            for (Cookie cookie:cookies) {
+            for (Cookie cookie : cookies) {
                 System.out.println(cookie.getName());
                 if (cookie.getName().equals("Authorization")) {
                     authCookie = cookie;
@@ -53,7 +57,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         System.out.println(jwt);
         if (jwt == null) {
-            sendError(response);
+//            sendError(response);
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -61,9 +66,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         username = jwtService.extractUsername(jwt);
         System.out.println(username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailService.loadUserByUsername(username);
+            System.out.println("qwertyuioplkjhgfdsazxcvbnm");
+            UserDetails userDetails = userDetailService.loadUserByUsername(username);
+            System.out.println("qwertyuioplkjhgfdsazxcvbnm");
             if (jwtService.isTokenValid(jwt, userDetails)) {
-                request.setAttribute("username",username);
+                request.setAttribute("username", username);
                 System.out.println("Username set-----------+++++++++++++++++++++++++++++++++++++");
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -77,7 +84,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 );
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }else{
+            } else {
                 authCookie.setMaxAge(0);
                 response.addCookie(authCookie);
                 sendError(response);
@@ -89,6 +96,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private void sendError(HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        mapper.writeValue(response.getWriter(),new ErrorDto("Forbidden",HttpStatus.FORBIDDEN.value()));
+        mapper.writeValue(response.getWriter(), new ErrorDto("Forbidden", HttpStatus.FORBIDDEN.value()));
     }
 }
