@@ -1,3 +1,4 @@
+
 package com.groupv.chatapp.config;
 
 import com.groupv.chatapp.repository.UserRepository;
@@ -45,3 +46,4 @@ public class ApplicationConfig {
     }
 
 }
+

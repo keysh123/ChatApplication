@@ -1,5 +1,6 @@
 package com.groupv.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,7 +20,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 public class User implements UserDetails {
 
     @Id
@@ -34,7 +34,8 @@ public class User implements UserDetails {
 
     @Column(
             nullable = false,
-            updatable = false
+            updatable = false,
+            unique = true
     )
     @NotEmpty(message = "email cannot be empty")
     private String email;
@@ -62,33 +63,41 @@ public class User implements UserDetails {
 
     @OneToMany(
             mappedBy = "creator")
-    @JsonManagedReference
+    @JsonManagedReference("creator")
     private List<Group> creator;
 
     @OneToOne(
-            mappedBy = "user1"
+            mappedBy = "user1",cascade = CascadeType.ALL, orphanRemoval = true
     )
+    @JsonManagedReference("sender")
     private ChatRoom user1;
 
     @OneToOne(
-            mappedBy = "user2"
+            mappedBy = "user2",cascade = CascadeType.ALL, orphanRemoval = true
     )
+    @JsonManagedReference("receiver")
     private ChatRoom user2;
 
     @OneToMany(
             mappedBy = "sender"
     )
+    @JsonManagedReference("sender-chat")
     private List<ChatData> chatSenderData;
 
     @OneToMany(
             mappedBy = "receiver"
     )
+    @JsonManagedReference("receiver-chat")
     private List<ChatData> chatRecieverData;
 
+    @OneToMany(mappedBy = "sender")
+    @JsonBackReference("group-sender")
+    private List<GroupChatData> senderGroupChatData;
 
     @OneToMany(
-            mappedBy = "username"
+            mappedBy = "username",cascade = CascadeType.ALL, orphanRemoval = true
     )
+    @JsonManagedReference("participant")
     private List<GroupParticipant> groupParticipants;
 
     @Override

@@ -2,6 +2,8 @@ package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.model.Content;
 import com.groupv.chatapp.model.Group;
+import com.groupv.chatapp.model.GroupParticipant;
+import com.groupv.chatapp.repository.GroupParticipantRepository;
 import com.groupv.chatapp.repository.GroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import java.util.List;
 public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
-
     public Group addGroup(Group group){
         return groupRepository.save(group);
     }
@@ -38,6 +39,10 @@ public class GroupService {
 
     public List<Group> findAllGroups(){
         return groupRepository.findAll();
+    }
+
+    public void deleteGroup(Integer id){
+        groupRepository.deleteById(id);
     }
 
 }

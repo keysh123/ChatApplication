@@ -2,19 +2,14 @@ package com.groupv.chatapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
-@Getter
-@Setter
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
 @IdClass(GroupUserComposite.class)
 public class GroupParticipant {
 
@@ -30,7 +25,8 @@ public class GroupParticipant {
     @JoinColumn(
             name = "user_id"
     )
+    @JsonBackReference("participant")
     private User username; //foreign key primary key
-    private LocalDateTime joinedAt;
+    private LocalDateTime joinedAt=LocalDateTime.now();
     private GroupRole role; // ADMIN, USER
 }

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class GroupChatData {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer chatId;
 
     @ManyToOne
@@ -30,6 +30,7 @@ public class GroupChatData {
     @JoinColumn(
             name = "senderId"
     )
+    @JsonBackReference("group-sender")
     private User sender; //fk
 
 
@@ -41,6 +42,7 @@ public class GroupChatData {
     @JoinColumn(
             name = "contentId"
     )
+    @JsonBackReference("group-chat-content")
     private Content content;
 
     private LocalDateTime time;

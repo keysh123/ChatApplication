@@ -1,3 +1,4 @@
+
 package com.groupv.chatapp.service;
 
 import io.jsonwebtoken.Claims;
@@ -72,3 +73,4 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
+

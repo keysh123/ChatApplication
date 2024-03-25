@@ -1,3 +1,4 @@
+
 package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.dto.AuthenticationRequest;
@@ -66,4 +67,6 @@ public class AuthService {
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
 
+
 }
+
