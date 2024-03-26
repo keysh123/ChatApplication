@@ -13,7 +13,7 @@ public class SuccessDto {
     int status;
     boolean success = true;
 
-    public SuccessDto(Object o,int status){
+    public SuccessDto(int status,Object o){
         this.data = o;
         this.status = status;
     }
