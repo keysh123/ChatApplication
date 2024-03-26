@@ -1,12 +1,10 @@
 package com.groupv.chatapp.controller;
 
+import com.groupv.chatapp.model.ChatData;
 import com.groupv.chatapp.model.GroupChatData;
 import com.groupv.chatapp.service.GroupChatDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,9 @@ public class GroupChatDataController {
     @GetMapping("/GroupChatData")
     public List<GroupChatData> findChat(){
         return groupChatDataService.show();
+    }
+    @PutMapping("/GroupChatData/{id}")
+    public GroupChatData updateStatus(@PathVariable Integer id, @RequestBody String status){
+        return groupChatDataService.updateStatus(id,status);
     }
 }
