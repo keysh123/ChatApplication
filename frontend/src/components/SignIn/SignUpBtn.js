@@ -1,10 +1,10 @@
 import React from 'react'
 import './SignIn.css'
 
-export default function SignUpBtn(props) {
+export default function SignUpBtn() {
   return (
     <div>
-        <button className={props.cname}>{props.heading}</button>
+        <button type="submit" className="signupbtn1">Sign Up</button>
     </div>
   )
 }

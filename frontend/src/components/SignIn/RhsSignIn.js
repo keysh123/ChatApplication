@@ -9,7 +9,7 @@ export default function RhsSignIn() {
         <div className="preference1">
           <h1><b>Hello, Friend!</b></h1>
           <p>Enter your personal details and start your journey with ChatNest today.</p>
-          <SignUpBtn cname="signupbtn1" heading="Sign Up" />
+          <SignUpBtn />
         </div>
       </div>
     </div>

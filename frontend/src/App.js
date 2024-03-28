@@ -16,8 +16,7 @@ function App() {
           <Route path={"/sign-in"} element={<SignIn></SignIn>}></Route>
           <Route path={"/sign-up"} element={<SignUp></SignUp>}></Route>
         </Routes>
-      </BrowserRouter>
-
+      </BrowserRouter>   
     </>
   );
 }
