@@ -1,0 +1,131 @@
+.container-fluid{
+    display: flex;
+    border: 1px solid black;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0;
+}
+
+.navbar{
+    background-color: rgb(153, 0, 255);
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    height: 10%;
+    padding: 5px;
+}
+
+.logo{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uimg{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.uimgs{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.uimg:hover{
+    cursor: pointer;
+
+}
+
+.uname{
+    font-size: 20px;
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.ubtn{
+    padding: 5px;
+    margin: 10px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    background-color: rgb(255, 200, 129);
+}
+
+.sidebar{
+    flex : 2;
+    height: 100vh;
+    border: 1px solid black;
+    background-color: rgb(177, 65, 252);
+}
+
+.search{
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.searchForm input{
+    background-color: transparent;
+    border: none;
+    /* border-bottom: 1px solid black; */
+    color: white;
+    outline: none;
+    width: 98%;
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.searchForm input::placeholder{
+    color: rgb(226, 196, 255);
+}
+
+.userChat{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    /* box-shadow: 1px 1px 1px 1px white; */
+    color: white;
+}
+
+.userChat:hover{
+    background-color: rgb(165, 30, 255);
+    box-shadow: 0 0 1px 1px white;
+}
+
+.chat{
+    flex : 5;
+    height: 100vh;
+    border: 1px solid black;
+    background-color: rgb(223, 209, 237);
+}
+
+.userChatInfo p {
+    font-size: 16px;
+    color: lightgray;
+}
+
+.chatInfo{
+    background-color: rgb(150, 17, 238);
+    height: 10%;
+    display: flex;
+}
+
+.chatIcons{
+    left: 600px;
+}
