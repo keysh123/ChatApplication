@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
@@ -93,10 +93,13 @@ public class AuthController {
     }
 
     @PostMapping("/upload")
-    public Integer uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
         System.out.println(file.getName());
         System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
-        return contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
+
+        int id = contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
+
+        return new ResponseEntity<>(new SuccessDto(id,HttpStatus.OK),HttpStatus.OK);
     }
 
 

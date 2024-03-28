@@ -21,9 +21,11 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer contentId;
     private String format;
+    private String fileName;
 
     @Lob
-    @Size(max = 100000)
+//    @Size(max = 10485760)
+    @Column(length = 16777215)
     private byte[] data;
 
     @OneToOne(
@@ -41,6 +43,12 @@ public class Content {
     private ChatData chatContent;
 
     public Content(String format, byte[] data) {
+        this.format = format;
+        this.data = data;
+    }
+
+    public Content(String fileName,String format, byte[] data) {
+        this.fileName = fileName;
         this.format = format;
         this.data = data;
     }

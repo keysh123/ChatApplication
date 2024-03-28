@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface GroupParticipantRepository extends JpaRepository<GroupParticipant, GroupUserComposite> {
     List<GroupParticipant> findByGroupId(Group group);
+//    List<GroupParticipant> findByGroupId(Integer groupId);
 }

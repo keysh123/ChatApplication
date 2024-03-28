@@ -2,13 +2,11 @@ package com.groupv.chatapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -40,7 +38,8 @@ public class ChatData {
     private User receiver; //fk
 
     private String text;
-    private ContentType contentType;
+
+    private String format;
 
     //fk
     @OneToOne
@@ -48,6 +47,6 @@ public class ChatData {
             name = "contentId"
     )
     private Content content;
-    private LocalDateTime time;
+    private LocalDateTime time = LocalDateTime.now();
     private ChatDataStatus status;
 }
