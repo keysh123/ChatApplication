@@ -6,13 +6,13 @@ import SignUpBtn from './SignUpBtn'
 
 export default function SignInForm() {
   return (
-    <form className='signin'>
+    <form className='signin1'>
         <div className='form-parent'>
             <Mail/>
             <Password/>
-            <SignUpBtn cname="signinbtn" heading="Sign In"/>
+            <SignUpBtn cname="signinbtn1" heading="Sign In"/>
             <div className='callout'>
-                <span>Don't have account? <a href='sign-up.html'>Create Account</a></span>
+                <span className='span1'>Don't have account? <a href='sign-up.html'>Create Account</a></span>
             </div>
         </div>
     </form>

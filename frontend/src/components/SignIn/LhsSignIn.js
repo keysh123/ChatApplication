@@ -7,10 +7,10 @@ export default function LhsSignIn() {
     <>
         {/* <div class="main order-md-1"> */}
 					{/* <div class="start"> */}
-						<div class="container lhs">
-							<div class="col-md-12">
-								<div class="content">
-									<h1><b>Sign in to Swipe</b></h1>
+						<div className="container lhs1">
+							<div className="col-md-12">
+								<div className="content1">
+									<h1><b>Sign in to ChatNest</b></h1>
 									<SignInForm/>
 								</div>
 							</div>

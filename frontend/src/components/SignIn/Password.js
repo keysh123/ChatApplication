@@ -3,8 +3,8 @@ import './SignIn.css'
 
 export default function Password() {
   return (
-    <div className='form-group field'>
-        <button className='btn icon'><i className='fa fa-lock'></i></button>
+    <div className='form-group field1'>
+        <button className='btn icon1'><i className='fa fa-lock'></i></button>
         <input type='password' id='inputPassword' className='form-control' placeholder='Password' required/>
     </div>
   )

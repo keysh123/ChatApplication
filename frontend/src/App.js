@@ -1,7 +1,7 @@
 import './App.css';
 import SignIn from './components/SignIn/SignIn';
 import Navbar from './components/Landingpage/Navbar';
-// import LandingPage from './components/Landingpage/LandingPage';
+import LandingPage from './components/Landingpage/LandingPage';
 // import Navbar from './components/Navbar';
 import { SignUp } from './components/SignUp/SignUp';
 import HomeApp from './components/ChatPage/HomeApp';
@@ -20,9 +20,10 @@ function App() {
      {/* </div> */}
 
      {/* <Navbar/> */}
-     {/* <SignUp/> */}
+     <SignUp/>
      {/* <LandingPage/> */}
-     <HomeApp/>
+     {/* <HomeApp/> */}
+     {/* <SignIn/> */}
     </>
   );
 }

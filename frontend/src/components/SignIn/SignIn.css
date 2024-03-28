@@ -1,4 +1,5 @@
-.rhs{
+
+.rhs1{
   height: 100vh;
   position: relative;
   display: flex;
@@ -11,7 +12,7 @@
   );
 }
 
-.preference {
+.preference1 {
   padding: 10% 10%;
   position: absolute;
   color: white;
@@ -19,12 +20,12 @@
   margin: auto;
 }
 
-.preference h1 {
-  margin: 0px 0px 23px;
+.preference1 h1 {
+  margin: 0px 0px 30px;
   font-size: 46px;
 }
 
-.preference p{
+.preference1 p{
   font-size: 16px;
   margin: 0px 0px 30px;
   font-weight: 500;
@@ -35,7 +36,7 @@
   padding: 0;
 }
 
-.signupbtn {
+.signupbtn1 {
   width: 70%;
   border: none;
   padding: 15px;
@@ -45,39 +46,47 @@
   background-color: white;
 }
 
-.signupbtn:hover {
+.signupbtn1:hover {
   background-color: rgba(255, 255, 255, 0.879);
 }
 
-.lhs{
+.lhs1{
   position: relative;
   top: 25%;
+  
 }
 
-.content{
+.content1{
   position: relative;
-  padding: 5% auto;
   margin: auto;
   width: 60%;
+  padding: 5% auto;
 }
 
-.icon{
+.content1 h1{
+  margin-left: 15%;
+}
+
+.icon1{
   float: left;
   height: 50px;
   width: 50px;
   font-size: 20px;
 }
 
+
 .form-control{
   border: 2px solid rgb(211, 141, 255);
+  /* width: 380%; */
+  /* margin-left: -10%; */
 }
 
-.field{
+.field1{
   display: flex;
   margin: 8%;
 }
 
-.signinbtn{
+.signinbtn1{
   width: 77%;
   border: none;
   padding: 15px;
@@ -86,16 +95,21 @@
   font-weight: bold;
   border-radius: 5px;
   color: white;
+  margin-left: 15%;
 }
 
-.signinbtn:hover{
+.signinbtn1:hover{
   background-color: rgb(157, 0, 255);
   color: white;
 }
 
+.span1{
+  margin-left: 25%;
+}
+
 @media (max-width: 700px){
   
-  .rhs{
+  .rhs1{
     display: none;
   }
 
@@ -105,7 +119,7 @@
     padding: 0;
   }
 
-  .content{
+  .content1{
     padding: 0;
     margin: 0;
     width: 100%;
