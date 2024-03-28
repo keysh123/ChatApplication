@@ -13,5 +13,4 @@ import java.util.List;
 public class GroupParticipantDto {
     Integer groupId;
     List<String> username;
-    GroupRole role;
 }

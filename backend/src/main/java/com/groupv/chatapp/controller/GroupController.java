@@ -14,8 +14,8 @@ public class GroupController  {
     private GroupService groupService;
 
     @PostMapping("/group")
-    public Group saveGroup(@RequestBody Group group){
-        return groupService.addGroup(group);
+    public Group saveGroup(@RequestBody Group group,@RequestAttribute("username") String username){
+        return groupService.addGroup(group,username);
     }
 
     @GetMapping("/group")

@@ -13,17 +13,21 @@ public class GroupParticipantController {
     @Autowired
     private GroupParticipantService groupParticipantService;
     @PostMapping("/participant")
-    public void addParticipant(@RequestBody GroupParticipantDto participant){
-         groupParticipantService.saveParticipant(participant);
+    public void addParticipants(@RequestBody GroupParticipantDto participant){
+         groupParticipantService.saveParticipants(participant);
     }
 
 
     @GetMapping("/participant/{groupId}")
-    public List<GroupParticipant> show(@PathVariable Integer groupId){
-        return groupParticipantService.find(groupId);
+    public List<GroupParticipant> showParticipants(@PathVariable Integer groupId){
+        return groupParticipantService.findParticipant(groupId);
     }
-    @PutMapping("/participant/{groupId}/{username}")
-    public GroupParticipant show(@PathVariable Integer groupId,@PathVariable String username,@RequestBody String role){
-        return groupParticipantService.updateRole(groupId,username,role);
+    @PutMapping("/participant/promote/{groupId}/{username}")
+    public GroupParticipant promote(@PathVariable Integer groupId,@PathVariable String username){
+        return groupParticipantService.promoteParticipant(groupId,username);
+    }
+    @PutMapping("/participant/demote/{groupId}/{username}")
+    public GroupParticipant demote(@PathVariable Integer groupId,@PathVariable String username){
+        return groupParticipantService.DemoteParticipant(groupId,username);
     }
 }

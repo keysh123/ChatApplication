@@ -27,6 +27,6 @@ public class GroupParticipant {
     )
     @JsonBackReference("participant")
     private User username; //foreign key primary key
-    private LocalDateTime joinedAt=LocalDateTime.now();
+    private LocalDateTime joinedAt;
     private GroupRole role; // ADMIN, USER
 }
