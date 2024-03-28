@@ -29,10 +29,8 @@ public class User implements UserDetails {
     @NotEmpty(message = "username cannot be empty")
     private String username;
 
-    @Column(
-            nullable = false
-    )
-    @NotEmpty(message = "name cannot be empty")
+    @Column
+//    @NotEmpty(message = "name cannot be empty")
     private String name;
 
     @Column(

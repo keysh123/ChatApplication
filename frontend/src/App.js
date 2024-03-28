@@ -5,25 +5,19 @@ import LandingPage from './components/Landingpage/LandingPage';
 // import Navbar from './components/Navbar';
 import { SignUp } from './components/SignUp/SignUp';
 import HomeApp from './components/ChatPage/HomeApp';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          <Route path={"/"} element={<LandingPage></LandingPage>}></Route>
+          <Route path={"/sign-in"} element={<SignIn></SignIn>}></Route>
+          <Route path={"/sign-up"} element={<SignUp></SignUp>}></Route>
+        </Routes>
+      </BrowserRouter>
 
-
-     {/* <div className="App"> */}
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-      </header> */}
-     
-     {/* </div> */}
-
-     {/* <Navbar/> */}
-     {/* <SignUp/> */}
-     {/* <LandingPage/> */}
-     <HomeApp/>
-     {/* <SignIn/> */}
     </>
   );
 }

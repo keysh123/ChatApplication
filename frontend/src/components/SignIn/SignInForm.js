@@ -3,6 +3,7 @@ import Mail from './Mail'
 import Password from './Password'
 import './SignIn.css'
 import SignUpBtn from './SignUpBtn'
+import { Link } from 'react-router-dom'
 
 export default function SignInForm() {
   return (
@@ -12,7 +13,7 @@ export default function SignInForm() {
             <Password/>
             <SignUpBtn cname="signinbtn1" heading="Sign In"/>
             <div className='callout'>
-                <span className='span1'>Don't have account? <a href='sign-up.html'>Create Account</a></span>
+                <span className='span1'>Don't have account? <Link to='/sign-up'>Create Account</Link></span>
             </div>
         </div>
     </form>

@@ -5,14 +5,16 @@ import { SignUpRhs } from './SignUpRhs'
 
 
 export const SignUp = () => {
+
+
     return (
         <>
-            <div class="container-fluid text-center">
-                <div class="row">
-                    <div class="col-4">
+            <div className="container-fluid text-center">
+                <div className="row">
+                    <div className="col-4">
                         <SignUpLhs />
                     </div>
-                    <div class="col-8">
+                    <div className="col-8">
                         <SignUpRhs />
                     </div>
                 </div>
