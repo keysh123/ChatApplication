@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class ChatDataController {
     @Autowired
     private ChatDataService chatDataService;
+
     @PostMapping("/chatData")
     public ChatData addChatData(@RequestBody ChatData chatData){
         return chatDataService.saveChatData(chatData);

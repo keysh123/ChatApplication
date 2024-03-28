@@ -46,6 +46,8 @@ public class AuthService {
     public UserDto saveUser(User user) throws DuplicateKeyException {
         if (userRepository.existsById(user.getUsername())) {
             throw new DuplicateKeyException("username is duplicate");
+        }else if(userRepository.existsByEmail(user.getEmail())){
+            throw new DuplicateKeyException("email already exist");
         }
         User u = userRepository.save(user);
         return new UserDto(u);

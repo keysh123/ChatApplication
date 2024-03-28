@@ -13,13 +13,12 @@ import java.util.Arrays;
 @Service
 @AllArgsConstructor
 public class ContentService {
-private ContentRepository contentRepository;
+    private ContentRepository contentRepository;
     EntityManager entityManager;
 
 
-
     @Transactional
-    public Integer saveContent(Content content){
+    public Integer saveContent(Content content) {
         entityManager.persist(content);
         return content.getContentId();
     }
