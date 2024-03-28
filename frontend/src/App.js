@@ -20,9 +20,9 @@ function App() {
      {/* </div> */}
 
      {/* <Navbar/> */}
-     <SignUp/>
+     {/* <SignUp/> */}
      {/* <LandingPage/> */}
-     {/* <HomeApp/> */}
+     <HomeApp/>
      {/* <SignIn/> */}
     </>
   );
