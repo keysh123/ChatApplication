@@ -1,6 +1,7 @@
 package com.groupv.chatapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -67,17 +68,19 @@ public class User implements UserDetails {
     @JsonManagedReference("creator")
     private List<Group> creator;
 
-    @OneToOne(
+    @OneToMany(
             mappedBy = "user1",cascade = CascadeType.ALL, orphanRemoval = true
     )
-    @JsonManagedReference("sender")
-    private ChatRoom user1;
+//    @JsonManagedReference("sender")
+    @JsonIgnore
+    private List<ChatRoom> user1;
 
-    @OneToOne(
+    @OneToMany(
             mappedBy = "user2",cascade = CascadeType.ALL, orphanRemoval = true
     )
-    @JsonManagedReference("receiver")
-    private ChatRoom user2;
+//    @JsonManagedReference("receiver")
+    @JsonIgnore
+    private List<ChatRoom> user2;
 
     @OneToMany(
             mappedBy = "sender"

@@ -16,6 +16,8 @@ public interface UserRepository extends JpaRepository<User,String> {
 //    @Query("SELECT u FROM User u LEFT JOIN FETCH u.profileImg WHERE u.username = :username")
     Optional<User> findByUsername(String username);
     boolean existsByEmail(String email);
+
+    @Query("SELECT new com.groupv.chatapp.dto.UserDto(u) FROM User u WHERE u.username LIKE %?1%")
     List<UserDto> findByUsernameContaining(String searchString);
 //    Optional<User> findByUsernameWithProfileImg(String username);
 

@@ -1,5 +1,6 @@
 package com.groupv.chatapp.dto;
 
+import com.groupv.chatapp.model.Content;
 import com.groupv.chatapp.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +15,13 @@ public class UserDto {
     String name;
     String email;
     String bio;
+//    Content profileImg;
 
     public UserDto(User user){
         this.username = user.getUsername();
         this.name = user.getName();
         this.bio = user.getBio();
         this.email = user.getEmail();
+//        this.profileImg = user.getProfileImg();
     }
 }

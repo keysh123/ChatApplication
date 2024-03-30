@@ -1,5 +1,6 @@
 package com.groupv.chatapp.repository;
 
+import com.groupv.chatapp.dto.ChatRoomResponseDto;
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,13 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom,Integer> {
     Optional<ChatRoom> findByUser1AndUser2(User user, User user2);
 
     Optional<ChatRoom> findByUser2AndUser1(User user,User user2);
+
+    @Query("select new com.groupv.chatapp.dto.ChatRoomResponseDto(c.chatRoomId,c.user1,c.user2) from ChatRoom c where c.user1 = ?1 or c.user2 = ?1 ")
+    List<ChatRoomResponseDto> findInUser1OrUser2(User user1);
+
+    @Query("select count(*)>0 from ChatRoom c where (c.user1 = ?1 and c.user2 = ?2) or (c.user1 = ?2 and c.user2 = ?1) ")
+    boolean exists(User user1,User user2);
+
+    @Query("select c from ChatRoom c where (c.user1 = ?1 and c.user2 = ?2) or (c.user1 = ?2 and c.user2 = ?1) ")
+    List<ChatRoom> justFind(User user1,User user2);
 }

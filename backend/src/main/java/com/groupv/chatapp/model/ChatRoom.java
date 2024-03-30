@@ -12,24 +12,28 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(
+        uniqueConstraints =
+                @UniqueConstraint(columnNames = {"username1","username2"})
+)
 public class ChatRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer chatRoomId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             name = "username1"
     )
-    @JsonBackReference("sender")
+//    @JsonBackReference("sender")
     private User user1;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             name = "username2"
     )
-    @JsonBackReference("receiver")
+//    @JsonBackReference("receiver")
     private User user2;
 
     @OneToMany(
