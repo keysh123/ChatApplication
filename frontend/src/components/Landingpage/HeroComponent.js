@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './LandingPage.css'
 export default function HeroComponent() {
   return (
@@ -11,7 +12,9 @@ export default function HeroComponent() {
     </div>
   
     <div className="d-grid gap-2 mt-4">
+      <Link to="/sign-up">
   <button className="btn btn-primary gs" type="button">Get Started</button>
+  </Link>
     </div>
     <div className='mt-5'>
         <p>GET STARTED FOR FREE AND JOIN MORE THAN 10000 HAPPY CUSTOMERS!! <br />REGISTER YOURSELF AND START CHATTING NOW!! </p>
