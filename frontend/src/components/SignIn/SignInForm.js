@@ -4,10 +4,10 @@ import "./SignIn.css";
 import SignUpBtn from "./SignUpBtn";
 import { Link } from "react-router-dom";
 import Username from "./Username";
-import SignInBtn from "./SignInBtn";
+// import SignInBtn from "./SignInBtn";
 import { useState } from "react";
 
-const USER_AUTH = "http://localhost:3000/api/v1/auth/authenticate";
+const USER_AUTH = "http://localhost:4000/api/v1/auth/authenticate";
 
 export default function SignInForm() {
 
@@ -28,9 +28,10 @@ export default function SignInForm() {
       body:JSON.stringify(user)
     }).then((res) => {
       // Check if response is successful
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
+      // if (!res.ok) {
+      
+      //   throw new Error("Network response was not ok");
+      // }
       // Parse the JSON response
       return res.json();
     }).then((res)=>{
