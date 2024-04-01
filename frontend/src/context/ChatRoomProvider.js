@@ -4,6 +4,7 @@ import { ChatRoomContext } from "./ChatRoomContext";
 
 const ChatRoomProvider = ({ children }) => {
     const [chatRoomData,setChatRoomData] = useState(null);
+    const [resUsers,setResUsers] = useState(null);
 
     const getChatRooms = async ()=>{
         const res = await fetch(api.GET_CHAT_ROOMS,{
@@ -32,10 +33,24 @@ const ChatRoomProvider = ({ children }) => {
         // console.log(obj);
     }
 
+    const searchUsers = async (query) =>{
+      const res = await fetch(api.SEARCH_USER+"?query="+query,{    
+        credentials:"include"
+      });
+
+      const obj = await res.json();
+      if(res.ok){
+        console.log(resUsers);
+        setResUsers(obj.data);
+        console.log(res);
+        console.log(obj);
+      }
+    }
+
 
 
   return (
-    <ChatRoomContext.Provider value={{chatRoomData,setChatRoomData,getChatRooms}}>
+    <ChatRoomContext.Provider value={{chatRoomData,setChatRoomData,getChatRooms,resUsers,setResUsers,searchUsers}}>
       {children}
     </ChatRoomContext.Provider>
   );

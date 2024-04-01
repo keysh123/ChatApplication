@@ -1,33 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ChatPage.css';
+import { ChatRoomContext } from '../../context/ChatRoomContext';
 const SEARCH_USER = "http://localhost:4000/api/v1/user/search";
-const Search = ({searchValue, setSearchValue, setUserInfo}) => {
+
+const Search = ({searchValue, setSearchValue}) => {
   // const [searchValue, setSearchValue] = useState('');
+
+  // const {searchUsers} = useContext(ChatRoomContext);
 
   const handleSearchChange = (event) => {
     event.preventDefault();
     setSearchValue(event.target.value);  
+    // searchUsers(searchValue);
   };
 
   // useEffect(()=>{
   //   if(searchValue.length>2){
-  //     fetch(SEARCH_USER+"?query="+searchValue,{
-        
-  //       credentials:"include"
-  //     })
-  //     .then((res)=>{
-  //       return res.json()
-  //     })
-  //     .then((res)=>{
-  //       console.log(res);
-  //       if(res.success){
-  //         setUserInfo(res.data)
-  //       }
-  //     })
-  //     .catch((err)=>{
-  //       console.log(err);
-  //       alert(err)
-  //     })
+  //     console.log("seatch Val"+searchValue);
+  //     searchUsers(searchValue);
   //   }
   // },[searchValue])
 

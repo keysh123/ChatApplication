@@ -32,10 +32,12 @@
 
 // export default Chats
 
-import React, { useState, useEffect } from 'react';
-import './ChatPage.css';
+import React, { useContext } from "react";
+import "./ChatPage.css";
+import { ChatRoomContext } from "../../context/ChatRoomContext";
+import { ChatContext } from "../../context/ChatContext";
 
-const Chats = ({userInfo}, {setSelectedPerson}) => {
+const Chats = ({userInfo}) => {
   // const [users, setUsers] = useState([]);
 
   // useEffect(() => {
@@ -56,22 +58,29 @@ const Chats = ({userInfo}, {setSelectedPerson}) => {
   //     console.error('Error fetching users:', error);
   //   }
   // };
-
+  const {setChatUser} = useContext(ChatContext);
+  const handleClick = (user)=>{
+    setChatUser(user);
+  }
   return (
-    <div className='chats'>
-    {userInfo.map(user => (
-      <div className="userChat" key={user?.username} onClick={()=>{
-        setSelectedPerson(user?.username);
-      }}>
-        <img className='uimgs' src={user?.profilePicture} alt="" />
-        <div className="userChatInfo">
-          <span>{user?.username}</span>
-          <p>Hello</p>
+    <div className="chats">
+      {userInfo?.map((user) => (
+        <div
+          className="userChat"
+          key={user?.username}
+          onClick={() => {
+            handleClick(user);
+          }}
+        >
+          <img className="uimgs" src={user?.profileImg?.url} alt="" />
+          <div className="userChatInfo">
+            <span>{user?.username}</span>
+            <p>Hello</p>
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
+      ))}
+    </div>
   );
-}
+};
 
 export default Chats;
