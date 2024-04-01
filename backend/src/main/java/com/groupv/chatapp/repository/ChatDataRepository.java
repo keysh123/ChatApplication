@@ -18,5 +18,7 @@ public interface ChatDataRepository extends JpaRepository<ChatData,Integer> {
     void updateContentByChatId(Content content, Integer chatId);
 
 //    List<ChatData> findByChatRoomIdOrderByTimeAsc(Integer chatRoomId);
+    @Query("select c from ChatData c where c.chatRoomId = ?1 order by c.time asc")
+    List<ChatData> findByChatRoomIdOrderByTimeAsc(Integer chatRoomId);
 
 }

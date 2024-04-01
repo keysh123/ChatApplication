@@ -2,10 +2,7 @@ package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.dto.ChatDto;
 import com.groupv.chatapp.exception.DoesNotExistException;
-import com.groupv.chatapp.model.ChatData;
-import com.groupv.chatapp.model.ChatDataStatus;
-import com.groupv.chatapp.model.Content;
-import com.groupv.chatapp.model.ContentType;
+import com.groupv.chatapp.model.*;
 import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.ContentRepository;
@@ -24,6 +21,8 @@ public class ChatDataService {
 
     @Autowired
     private ChatRoomRepository chatRoomRepository;
+    @Autowired
+    private ChatRoomService chatRoomService;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -70,6 +69,12 @@ public class ChatDataService {
         chatData.setStatus(ChatDataStatus.valueOf(status));
         return chatDataRepository.save(chatData);
     }
+
+//    public List<> getChats(String username, String uname) {
+//        List<ChatRoom> chatRoom = chatRoomService.justFind(username,uname);
+//
+////        return chatDataRepository.findByChatRoomIdOrderByTimeAsc(chatRoom.)
+//    }
 
 //    public List<?> getAllChats()
 }

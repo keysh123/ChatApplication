@@ -66,6 +66,14 @@ public class ChatRoomController {
         return chatRoomService.findChatRoomsByBoth(sender,receiver);
     }
 
+    @GetMapping("/get-room/{uname}")
+    public ResponseEntity<?> sendChats(
+            @PathVariable String uname,
+            @RequestAttribute String username
+    ){
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.justFind(username,uname)), HttpStatus.FOUND);
+    }
+
     @DeleteMapping("room/{chatRoomId}")
     public void delete(@PathVariable Integer chatRoomId){
         chatRoomService.deleteChatRoom(chatRoomId);
