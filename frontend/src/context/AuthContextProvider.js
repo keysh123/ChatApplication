@@ -5,6 +5,26 @@ import { AuthContext } from "./AuthContext";
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 //   const navigate = useNavigate();
+
+  const authenticateWithCookies = async ()=>{
+    try {
+      const res = await fetch(api.AUTH_COOKIE,{
+        credentials:"include"
+      });
+      const obj = await res.json();
+      if(res.ok){
+        setUser(obj.data)
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  // authenticateWithCookies();
+
   const signup = (userData) => {
     //   fetch()
     fetch(api.SIGNUP, {
@@ -86,7 +106,7 @@ const AuthContextProvider = ({ children }) => {
   
 
   return (
-    <AuthContext.Provider value={{ user, signin, signout, signup }}>
+    <AuthContext.Provider value={{ user, signin, signout, signup, authenticateWithCookies }}>
       {children}
     </AuthContext.Provider>
   );

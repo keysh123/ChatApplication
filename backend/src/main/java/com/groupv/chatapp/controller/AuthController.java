@@ -3,6 +3,8 @@ package com.groupv.chatapp.controller;
 
 import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.Content;
+import com.groupv.chatapp.model.User;
+import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.AuthService;
 import com.groupv.chatapp.service.ContentService;
 import jakarta.servlet.http.Cookie;
@@ -32,6 +34,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ContentService contentService;
@@ -90,6 +95,18 @@ public class AuthController {
         SecurityContextHolder.clearContext();
         authService.removeAuthCookie(request,response);
         return new ResponseEntity<>(new SuccessDto(HttpStatus.NO_CONTENT.value(),"Done"),HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> authenticateWithCookie(
+            @RequestAttribute String username
+    ){
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username+" not found"));
+        if(username!=null){
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.ACCEPTED.value(),new UserDto(user)),HttpStatus.ACCEPTED);
+        }
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.UNAUTHORIZED.value(),"Unauthorized"),HttpStatus.UNAUTHORIZED);
+
     }
 
     @PostMapping("/upload")

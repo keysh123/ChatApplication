@@ -20,14 +20,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 //import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
-=======
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
->>>>>>> chat-data-controller
+
 
 import java.security.Principal;
 import java.util.List;
@@ -83,14 +79,7 @@ public class ChatController {
         }
     }
 
-<<<<<<< HEAD
-    @GetMapping("/chat/{uname}")
-    public ResponseEntity<?> sendChats(
-            @PathVariable String uname,
-            @RequestAttribute String username
-    ){
-        return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatDataService.getChats(username,uname)), HttpStatus.FOUND);
-=======
+
     @GetMapping("/chat-room/chat/{id}")
     public ResponseEntity<?> sendChats(
             @PathVariable Integer id,
@@ -98,7 +87,6 @@ public class ChatController {
     ){
         List<ChatDto> chatData = chatDataRepository.getAllChatsByChatRoomId(id);
         return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatData),HttpStatus.OK);
->>>>>>> chat-data-controller
     }
 
 //    @PostMapping("/upload")

@@ -5,8 +5,15 @@ import Home from '../ChatPage/Home';
 import LandingPage from '../Landingpage/LandingPage';
 
 const MainPage = () => {
-  const {user,setUser} = useContext(AuthContext);
+  const {user,authenticateWithCookies} = useContext(AuthContext);
 
+  useEffect(()=>{
+    authenticateWithCookies().then((res)=>{
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    })
+  },[])
 
   return (
     <>

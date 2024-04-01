@@ -10,6 +10,7 @@ import AuthContextProvider from "./context/AuthContextProvider";
 import MainPage from "./components/MainPage/MainPage";
 
 function App() {
+
   return (
     <>
       <AuthContextProvider>
