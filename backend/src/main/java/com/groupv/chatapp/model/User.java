@@ -46,6 +46,7 @@ public class User implements UserDetails {
             nullable = false
     )
     @NotEmpty(message = "password cannot be empty")
+    @JsonIgnore
     private String password;
 
 
@@ -57,10 +58,11 @@ public class User implements UserDetails {
     )
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "userProfileImg"
     )
+    @JsonIgnore
     private Content profileImg; // foreign key of image table
 
     @OneToMany(
@@ -71,14 +73,14 @@ public class User implements UserDetails {
     @OneToMany(
             mappedBy = "user1",cascade = CascadeType.ALL, orphanRemoval = true
     )
-//    @JsonManagedReference("sender")
+    @JsonManagedReference("sender")
     @JsonIgnore
     private List<ChatRoom> user1;
 
     @OneToMany(
             mappedBy = "user2",cascade = CascadeType.ALL, orphanRemoval = true
     )
-//    @JsonManagedReference("receiver")
+    @JsonManagedReference("receiver")
     @JsonIgnore
     private List<ChatRoom> user2;
 
@@ -86,14 +88,13 @@ public class User implements UserDetails {
             mappedBy = "sender"
     )
     @JsonManagedReference("sender-chat")
-    @JsonIgnore
+//    @JsonIgnore
     private List<ChatData> chatSenderData;
 
     @OneToMany(
             mappedBy = "receiver"
     )
     @JsonManagedReference("receiver-chat")
-
     private List<ChatData> chatRecieverData;
 
     @OneToMany(mappedBy = "sender")
@@ -108,7 +109,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new HashSet<GrantedAuthority>();
+        return new HashSet<>();
     }
 
     @Override

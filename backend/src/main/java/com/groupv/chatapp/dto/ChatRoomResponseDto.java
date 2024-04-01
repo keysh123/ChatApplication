@@ -18,7 +18,6 @@ public class ChatRoomResponseDto {
 
     private Integer chatRoomId;
     private UserDto user1;
-
     private UserDto user2;
 
 //    private List<ChatData> chatData;

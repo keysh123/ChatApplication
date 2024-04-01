@@ -7,6 +7,7 @@ import com.groupv.chatapp.exception.DoesNotExistException;
 import com.groupv.chatapp.model.ChatData;
 import com.groupv.chatapp.model.GroupChatData;
 import com.groupv.chatapp.model.GroupParticipant;
+import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.GroupParticipantRepository;
 import com.groupv.chatapp.service.ChatDataService;
 import com.groupv.chatapp.service.ContentService;
@@ -19,9 +20,14 @@ import org.springframework.messaging.handler.annotation.Payload;
 //import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
+=======
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> chat-data-controller
 
 import java.security.Principal;
 import java.util.List;
@@ -34,6 +40,7 @@ public class ChatController {
     private final GroupChatDataService groupChatDataService;
     private final GroupParticipantRepository groupParticipantRepository;
     private final ContentService contentService;
+    private final ChatDataRepository chatDataRepository;
 
     @MessageMapping("/chat")
     public void oneToOne(
@@ -44,7 +51,7 @@ public class ChatController {
         ChatData savedChat = chatDataService.saveChatData(chat);
         System.out.println(savedChat.getSender().getUsername()+" - "+savedChat.getReceiver().getUsername()+" - "+savedChat.getTime());
         ChatDto send;
-        if(chat.getContentId()==null){
+        if(chat.getContent()==null){
             send = new ChatDto(savedChat);
         }else {
             send = new ChatDto(savedChat,savedChat.getContent().getFileName());
@@ -76,12 +83,22 @@ public class ChatController {
         }
     }
 
+<<<<<<< HEAD
     @GetMapping("/chat/{uname}")
     public ResponseEntity<?> sendChats(
             @PathVariable String uname,
             @RequestAttribute String username
     ){
         return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatDataService.getChats(username,uname)), HttpStatus.FOUND);
+=======
+    @GetMapping("/chat-room/chat/{id}")
+    public ResponseEntity<?> sendChats(
+            @PathVariable Integer id,
+            @RequestAttribute String username
+    ){
+        List<ChatDto> chatData = chatDataRepository.getAllChatsByChatRoomId(id);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatData),HttpStatus.OK);
+>>>>>>> chat-data-controller
     }
 
 //    @PostMapping("/upload")

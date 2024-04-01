@@ -41,7 +41,7 @@ public class ChatRoom {
     private User user2;
 
     @OneToMany(
-            mappedBy = "chatRoomId"
+            mappedBy = "chatRoom"
     )
     @JsonManagedReference("chatroomInfo")
     private List<ChatData> chatData;

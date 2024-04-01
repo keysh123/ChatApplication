@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupv.chatapp.dto.ErrorDto;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -41,7 +42,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NotNull HttpServletRequest request,
             @NotNull HttpServletResponse response,
             @NotNull FilterChain filterChain
-    ) throws ServletException, IOException {
+    ) throws ServletException, IOException, ExpiredJwtException {
         System.out.println("__________________________________Filter____________________________________________________");
         String jwt = null;
         Cookie[] cookies = request.getCookies();
@@ -64,7 +65,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         final String username;
-        username = jwtService.extractUsername(jwt);
+        try {
+            username = jwtService.extractUsername(jwt);
+        }catch (ExpiredJwtException e){
+            System.out.println(e);
+            sendError(response);
+            return;
+        }
+
         System.out.println(username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             System.out.println("qwertyuioplkjhgfdsazxcvbnm");

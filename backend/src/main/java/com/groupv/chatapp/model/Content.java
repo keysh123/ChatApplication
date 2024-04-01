@@ -31,15 +31,18 @@ public class Content {
     @OneToOne(
             mappedBy = "groupImg"
     )
+    @JsonIgnore
     private Group groupProfileImage;
 
     @OneToOne(
             mappedBy = "profileImg")
+    @JsonIgnore
     private User userProfileImg;
 
     @OneToOne(
             mappedBy = "content"
     )
+    @JsonIgnore
     private ChatData chatContent;
 
     public Content(String format, byte[] data) {

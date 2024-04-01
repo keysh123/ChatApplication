@@ -22,7 +22,6 @@ public class ChatRoomService {
     private UserRepository userRepository;
 
     public ChatRoom createChatRoom(ChatRoom chatRoom) {
-
         return chatRoomRepository.save(chatRoom);
     }
 

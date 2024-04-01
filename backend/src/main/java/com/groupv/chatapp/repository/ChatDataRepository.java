@@ -1,6 +1,8 @@
 package com.groupv.chatapp.repository;
 
+import com.groupv.chatapp.dto.ChatDto;
 import com.groupv.chatapp.model.ChatData;
+import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.Content;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +19,15 @@ public interface ChatDataRepository extends JpaRepository<ChatData,Integer> {
     @Query("update ChatData c set c.content = ?1 where c.chatId = ?2")
     void updateContentByChatId(Content content, Integer chatId);
 
+<<<<<<< HEAD
 //    List<ChatData> findByChatRoomIdOrderByTimeAsc(Integer chatRoomId);
     @Query("select c from ChatData c where c.chatRoomId = ?1 order by c.time asc")
     List<ChatData> findByChatRoomIdOrderByTimeAsc(Integer chatRoomId);
+=======
+    @Query("select new com.groupv.chatapp.dto.ChatDto(c,c.content) from ChatData c LEFT JOIN FETCH c.content co where c.chatRoom.chatRoomId = ?1 order by c.time asc")
+    List<ChatDto> getAllChatsByChatRoomId(Integer id);
+
+//    List<ChatData> findByChatRoomChatRoomId(Integer id);
+>>>>>>> chat-data-controller
 
 }

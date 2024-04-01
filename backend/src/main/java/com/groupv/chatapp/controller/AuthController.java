@@ -44,7 +44,7 @@ public class AuthController {
     ){
         AuthenticationResponse authResponse = authService.register(request);
         Cookie cookie = new Cookie("Authorization", authResponse.getToken());
-        cookie.setMaxAge(1000*60*60*24);
+        cookie.setMaxAge(1000*60*60*24*24);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
@@ -74,7 +74,7 @@ public class AuthController {
 
         System.out.println(authResponse);
         Cookie cookie = new Cookie("Authorization", authResponse.getToken());
-        cookie.setMaxAge(1000*60*60*24);
+        cookie.setMaxAge(1000*60*60*24*24);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
@@ -93,9 +93,11 @@ public class AuthController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImg(
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
         System.out.println(file.getName());
-        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
+//        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
 
         int id = contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
 

@@ -15,13 +15,14 @@ public class UserDto {
     String name;
     String email;
     String bio;
+    ContentDto profileImg;
 //    Content profileImg;
 
     public UserDto(User user){
-        this.username = user.getUsername();
-        this.name = user.getName();
-        this.bio = user.getBio();
-        this.email = user.getEmail();
-//        this.profileImg = user.getProfileImg();
+        setUsername(user.getUsername());
+        setName(user.getName());
+        setBio(user.getBio());
+        setEmail(user.getEmail());
+        if(user.getProfileImg()!=null) setProfileImg(new ContentDto(user.getProfileImg()));
     }
 }

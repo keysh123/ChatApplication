@@ -1,6 +1,7 @@
 package com.groupv.chatapp.advice;
 
 import com.groupv.chatapp.exception.DoesNotExistException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,16 @@ public class ApplicationExceptionHandler {
         map.put("error",e.getMessage());
         map.put("success",false);
         return new ResponseEntity<>(map,HttpStatus.NOT_FOUND);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({ExpiredJwtException.class})
+    public ResponseEntity<?> handleExpire(ExpiredJwtException e){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("error",e.getMessage());
+        map.put("success",false);
+        return new ResponseEntity<>(map,HttpStatus.UNAUTHORIZED);
     }
 }
 
