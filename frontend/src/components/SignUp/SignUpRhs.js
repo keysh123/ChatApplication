@@ -58,7 +58,7 @@ export const SignUpRhs = () => {
       <div className="container rhs">
         <div className="col-md-12">
           <div className="content">
-            <h1>
+            <h1 className="sidnuph1">
               <b>Create Account</b>
             </h1>
             <form className="signup">

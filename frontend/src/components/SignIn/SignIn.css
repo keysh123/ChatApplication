@@ -2,8 +2,6 @@
 .rhs1{
   height: 100vh;
   position: relative;
-  display: flex;
-  align-items: center;
   background: linear-gradient(
     145deg,
     rgba(140, 167, 255, 1) 0,
@@ -13,7 +11,7 @@
 }
 
 .preference1 {
-  padding: 10% 10%;
+  padding: 50% 10%;
   position: absolute;
   color: white;
   text-align: center;
@@ -52,8 +50,13 @@
 
 .lhs1{
   position: relative;
-  top: 25%;
+  top: 20%;
   
+}
+
+.signinh1{
+  margin-bottom: 50px;
+  font-size: 3rem;
 }
 
 .content1{
@@ -83,19 +86,20 @@
 
 .field1{
   display: flex;
-  margin: 8%;
+  margin: 4%;
 }
 
 .signinbtn1{
-  width: 77%;
+  width: 80%;
   border: none;
   padding: 15px;
-  margin: 10px 0px 20px 40px;
+  margin: 10px 0px 10px 40px;
   background-color: rgb(189, 104, 255);
   font-weight: bold;
+  font-size: 1.2rem;
   border-radius: 5px;
   color: white;
-  margin-left: 15%;
+  margin-left: 13%;
 }
 
 .signinbtn1:hover{
@@ -104,11 +108,12 @@
 }
 
 .span1{
-  margin-left: 25%;
+  display: flex;
+  justify-content: center;
 }
 
 .rememberbox{
-  margin-left: 18%;
+  margin-left: 15%;
 }
 
 @media (max-width: 700px){
