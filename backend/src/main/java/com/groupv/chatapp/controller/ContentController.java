@@ -18,7 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-@CrossOrigin
+
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @Controller
 @RequiredArgsConstructor
 public class ContentController {

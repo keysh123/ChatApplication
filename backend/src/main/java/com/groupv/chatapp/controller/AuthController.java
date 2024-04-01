@@ -3,6 +3,8 @@ package com.groupv.chatapp.controller;
 
 import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.Content;
+import com.groupv.chatapp.model.User;
+import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.AuthService;
 import com.groupv.chatapp.service.ContentService;
 import jakarta.servlet.http.Cookie;
@@ -34,6 +36,9 @@ public class AuthController {
     private AuthService authService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ContentService contentService;
 
     @PostMapping("/register")
@@ -44,7 +49,7 @@ public class AuthController {
     ){
         AuthenticationResponse authResponse = authService.register(request);
         Cookie cookie = new Cookie("Authorization", authResponse.getToken());
-        cookie.setMaxAge(1000*60*60*24);
+        cookie.setMaxAge(1000*60*60*24*24);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
@@ -74,7 +79,7 @@ public class AuthController {
 
         System.out.println(authResponse);
         Cookie cookie = new Cookie("Authorization", authResponse.getToken());
-        cookie.setMaxAge(1000*60*60*24);
+        cookie.setMaxAge(1000*60*60*24*24);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
@@ -92,10 +97,24 @@ public class AuthController {
         return new ResponseEntity<>(new SuccessDto(HttpStatus.NO_CONTENT.value(),"Done"),HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("")
+    public ResponseEntity<?> authenticateWithCookie(
+            @RequestAttribute String username
+    ){
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username+" not found"));
+        if(username!=null){
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.ACCEPTED.value(),new UserDto(user)),HttpStatus.ACCEPTED);
+        }
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.UNAUTHORIZED.value(),"Unauthorized"),HttpStatus.UNAUTHORIZED);
+
+    }
+
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImg(
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
         System.out.println(file.getName());
-        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
+//        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
 
         int id = contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
 

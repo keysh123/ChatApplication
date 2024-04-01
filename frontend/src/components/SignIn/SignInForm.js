@@ -1,50 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import Password from "./Password";
 import "./SignIn.css";
 import SignUpBtn from "./SignUpBtn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import Username from "./Username";
 // import SignInBtn from "./SignInBtn";
 import { useState } from "react";
-// import { useHistory } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../context/AuthContext";
 
 const USER_AUTH = "http://localhost:4000/api/v1/auth/authenticate";
 
 export default function SignInForm() {
-  const navigate = useNavigate();
   const [user, setUser] = useState({ username: "", password: "" });
-
+  const {signin} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(user);
-  
-    fetch(USER_AUTH,{
-      method:"POST",
-      headers: {
-        accept: 'application/json',
-        "Content-Type": "application/json",
-      },
-      credentials:"include",
-      body:JSON.stringify(user)
-    }).then((res) => {
-      // Check if response is successful
-      // if (!res.ok) {
-      
-      //   throw new Error("Network response was not ok");
-      // }
-      // Parse the JSON response
-      return res.json();
-    }).then((res)=>{
-      console.log(res,"---------------");
-      if(res.success){
-        navigate('/chat-page'); 
-        localStorage.setItem("user",JSON.stringify(res.data));
+    // console.log(signin(user),"-----------------------");
+    signin(user).then((res)=>{
+      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+res);
+      if(res){
+        navigate("/");
+        console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       }
-      // console.log();
-    })
-    .catch((err)=>{
+    }).catch((err)=>{
       console.log(err);
     })
   }

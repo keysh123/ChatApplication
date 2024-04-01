@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 // import { SignUpBtn } from "./SignUpBtn";
 const USER_REGISTER = "http://localhost:4000/api/v1/auth/register";
 
@@ -10,6 +11,8 @@ export const SignUpRhs = () => {
     email: "",
     password: "",
   });
+
+  const {signup} = useContext(AuthContext);
 
   const handleChangeUsername = (e) => {
     setUser({ ...user, username: e.target.value });
@@ -29,27 +32,7 @@ export const SignUpRhs = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(user);
-  
-    fetch(USER_REGISTER,{
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      credentials:"include",
-      body:JSON.stringify(user)
-    }).then((res)=>{
-        return res.json();
-    }).then((res)=>{
-      console.log(res,"---------------");
-      if(res.success){
-        localStorage.setItem("user",JSON.stringify(res.data));
-      }
-      // console.log();
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+    signup(user);
   }
 
   return (
