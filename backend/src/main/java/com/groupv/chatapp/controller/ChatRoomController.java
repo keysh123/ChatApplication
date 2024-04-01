@@ -1,11 +1,9 @@
 package com.groupv.chatapp.controller;
 
-import com.groupv.chatapp.dto.ChatRoomDto;
-import com.groupv.chatapp.dto.ChatRoomResponseDto;
-import com.groupv.chatapp.dto.ErrorDto;
-import com.groupv.chatapp.dto.SuccessDto;
+import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
+import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ChatRoomService;
@@ -18,16 +16,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @RestController
+@RequestMapping("/api/v1/chat-room")
 public class ChatRoomController {
     @Autowired
     private ChatRoomService  chatRoomService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ChatDataRepository chatDataRepository;
 
     @Autowired private ChatRoomRepository chatRoomRepository;
 
-    @PostMapping("/room")
+    @PostMapping("")
     public ResponseEntity<?> saveChatRoom(@RequestBody ChatRoomDto room){
         User user1 = userRepository.findByUsername(room.getUser1()).
                 orElseThrow(()->new UsernameNotFoundException(room.getUser1()+" does not exist"));
@@ -46,7 +49,7 @@ public class ChatRoomController {
         return new ResponseEntity<>(new ErrorDto("Already Exists",HttpStatus.CONFLICT.value()),HttpStatus.CONFLICT);
     }
 
-    @GetMapping("/room")
+    @GetMapping("")
     public ResponseEntity<?> showChatRooms(
             @RequestAttribute String username
     ){
@@ -79,6 +82,15 @@ public class ChatRoomController {
             @RequestAttribute String username
     ){
         return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.justFind(username,uname)), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/chat/{id}")
+    public ResponseEntity<?> sendChats(
+            @PathVariable Integer id,
+            @RequestAttribute String username
+    ){
+        List<ChatDto> chatData = chatDataRepository.getAllChatsByChatRoomId(id);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatData),HttpStatus.OK);
     }
 }
 
