@@ -1,17 +1,19 @@
-import React from 'react'
-import './ChatPage.css'
-import SideBar from './SideBar'
-import Chat from './Chat'
+import React, { useState } from 'react';
+import './ChatPage.css';
+import SideBar from './SideBar';
+import Chat from './Chat';
 
 const Home = () => {
+  const [selectedPerson, setSelectedPerson] = useState(null);
+
   return (
     <div className='home'>
       <div className="containerfluid ">
-        <SideBar/>
-        <Chat/>
+        <SideBar setSelectedPerson={setSelectedPerson} />
+        <Chat selectedPerson={selectedPerson} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

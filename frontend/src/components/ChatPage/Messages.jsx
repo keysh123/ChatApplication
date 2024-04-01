@@ -1,16 +1,35 @@
-import React from 'react'
-import Message from './Message'
-const Messages = () => {
-  return (
-    <div className='messages'>
-      <Message/>
+// import React from 'react'
+// import Message from './Message'
+// const Messages = (messages) => {
+//   return (
+//     <div className='messages'>
+//       <Message/>
    
       
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
+// export default Messages
+import React from 'react';
+import Message from './Message';
 
-export default Messages
+const Messages = ({ messages, currentUser }) => {
+  return (
+    <div className='messages'>
+      {messages.map((message, index) => {
+        // Determine if the message is from the current user
+        const isOwner = message.sender === currentUser.username;
+
+        return (
+          <Message key={index} message={message} isOwner={isOwner} />
+        );
+      })}
+    </div>
+  );
+};
+
+export default Messages;
+
 
 // import React from 'react';
 // import Message from './Message';

@@ -31,4 +31,6 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom,Integer> {
 
     @Query("select c from ChatRoom c where (c.user1 = ?1 and c.user2 = ?2) or (c.user1 = ?2 and c.user2 = ?1) ")
     List<ChatRoom> justFind(User user1,User user2);
+
+
 }

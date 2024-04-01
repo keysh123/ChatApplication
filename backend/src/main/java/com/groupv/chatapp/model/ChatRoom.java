@@ -1,6 +1,7 @@
 package com.groupv.chatapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,12 +28,14 @@ public class ChatRoom {
             name = "username1"
     )
 //    @JsonBackReference("sender")
+//    @JsonIgnore
     private User user1;
 
     @ManyToOne
     @JoinColumn(
             name = "username2"
     )
+//    @JsonIgnore
 //    @JsonBackReference("receiver")
     private User user2;
 

@@ -86,12 +86,14 @@ public class User implements UserDetails {
             mappedBy = "sender"
     )
     @JsonManagedReference("sender-chat")
+    @JsonIgnore
     private List<ChatData> chatSenderData;
 
     @OneToMany(
             mappedBy = "receiver"
     )
     @JsonManagedReference("receiver-chat")
+
     private List<ChatData> chatRecieverData;
 
     @OneToMany(mappedBy = "sender")

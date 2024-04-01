@@ -61,5 +61,15 @@ public class ChatRoomService {
         return b;
     }
 
+    public List<ChatRoom> justFind(String u1, String u2){
+        User user1 = userRepository.findByUsername(u1).orElseThrow(
+                ()->new UsernameNotFoundException("")
+        );
 
+        User user2 = userRepository.findByUsername(u2).orElseThrow(
+                ()->new UsernameNotFoundException("")
+        );
+
+        return chatRoomRepository.justFind(user1,user2);
+    }
 }

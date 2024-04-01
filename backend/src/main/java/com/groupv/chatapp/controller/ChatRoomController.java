@@ -70,4 +70,14 @@ public class ChatRoomController {
     public void delete(@PathVariable Integer chatRoomId){
         chatRoomService.deleteChatRoom(chatRoomId);
     }
+
+    @GetMapping("/get-room/{uname}")
+    public ResponseEntity<?> sendChats(
+            @PathVariable String uname,
+            @RequestAttribute String username
+    ){
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.justFind(username,uname)), HttpStatus.FOUND);
+    }
 }
+
+

@@ -4,11 +4,11 @@ import Search from './Search'
 import Chats from './Chats'
 import ShowSearch from './ShowSearch'
 
-const SideBar = () => {
+const SideBar = ({setSelectedPerson}) => {
   return (
     <div className='sidebar'>
       <Navbar/>
-      <ShowSearch />
+      <ShowSearch setSelectedPerson={setSelectedPerson}/>
     </div>
   )
 }

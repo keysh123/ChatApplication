@@ -35,7 +35,7 @@
 import React, { useState, useEffect } from 'react';
 import './ChatPage.css';
 
-const Chats = ({userInfo}) => {
+const Chats = ({userInfo}, {setSelectedPerson}) => {
   // const [users, setUsers] = useState([]);
 
   // useEffect(() => {
@@ -60,7 +60,9 @@ const Chats = ({userInfo}) => {
   return (
     <div className='chats'>
     {userInfo.map(user => (
-      <div className="userChat" key={user?.username} >
+      <div className="userChat" key={user?.username} onClick={()=>{
+        setSelectedPerson(user?.username);
+      }}>
         <img className='uimgs' src={user?.profilePicture} alt="" />
         <div className="userChatInfo">
           <span>{user?.username}</span>
