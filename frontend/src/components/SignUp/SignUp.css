@@ -35,7 +35,12 @@
 /* RHS */
 .rhs{
     position: relative;
-    top: 10%;
+    top: 20%;
+}
+
+.sidnuph1{
+    margin-bottom: 50px;
+    font-size: 3rem;
 }
 .content{
     position: relative;
@@ -63,10 +68,11 @@
 .signupbtn{
     width: 81%;
     border: none;
-    padding: 10px;
+    padding: 15px;
     margin: 10px 0 5px 40px;
     background-color: rgb(189, 104, 255);
     font-weight: bold;
+    font-size: 1.2rem;
     color: white;
 }
 

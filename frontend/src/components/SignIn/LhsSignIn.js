@@ -10,7 +10,7 @@ export default function LhsSignIn() {
 						<div className="container lhs1">
 							<div className="col-md-12">
 								<div className="content1">
-									<h1><b>Sign in to ChatNest</b></h1>
+									<h1 className='signinh1'><b>Sign in to ChatNest</b></h1>
 									<SignInForm/>
 								</div>
 							</div>
