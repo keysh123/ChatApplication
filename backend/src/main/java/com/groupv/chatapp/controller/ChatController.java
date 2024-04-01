@@ -22,7 +22,9 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -80,6 +82,13 @@ public class ChatController {
             );
         }
     }
+
+//    @GetMapping("chat")
+//    public ResponseEntity<?> sendChats(
+//            @RequestAttribute String username
+//    ){
+//        chatDataService.
+//    }
 
 //    @PostMapping("/upload")
 //    public ResponseEntity<?> uploadImg(@RequestParam("file") MultipartFile file) throws IOException {
