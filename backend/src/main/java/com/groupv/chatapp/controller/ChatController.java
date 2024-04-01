@@ -43,11 +43,10 @@ public class ChatController {
 
     @MessageMapping("/chat")
     public void oneToOne(
-            @Payload ChatDto chat,
-            Principal user
+            @Payload ChatDto chat
     ) throws DoesNotExistException {
         System.out.println(chat);
-        System.out.println(user);
+//        System.out.println(user);
         ChatData savedChat = chatDataService.saveChatData(chat);
         System.out.println(savedChat.getSender().getUsername()+" - "+savedChat.getReceiver().getUsername()+" - "+savedChat.getTime());
         ChatDto send;
