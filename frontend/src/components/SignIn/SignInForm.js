@@ -2,15 +2,17 @@ import React from "react";
 import Password from "./Password";
 import "./SignIn.css";
 import SignUpBtn from "./SignUpBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Username from "./Username";
 // import SignInBtn from "./SignInBtn";
 import { useState } from "react";
+// import { useHistory } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const USER_AUTH = "http://localhost:4000/api/v1/auth/authenticate";
 
 export default function SignInForm() {
-
+  const navigate = useNavigate();
   const [user, setUser] = useState({ username: "", password: "" });
 
 
@@ -37,6 +39,7 @@ export default function SignInForm() {
     }).then((res)=>{
       console.log(res,"---------------");
       if(res.success){
+        navigate('/chat-page'); 
         localStorage.setItem("user",JSON.stringify(res.data));
       }
       // console.log();

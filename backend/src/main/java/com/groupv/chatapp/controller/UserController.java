@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -79,7 +79,9 @@ public class UserController {
     public ResponseEntity<?> getUsers(
             @RequestParam String query
     ){
+        System.out.println("--------------------"+query);
         List<UserDto> users = userRepository.findByUsernameContaining(query);
+        System.out.println(users.size());
         return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),users), HttpStatus.OK);
     }
 }
