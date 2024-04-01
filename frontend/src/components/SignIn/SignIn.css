@@ -107,6 +107,10 @@
   margin-left: 25%;
 }
 
+.rememberbox{
+  margin-left: 18%;
+}
+
 @media (max-width: 700px){
   
   .rhs1{
