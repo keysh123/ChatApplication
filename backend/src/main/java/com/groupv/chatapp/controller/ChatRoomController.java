@@ -31,7 +31,10 @@ public class ChatRoomController {
     @Autowired private ChatRoomRepository chatRoomRepository;
 
     @PostMapping("")
-    public ResponseEntity<?> saveChatRoom(@RequestBody ChatRoomDto room){
+    public ResponseEntity<?> saveChatRoom(
+            @RequestBody ChatRoomDto room,
+            @RequestAttribute String username
+    ){
         User user1 = userRepository.findByUsername(room.getUser1()).
                 orElseThrow(()->new UsernameNotFoundException(room.getUser1()+" does not exist"));
         User user2 = userRepository.findByUsername(room.getUser2()).
@@ -44,7 +47,7 @@ public class ChatRoomController {
                     .user2(user2)
                     .build();
             ChatRoom saved = chatRoomService.createChatRoom(chatRoom);
-            return new ResponseEntity<>(new SuccessDto(HttpStatus.CREATED.value(),new ChatRoomResponseDto(saved)), HttpStatus.CREATED);
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.CREATED.value(),new ChatRoomResponseDto(saved,username)), HttpStatus.CREATED);
         }
         return new ResponseEntity<>(new ErrorDto("Already Exists",HttpStatus.CONFLICT.value()),HttpStatus.CONFLICT);
     }
@@ -53,7 +56,7 @@ public class ChatRoomController {
     public ResponseEntity<?> showChatRooms(
             @RequestAttribute String username
     ){
-        return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.findByUser(username)),HttpStatus.FOUND);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatRoomService.findByUser(username)),HttpStatus.OK);
     }
 
     @GetMapping("/room/sender/{username}")

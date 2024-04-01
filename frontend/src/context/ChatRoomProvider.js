@@ -1,0 +1,44 @@
+import React, { createContext, useState } from "react";
+import { api } from "../api/api";
+import { ChatRoomContext } from "./ChatRoomContext";
+
+const ChatRoomProvider = ({ children }) => {
+    const [chatRoomData,setChatRoomData] = useState(null);
+
+    const getChatRooms = async ()=>{
+        const res = await fetch(api.GET_CHAT_ROOMS,{
+            credentials:"include"
+        });
+
+        const obj = await res.json();
+        if(res.ok){
+            let cRooms = obj.data.map(async (chatRoom)=>{
+                if(chatRoom.user.profileImg!=null){
+                  const contentRes = await fetch(api.GET_CONTENT+chatRoom.user.profileImg.id,{
+                    credentials:"include"
+                  });
+                  let blob = await contentRes.blob();
+                  let profileImgUrl = URL.createObjectURL(blob);
+                  console.log("Image urlllllllllllllllll"+profileImgUrl);
+                  chatRoom.user.profileImg.url = profileImgUrl;
+                }else{
+                  chatRoom.user.profileImg = {url : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"};
+                }
+            })
+            console.log(obj);
+            setChatRoomData(obj.data);
+        }
+        // console.log(res);
+        // console.log(obj);
+    }
+
+
+
+  return (
+    <ChatRoomContext.Provider value={{chatRoomData,setChatRoomData,getChatRooms}}>
+      {children}
+    </ChatRoomContext.Provider>
+  );
+};
+
+export default ChatRoomProvider;

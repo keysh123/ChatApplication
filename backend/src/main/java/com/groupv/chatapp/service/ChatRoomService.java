@@ -39,7 +39,7 @@ public class ChatRoomService {
 
     public List<ChatRoomResponseDto> findByUser(String username){
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Username not found"));
-        List<ChatRoomResponseDto> list = chatRoomRepository.findInUser1OrUser2(user);
+        List<ChatRoomResponseDto> list = chatRoomRepository.findInUser1OrUser2(user,username);
         return list;
     }
     public ChatRoom findChatRoomsByBoth(String sender, String receiver) {

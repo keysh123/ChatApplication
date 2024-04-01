@@ -9,27 +9,27 @@ const Search = ({searchValue, setSearchValue, setUserInfo}) => {
     setSearchValue(event.target.value);  
   };
 
-  useEffect(()=>{
-    if(searchValue.length>2){
-      fetch(SEARCH_USER+"?query="+searchValue,{
+  // useEffect(()=>{
+  //   if(searchValue.length>2){
+  //     fetch(SEARCH_USER+"?query="+searchValue,{
         
-        credentials:"include"
-      })
-      .then((res)=>{
-        return res.json()
-      })
-      .then((res)=>{
-        console.log(res);
-        if(res.success){
-          setUserInfo(res.data)
-        }
-      })
-      .catch((err)=>{
-        console.log(err);
-        alert(err)
-      })
-    }
-  },[searchValue])
+  //       credentials:"include"
+  //     })
+  //     .then((res)=>{
+  //       return res.json()
+  //     })
+  //     .then((res)=>{
+  //       console.log(res);
+  //       if(res.success){
+  //         setUserInfo(res.data)
+  //       }
+  //     })
+  //     .catch((err)=>{
+  //       console.log(err);
+  //       alert(err)
+  //     })
+  //   }
+  // },[searchValue])
 
 
   const handleSearchSubmit = (event) => {

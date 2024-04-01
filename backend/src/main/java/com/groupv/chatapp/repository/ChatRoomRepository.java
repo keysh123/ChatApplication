@@ -23,8 +23,8 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom,Integer> {
 
     Optional<ChatRoom> findByUser2AndUser1(User user,User user2);
 
-    @Query("select new com.groupv.chatapp.dto.ChatRoomResponseDto(c.chatRoomId,c.user1,c.user2) from ChatRoom c where c.user1 = ?1 or c.user2 = ?1 ")
-    List<ChatRoomResponseDto> findInUser1OrUser2(User user1);
+    @Query("select new com.groupv.chatapp.dto.ChatRoomResponseDto(c.chatRoomId,c.user1,c.user2,?2) from ChatRoom c where c.user1 = ?1 or c.user2 = ?1 ")
+    List<ChatRoomResponseDto> findInUser1OrUser2(User user1,String ownUsername);
 
     @Query("select count(*)>0 from ChatRoom c where (c.user1 = ?1 and c.user2 = ?2) or (c.user1 = ?2 and c.user2 = ?1) ")
     boolean exists(User user1,User user2);
