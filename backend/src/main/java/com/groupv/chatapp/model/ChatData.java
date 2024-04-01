@@ -21,7 +21,7 @@ public class ChatData {
     @ManyToOne
     @JoinColumn(name = "roomId")
     @JsonBackReference("chatroomInfo")
-    private ChatRoom chatRoomId; //fk
+    private ChatRoom chatRoom; //fk
 
     @ManyToOne
     @JoinColumn(

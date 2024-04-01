@@ -36,7 +36,7 @@ public class ChatDataService {
 
     public ChatData saveChatData(ChatDto chat) throws DoesNotExistException {
         ChatData chatData = ChatData.builder()
-                .chatRoomId(
+                .chatRoom(
                         chatRoomRepository.findById(chat.getChatRoomId()).orElseThrow(() -> new DoesNotExistException(chat.getChatRoomId() + " does not exist"))
                 )
                 .sender(
@@ -51,8 +51,8 @@ public class ChatDataService {
 
         ChatData data = chatDataRepository.save(chatData);
 //        chatDataRepository.save(chatData);
-        if (chat.getContentId() != null) {
-            Content content = contentRepository.findById(chat.getContentId()).orElse(null);
+        if (chat.getContent() != null) {
+            Content content = contentRepository.findById(chat.getContent().getId()).orElse(null);
             if (content != null) {
                 chatData.setContent(content);
                 chatData.setFormat(content.getFormat());

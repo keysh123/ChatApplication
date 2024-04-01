@@ -24,26 +24,32 @@ public class ChatDto implements Serializable {
 
     private String text;
 
-    private String format;
-    private String contentName;
-    private Integer contentId;
+    private ContentDto content;
 
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private LocalDateTime time ;
 
     public ChatDto(ChatData chatData){
-        setChatRoomId(chatData.getChatRoomId().getChatRoomId());
+        setChatRoomId(chatData.getChatRoom().getChatRoomId());
         setSender(chatData.getSender().getUsername());
         setReceiver(chatData.getReceiver().getUsername());
         setText(chatData.getText());
-        setFormat(chatData.getFormat());
 //        setContentId(chatData.getContent().getContentId());
         setTime(chatData.getTime());
     }
 
+    public ChatDto(ChatData chatData,Content content){
+        this(chatData);
+        if(content!=null) setContent(new ContentDto(content));
+    }
+
+//    public ChatDto(ChatData chatData,Integer contentId,String format){
+//        this(chatData);
+//        if(content!=null) setContent(new ContentDto(contentId,format));
+//    }
+
     public ChatDto(ChatData chatData,String filename){
         this(chatData);
-        setContentName(filename);
-        setContentId(chatData.getContent().getContentId());
+        setContent(new ContentDto(chatData.getContent()));
     }
 }
