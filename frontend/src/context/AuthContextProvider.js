@@ -56,32 +56,34 @@ const AuthContextProvider = ({ children }) => {
         console.log(err);
       });
   };
-
-  const signin = (userCred) => {
-    // Implement your logout logic here
-    fetch(api.SIGNIN, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(userCred),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res, "---------------");
-        if (res.success) {
-          console.log("Success");
-          setUser(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+  const signin = async (userCred) => {
+    try {
+      const res = await fetch(api.SIGNIN, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(userCred),
       });
+  
+      const data = await res.json();
+      console.log(data);
+  
+      if (data.success) {
+        setUser(data.data); // Assuming setUser is a state updater function passed as an argument
+        console.log(user); // This will not print the updated user immediately due to closure, use setUser instead
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   };
+  
 
   return (
     <AuthContext.Provider value={{ user, signin, signout, signup }}>

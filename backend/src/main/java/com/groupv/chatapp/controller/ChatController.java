@@ -91,7 +91,7 @@ public class ChatController {
 //
 //        int id = contentService.saveContent(new Content(file.getOriginalFilename(),file.getContentType(), file.getBytes()));
 //
-//        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),id),HttpStatus.OK);
+//        return new Resp   onseEntity<>(new SuccessDto(HttpStatus.OK.value(),id),HttpStatus.OK);
 //    }
 }
 
