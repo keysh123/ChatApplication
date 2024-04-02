@@ -16,12 +16,12 @@
 //           <img src={add} alt="" />
 //           <img src={more} alt="" />
 //         </div>
-       
+
 //       </div>
 //       <Messages />
 //       <Input/>
 //     </div>
-    
+
 //     </>
 //   )
 // }
@@ -36,15 +36,16 @@ import Messages from './Messages';
 import Input from './Input';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
+import { Link } from 'react-router-dom'; 
 
-const Chat = ({selectedPerson}) => {
+const Chat = ({ selectedPerson }) => {
   const [messages, setMessages] = useState([]);
 
-  const {chatUser} = useContext(ChatContext);
+  const { chatUser } = useContext(ChatContext);
 
   useEffect(() => {
     // Fetch messages data from your backend API
-    fetch('http://localhost:4000/api/v1/messages?uname='+selectedPerson) // Adjust URL based on your API endpoint
+    fetch('http://localhost:4000/api/v1/messages?uname=' + selectedPerson) // Adjust URL based on your API endpoint
       .then(response => response.json())
       .then(data => setMessages(data))
       .catch(error => console.error('Error fetching messages:', error));
@@ -55,7 +56,9 @@ const Chat = ({selectedPerson}) => {
   return (
     <div className='chat'>
       <div className="chatInfo">
-        <span>{chatUser?.username || "User"}</span>
+        <Link to="/user-friend-info" className='unamelink'>
+          <span className='chatUserName'>{chatUser?.username || "User"}</span>
+        </Link>
         <div className="chatIcons">
           <img src={cam} alt="" />
           <img src={add} alt="" />

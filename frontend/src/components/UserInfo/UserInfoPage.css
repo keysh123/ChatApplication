@@ -1,0 +1,104 @@
+.userInfoPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgba(131, 33, 243, 1) 100%);
+}
+
+.profile{
+    color: white;
+    font-size: 4rem;
+    font-family: cursive;
+    font-weight: bold;
+}
+
+.userfield{
+    height: 80%;
+    width: 90%;
+    background-color: white;
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 0 15px 5px black;
+    margin: 20px;
+}
+
+.userimgBox{
+    height: 82%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.userimg{
+    height: 400px;
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 250px;
+    margin: 10px;
+}
+
+.userimgbtn{
+    padding: 15px;
+    background-color: blueviolet;
+    border-radius: 10px;
+    border: 3px outset rgb(0, 0, 0);
+    font-size: 2rem;
+    margin: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.userimgbtn:hover{
+    background-color: #5423c6;
+}
+
+.userdatabox{
+    height: 82%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 50px;
+    padding: 10px;
+}
+
+.uridiv{
+    height: 470px;
+    padding-top: 130px;
+    padding-right: 60px;
+}
+
+.uiform{
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+
+.uir{
+    margin: 50px 15px;
+    font-size: 2rem;
+}
+
+.uir input{
+    float: right;
+    margin-left: 15px;
+    width: 70%;
+    padding: 5px;
+    font-size: 1.7rem;
+    border: 3px solid rgb(211, 141, 255);
+    border-radius: 5px;
+}
+
+.uribtn{
+    margin:auto;
+    margin-top: 55px;
+}
