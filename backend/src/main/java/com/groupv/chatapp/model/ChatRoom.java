@@ -28,7 +28,7 @@ public class ChatRoom {
             name = "username1"
     )
 //    @JsonBackReference("sender")
-//    @JsonIgnore
+    @JsonIgnore
     private User user1;
 
     @ManyToOne
@@ -37,10 +37,11 @@ public class ChatRoom {
     )
 //    @JsonIgnore
 //    @JsonBackReference("receiver")
+    @JsonIgnore
     private User user2;
 
     @OneToMany(
-            mappedBy = "chatRoomId"
+            mappedBy = "chatRoom"
     )
     @JsonManagedReference("chatroomInfo")
     private List<ChatData> chatData;

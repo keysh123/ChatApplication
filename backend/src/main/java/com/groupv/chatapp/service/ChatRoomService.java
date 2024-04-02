@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +22,6 @@ public class ChatRoomService {
     private UserRepository userRepository;
 
     public ChatRoom createChatRoom(ChatRoom chatRoom) {
-
         return chatRoomRepository.save(chatRoom);
     }
 
@@ -41,7 +39,7 @@ public class ChatRoomService {
 
     public List<ChatRoomResponseDto> findByUser(String username){
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Username not found"));
-        List<ChatRoomResponseDto> list = chatRoomRepository.findInUser1OrUser2(user);
+        List<ChatRoomResponseDto> list = chatRoomRepository.findInUser1OrUser2(user,username);
         return list;
     }
     public ChatRoom findChatRoomsByBoth(String sender, String receiver) {
@@ -72,4 +70,5 @@ public class ChatRoomService {
 
         return chatRoomRepository.justFind(user1,user2);
     }
+
 }

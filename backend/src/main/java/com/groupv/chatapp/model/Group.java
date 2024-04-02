@@ -37,7 +37,7 @@ public class Group {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // foreign key
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name="groupProfileImage")
     private Content groupImg;
@@ -53,6 +53,5 @@ public class Group {
     )
     @JsonManagedReference
     private List<GroupChatData> groupChatData;
-
 
 }

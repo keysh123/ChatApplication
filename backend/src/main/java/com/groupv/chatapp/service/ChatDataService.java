@@ -2,10 +2,7 @@ package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.dto.ChatDto;
 import com.groupv.chatapp.exception.DoesNotExistException;
-import com.groupv.chatapp.model.ChatData;
-import com.groupv.chatapp.model.ChatDataStatus;
-import com.groupv.chatapp.model.Content;
-import com.groupv.chatapp.model.ContentType;
+import com.groupv.chatapp.model.*;
 import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.ContentRepository;
@@ -25,6 +22,8 @@ public class ChatDataService {
     @Autowired
     private ChatRoomRepository chatRoomRepository;
     @Autowired
+    private ChatRoomService chatRoomService;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private ContentRepository contentRepository;
@@ -36,7 +35,7 @@ public class ChatDataService {
 
     public ChatData saveChatData(ChatDto chat) throws DoesNotExistException {
         ChatData chatData = ChatData.builder()
-                .chatRoomId(
+                .chatRoom(
                         chatRoomRepository.findById(chat.getChatRoomId()).orElseThrow(() -> new DoesNotExistException(chat.getChatRoomId() + " does not exist"))
                 )
                 .sender(
@@ -51,8 +50,8 @@ public class ChatDataService {
 
         ChatData data = chatDataRepository.save(chatData);
 //        chatDataRepository.save(chatData);
-        if (chat.getContentId() != null) {
-            Content content = contentRepository.findById(chat.getContentId()).orElse(null);
+        if (chat.getContent() != null) {
+            Content content = contentRepository.findById(chat.getContent().getId()).orElse(null);
             if (content != null) {
                 chatData.setContent(content);
                 chatData.setFormat(content.getFormat());
@@ -70,6 +69,12 @@ public class ChatDataService {
         chatData.setStatus(ChatDataStatus.valueOf(status));
         return chatDataRepository.save(chatData);
     }
+
+//    public List<> getChats(String username, String uname) {
+//        List<ChatRoom> chatRoom = chatRoomService.justFind(username,uname);
+//
+////        return chatDataRepository.findByChatRoomIdOrderByTimeAsc(chatRoom.)
+//    }
 
 //    public List<?> getAllChats()
 }

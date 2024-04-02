@@ -17,21 +17,26 @@ import java.util.List;
 public class ChatRoomResponseDto {
 
     private Integer chatRoomId;
-    private UserDto user1;
-
-    private UserDto user2;
+    private UserDto user;
 
 //    private List<ChatData> chatData;
-    public ChatRoomResponseDto(ChatRoom chatRoom){
+    public ChatRoomResponseDto(ChatRoom chatRoom,String ownUsername){
         setChatRoomId(chatRoom.getChatRoomId());
-        setUser1(new UserDto(chatRoom.getUser1()));
-        setUser2(new UserDto(chatRoom.getUser2()));
+        if(!chatRoom.getUser1().getUsername().equals(ownUsername)){
+           setUser(new UserDto(chatRoom.getUser1()));
+        }else{
+           setUser(new UserDto(chatRoom.getUser2()));
+        }
+//        setUser2(new UserDto(chatRoom.getUser2()));
     }
 
-    public ChatRoomResponseDto(Integer chatRoomId,User user1,User user2){
+    public ChatRoomResponseDto(Integer chatRoomId,User user1,User user2,String ownUsername){
         setChatRoomId(chatRoomId);
-        setUser1(new UserDto(user1));
-        setUser2(new UserDto(user2));
+        if(!user1.getUsername().equals(ownUsername)){
+            setUser(new UserDto(user1));
+        }else{
+            setUser(new UserDto(user2));
+        }
     }
 
 }

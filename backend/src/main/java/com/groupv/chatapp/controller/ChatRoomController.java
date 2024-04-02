@@ -1,11 +1,9 @@
 package com.groupv.chatapp.controller;
 
-import com.groupv.chatapp.dto.ChatRoomDto;
-import com.groupv.chatapp.dto.ChatRoomResponseDto;
-import com.groupv.chatapp.dto.ErrorDto;
-import com.groupv.chatapp.dto.SuccessDto;
+import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
+import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ChatRoomService;
@@ -18,17 +16,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @RestController
+@RequestMapping("/api/v1/chat-room")
 public class ChatRoomController {
     @Autowired
     private ChatRoomService  chatRoomService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ChatDataRepository chatDataRepository;
 
     @Autowired private ChatRoomRepository chatRoomRepository;
 
-    @PostMapping("/room")
-    public ResponseEntity<?> saveChatRoom(@RequestBody ChatRoomDto room){
+    @PostMapping("")
+    public ResponseEntity<?> saveChatRoom(
+            @RequestBody ChatRoomDto room,
+            @RequestAttribute String username
+    ){
         User user1 = userRepository.findByUsername(room.getUser1()).
                 orElseThrow(()->new UsernameNotFoundException(room.getUser1()+" does not exist"));
         User user2 = userRepository.findByUsername(room.getUser2()).
@@ -41,14 +47,16 @@ public class ChatRoomController {
                     .user2(user2)
                     .build();
             ChatRoom saved = chatRoomService.createChatRoom(chatRoom);
-            return new ResponseEntity<>(new SuccessDto(HttpStatus.CREATED.value(),saved), HttpStatus.CREATED);
+            return new ResponseEntity<>(new SuccessDto(HttpStatus.CREATED.value(),new ChatRoomResponseDto(saved,username)), HttpStatus.CREATED);
         }
         return new ResponseEntity<>(new ErrorDto("Already Exists",HttpStatus.CONFLICT.value()),HttpStatus.CONFLICT);
     }
 
-    @GetMapping("/room/{username}")
-    public ResponseEntity<?> showChatRooms(@PathVariable String username){
-        return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.findByUser(username)),HttpStatus.FOUND);
+    @GetMapping("")
+    public ResponseEntity<?> showChatRooms(
+            @RequestAttribute String username
+    ){
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatRoomService.findByUser(username)),HttpStatus.OK);
     }
 
     @GetMapping("/room/sender/{username}")
@@ -66,17 +74,26 @@ public class ChatRoomController {
         return chatRoomService.findChatRoomsByBoth(sender,receiver);
     }
 
-    @DeleteMapping("room/{chatRoomId}")
-    public void delete(@PathVariable Integer chatRoomId){
-        chatRoomService.deleteChatRoom(chatRoomId);
-    }
-
     @GetMapping("/get-room/{uname}")
     public ResponseEntity<?> sendChats(
             @PathVariable String uname,
             @RequestAttribute String username
     ){
         return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(),chatRoomService.justFind(username,uname)), HttpStatus.FOUND);
+    }
+
+    @DeleteMapping("room/{chatRoomId}")
+    public void delete(@PathVariable Integer chatRoomId){
+        chatRoomService.deleteChatRoom(chatRoomId);
+    }
+
+    @GetMapping("/chat/{id}")
+    public ResponseEntity<?> sendChats(
+            @PathVariable Integer id,
+            @RequestAttribute String username
+    ){
+        List<ChatDto> chatData = chatDataRepository.getAllChatsByChatRoomId(id);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),chatData),HttpStatus.OK);
     }
 }
 
