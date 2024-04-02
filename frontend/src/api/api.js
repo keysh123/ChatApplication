@@ -6,6 +6,6 @@ export const api = {
     AUTH_COOKIE:"http://localhost:4000/api/v1/auth",
     GET_CHAT_ROOMS:"http://localhost:4000/api/v1/chat-room",
     POST_CHAT_ROOM:"http://localhost:4000/api/v1/chat-room", //body : {user1:"username",user2:"username"}
-    GET_CONTENT:"http://localhost:4000/content/",
+    GET_CONTENT:"http://localhost:4000/content/", // + {content-id}
     GET_CHATS:"http://localhost:4000/chat-room/chat/", //example rquest : http://localhost:4000/chat-room/chat/{chat-room-id}
 } 
