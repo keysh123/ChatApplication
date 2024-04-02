@@ -71,6 +71,7 @@ export const SignUpRhs = () => {
                     placeholder="Email Address"
                     value={user.email}
                     onChange={handleChangeEmail}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required
                   />
                 </div>
@@ -86,10 +87,13 @@ export const SignUpRhs = () => {
                   placeholder="Password"
                   value={user.password}
                   onChange={handleChangePassword}
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+                  title="Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special symbol"
                   required
                 />
               </div>
               <div>
+                <Link to="/sign-in">
                 <button
                   type="submit"
                   className="btn button signupbtn"
@@ -97,6 +101,7 @@ export const SignUpRhs = () => {
                 >
                   Sign Up
                 </button>
+                </Link>
               </div>
               <div className="callout">
                 <span>
