@@ -127,7 +127,7 @@
 
 .chatInfo{
   background-color: rgb(150, 17, 238);
-  height: 50px;
+  height: 10%;
   display: flex;
   align-items: center;
   justify-content: space-between;
