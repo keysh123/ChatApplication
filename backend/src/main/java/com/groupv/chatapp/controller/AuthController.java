@@ -94,7 +94,7 @@ public class AuthController {
     ){
         SecurityContextHolder.clearContext();
         authService.removeAuthCookie(request,response);
-        return new ResponseEntity<>(new SuccessDto(HttpStatus.NO_CONTENT.value(),"Done"),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),"Done"),HttpStatus.OK);
     }
 
     @GetMapping("")
@@ -105,7 +105,7 @@ public class AuthController {
         if(username!=null){
             return new ResponseEntity<>(new SuccessDto(HttpStatus.ACCEPTED.value(),new UserDto(user)),HttpStatus.ACCEPTED);
         }
-            return new ResponseEntity<>(new SuccessDto(HttpStatus.UNAUTHORIZED.value(),"Unauthorized"),HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new ErrorDto("Unauthorized",HttpStatus.UNAUTHORIZED.value()),HttpStatus.UNAUTHORIZED);
 
     }
 

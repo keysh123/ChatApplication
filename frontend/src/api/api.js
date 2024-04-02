@@ -1,6 +1,7 @@
 export const api = {
     SIGNIN:"http://localhost:4000/api/v1/auth/authenticate",
     SIGNUP:"http://localhost:4000/api/v1/auth/register",
+    SIGNOUT:"http://localhost:4000/api/v1/auth/logout",
     SEARCH_USER:"http://localhost:4000/api/v1/user/search",
     AUTH_COOKIE:"http://localhost:4000/api/v1/auth",
     GET_CHAT_ROOMS:"http://localhost:4000/api/v1/chat-room",
