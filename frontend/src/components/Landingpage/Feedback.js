@@ -3,7 +3,7 @@ import Typing from "./Typing";
 export default function Feedback() {
   return (
     <>
-      <div className="row " style={{ color: "black", fontFamily: "cursive" }}>
+      <div className="row feedback" style={{ color: "black", fontFamily: "cursive" }}>
         <div className="col-6 px-4">
           <h3
             className="mt-4 "
