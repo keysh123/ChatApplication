@@ -1,4 +1,4 @@
-.userInfoPage{
+.userInfoPagef{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,14 +8,14 @@
     background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgba(131, 33, 243, 1) 100%);
 }
 
-.profile{
+.profilef{
     color: white;
     font-size: 4rem;
     font-family: cursive;
     font-weight: bold;
 }
 
-.userfield{
+.userfieldf{
     height: 80%;
     width: 90%;
     background-color: white;
@@ -25,7 +25,7 @@
     margin: 20px;
 }
 
-.userimgBox{
+.userimgBoxf{
     height: 82%;
     width: 100%;
     display: flex;
@@ -35,7 +35,7 @@
     margin: 50px;
 }
 
-.userimg{
+.userimgf{
     height: 350px;
     width: 350px;
     border: 2px solid black;
@@ -43,7 +43,7 @@
     margin: 2%;
 }
 
-.userdatabox{
+.userdataboxf{
     height: 82%;
     width: 100%;
     display: flex;
@@ -54,13 +54,13 @@
     padding: 10px;
 }
 
-.uridiv{
-    height: 70%;
+.uridivf{
+    height: 68%;
     padding-top: 2%;
     padding-right: 60px;
 }
 
-.uiform{
+.uiformf{
     width: 100%;
     display: flex;
     /* align-items: center; */
@@ -68,12 +68,12 @@
     flex-direction: column;
 }
 
-.uir{
+.uirf{
     margin: 6% 15px;
     font-size: 2rem;
 }
 
-.uir input{
+.uirf input{
     float: right;
     margin-left: 15px;
     width: 65%;

@@ -4,8 +4,8 @@ import './UserFriendInfoPage.css'
 const UserFriendImg = () => {
   return (
     <>
-    <div className='userimgBox'>
-        <img src="" alt="" className='userimg'/>
+    <div className='userimgBoxf'>
+        <img src="" alt="" className='userimgf'/>
     </div>
     </>
   )
