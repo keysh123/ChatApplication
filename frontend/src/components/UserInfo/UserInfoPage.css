@@ -26,7 +26,7 @@
 }
 
 .userimgBox{
-    height: 82%;
+    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
@@ -36,11 +36,11 @@
 }
 
 .userimg{
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
     border: 2px solid black;
-    border-radius: 250px;
-    margin: 10px;
+    border-radius: 175px;
+    margin: 2%;
 }
 
 .userimgbtn{
@@ -49,7 +49,7 @@
     border-radius: 10px;
     border: 3px outset rgb(0, 0, 0);
     font-size: 2rem;
-    margin: 30px;
+    margin: 5%;
     color: white;
     font-weight: bold;
 }
@@ -70,8 +70,8 @@
 }
 
 .uridiv{
-    height: 470px;
-    padding-top: 130px;
+    height: 68%;
+    padding-top: 5%;
     padding-right: 60px;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .uir{
-    margin: 50px 15px;
+    margin: 2% 15px;
     font-size: 2rem;
 }
 
@@ -100,5 +100,5 @@
 
 .uribtn{
     margin:auto;
-    margin-top: 55px;
+    margin-top: 8.5%;
 }

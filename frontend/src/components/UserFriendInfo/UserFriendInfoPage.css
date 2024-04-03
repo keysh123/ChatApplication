@@ -36,11 +36,11 @@
 }
 
 .userimg{
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
     border: 2px solid black;
-    border-radius: 250px;
-    margin: 10px;
+    border-radius: 175px;
+    margin: 2%;
 }
 
 .userdatabox{
@@ -55,8 +55,8 @@
 }
 
 .uridiv{
-    height: 470px;
-    padding-top: 130px;
+    height: 70%;
+    padding-top: 2%;
     padding-right: 60px;
 }
 
@@ -69,14 +69,14 @@
 }
 
 .uir{
-    margin: 50px 15px;
+    margin: 6% 15px;
     font-size: 2rem;
 }
 
 .uir input{
     float: right;
     margin-left: 15px;
-    width: 70%;
+    width: 65%;
     padding: 5px;
     font-size: 1.7rem;
     border: 3px solid rgb(211, 141, 255);
