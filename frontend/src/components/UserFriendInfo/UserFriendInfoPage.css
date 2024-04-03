@@ -10,9 +10,27 @@
 
 .profilef{
     color: white;
+    width: 100%;
     font-size: 4rem;
     font-family: cursive;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.prof{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close{
+    display: flex;
+    float: right;
+    text-decoration: none;
+    color: white;
 }
 
 .userfieldf{
