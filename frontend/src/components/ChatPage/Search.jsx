@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './ChatPage.css';
+import Img2 from '../img/search.png'
 import { ChatRoomContext } from '../../context/ChatRoomContext';
 const SEARCH_USER = "http://localhost:4000/api/v1/user/search";
 
-const Search = ({searchValue, setSearchValue}) => {
+const Search = ({ searchValue, setSearchValue }) => {
   // const [searchValue, setSearchValue] = useState('');
 
   // const {searchUsers} = useContext(ChatRoomContext);
 
   const handleSearchChange = (event) => {
     event.preventDefault();
-    setSearchValue(event.target.value);  
+    setSearchValue(event.target.value);
     // searchUsers(searchValue);
   };
 
@@ -31,12 +32,15 @@ const Search = ({searchValue, setSearchValue}) => {
   return (
     <div className='search'>
       <form className="searchForm" onSubmit={handleSearchSubmit}>
-        <input 
-          type="text" 
-          placeholder="Find a user" 
-          value={searchValue} 
-          onChange={handleSearchChange} 
-        />
+        <div className='searchfield'>
+          <span><img className='searchbtn' src={Img2} alt="" /></span>
+          <input
+            type="text"
+            placeholder="Find a user"
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
+        </div>
         {/* <button type="submit">Search</button> */}
       </form>
     </div>
