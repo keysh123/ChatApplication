@@ -37,7 +37,7 @@ import "./ChatPage.css";
 import { ChatRoomContext } from "../../context/ChatRoomContext";
 import { ChatContext } from "../../context/ChatContext";
 
-const Chats = ({userInfo}) => {
+const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setShowStart}) => {
   // const [users, setUsers] = useState([]);
 
   // useEffect(() => {
@@ -58,9 +58,17 @@ const Chats = ({userInfo}) => {
   //     console.error('Error fetching users:', error);
   //   }
   // };
-  const {setChatUser} = useContext(ChatContext);
-  const handleClick = (user)=>{
-    setChatUser(user);
+  // const {setChatUser} = useContext(ChatContext);
+  // const handleClick = (user)=>{
+  //   setChatUser(user);
+    
+  // }
+  const getStarted = (user) =>{
+    setStartConversation(true);
+    setShowChat(false);
+    setShowStart(false);
+    setSelectedPerson(user?.username);
+    
   }
   return (
     <div className="chats">
@@ -68,14 +76,14 @@ const Chats = ({userInfo}) => {
         <div
           className="userChat"
           key={user?.username}
-          onClick={() => {
-            handleClick(user);
+          onClick={()=>{
+            getStarted(user)
           }}
         >
           <img className="uimgs" src={user?.profileImg?.url} alt="" />
           <div className="userChatInfo">
             <span>{user?.username}</span>
-            <p>Hello</p>
+            {/* <p>Hello</p> */}
           </div>
         </div>
       ))}

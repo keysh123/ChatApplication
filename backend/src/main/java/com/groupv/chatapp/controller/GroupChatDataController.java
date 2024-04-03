@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 public class GroupChatDataController {
     @Autowired
     private GroupChatDataService groupChatDataService;

@@ -41,17 +41,20 @@ const Chat = ({selectedPerson}) => {
   const [messages, setMessages] = useState([]);
 
   const {chatUser} = useContext(ChatContext);
+  const {user,signout} = useContext(AuthContext);
 
-  useEffect(() => {
-    // Fetch messages data from your backend API
-    fetch('http://localhost:4000/api/v1/messages?uname='+selectedPerson) // Adjust URL based on your API endpoint
-      .then(response => response.json())
-      .then(data => setMessages(data))
-      .catch(error => console.error('Error fetching messages:', error));
-  }, []);
-
-
-
+  // useEffect(() => {
+  //   // Fetch messages data from your backend API
+  //   fetch('http://localhost:4000/chat-room/chat/'+1) // Adjust URL based on your API endpoint
+  //     .then(response => response.json())
+  //     .then(data => setMessages(data))
+      
+  //     .catch(error => console.error('Error fetching messages:', error));
+  //     console.log("HIOI")
+  // }, []);
+ 
+// console.log("fcghjk"+AuthContext.user)
+console.log(user?.username)
   return (
     <div className='chat'>
       <div className="chatInfo">
@@ -60,9 +63,11 @@ const Chat = ({selectedPerson}) => {
           <img src={cam} alt="" />
           <img src={add} alt="" />
           <img src={more} alt="" />
+        
         </div>
       </div>
-      <Messages messages={messages} />
+      {/* {AuthContext.user} */}
+      <Messages currentUser={user?.username} />
       <Input />
     </div>
   );

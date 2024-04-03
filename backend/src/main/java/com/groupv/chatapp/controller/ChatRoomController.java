@@ -71,6 +71,7 @@ public class ChatRoomController {
 
     @GetMapping("/room/both/{sender}/{receiver}")
     public ChatRoom showChatRoomsByBoth(@PathVariable String sender,@PathVariable String receiver){
+        System.out.println(sender+"called    "+receiver);
         return chatRoomService.findChatRoomsByBoth(sender,receiver);
     }
 
@@ -88,6 +89,7 @@ public class ChatRoomController {
     }
 
     @GetMapping("/chat/{id}")
+    @CrossOrigin(origins = "http://localhost:3000",allowCredentials = "true")
     public ResponseEntity<?> sendChats(
             @PathVariable Integer id,
             @RequestAttribute String username
