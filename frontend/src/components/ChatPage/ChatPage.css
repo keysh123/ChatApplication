@@ -259,9 +259,9 @@
   background-color: #8da4f1;
   cursor: pointer;
 }
-.btnstart{
-  margin-left: 50%;
-  margin-top: 30%;
-  width: 200px;
-  height: 40px;
+
+
+.searchbtn{
+  height: 30px;
+  margin-left: 10px;
 }
