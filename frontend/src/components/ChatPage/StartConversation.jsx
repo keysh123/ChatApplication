@@ -4,7 +4,7 @@ import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from '../../context/AuthContext';
 export default function StartConversation({selectedPerson,setShowChat,setStartConversation,setShowStart}) {
   const { createRoom } = useContext(CreateRoomContext);
-  // const {ChatUser} = useContext(ChatContext);
+  const {ChatUser,setChatUser} = useContext(ChatContext);
   // const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
   const {user,signout} = useContext(AuthContext);
   const create_room = () =>{
@@ -16,6 +16,7 @@ export default function StartConversation({selectedPerson,setShowChat,setStartCo
     setShowChat(true);
     setShowStart(false);
     setStartConversation(false);
+    setChatUser(selectedPerson);
   }
   return (
     <div className='chat'>

@@ -10,7 +10,7 @@ const ChatRoom = ({ chatRoom,setShowChat,setStartConversation,setShowStart} ) =>
       setShowChat(true);
       setShowStart(false);
       setStartConversation(false);
-        setChatUser(chatRoom);
+        setChatUser(chatRoom.user);
         console.log(chatRoom.chatRoomId);
         console.log(chatRoom);
         console.log(user+"HIII");

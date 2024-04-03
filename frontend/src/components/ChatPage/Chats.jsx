@@ -68,7 +68,7 @@ const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setS
     setShowChat(false);
     setShowStart(false);
     setSelectedPerson(user?.username);
-    
+   
   }
   return (
     <div className="chats">

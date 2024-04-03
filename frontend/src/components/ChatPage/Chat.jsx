@@ -70,7 +70,7 @@ console.log(user?.username)
         </div>
       </div>
       {/* {AuthContext.user} */}
-      <Messages currentUser={user?.username} />
+      <Messages currentUser={user?.username} selectedPerson={chatUser.user?.username} />
       <Input />
     </div>
   );
