@@ -1,0 +1,102 @@
+.userInfoPagef{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgba(131, 33, 243, 1) 100%);
+}
+
+.profilef{
+    color: white;
+    width: 100%;
+    font-size: 4rem;
+    font-family: cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.prof{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close{
+    display: flex;
+    float: right;
+    text-decoration: none;
+    color: white;
+}
+
+.userfieldf{
+    height: 80%;
+    width: 90%;
+    background-color: white;
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 0 15px 5px black;
+    margin: 20px;
+}
+
+.userimgBoxf{
+    height: 82%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.userimgf{
+    height: 350px;
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 175px;
+    margin: 2%;
+}
+
+.userdataboxf{
+    height: 82%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 50px;
+    padding: 10px;
+}
+
+.uridivf{
+    height: 68%;
+    padding-top: 2%;
+    padding-right: 60px;
+}
+
+.uiformf{
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+
+.uirf{
+    margin: 6% 15px;
+    font-size: 2rem;
+}
+
+.uirf input{
+    float: right;
+    margin-left: 15px;
+    width: 65%;
+    padding: 5px;
+    font-size: 1.7rem;
+    border: 3px solid rgb(211, 141, 255);
+    border-radius: 5px;
+}
