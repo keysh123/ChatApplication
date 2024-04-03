@@ -6,9 +6,9 @@ import UserData from './UserFriendData'
 const UserFriendInfo = () => {
   return (
     <>
-      <div className='userInfoPage container-fluid'>
-        <div className="row profile">Profile</div>
-        <div className="row userfield">
+      <div className='userInfoPagef container-fluid'>
+        <div className="row profilef">Profile</div>
+        <div className="row userfieldf">
           <div className="col-5"> <UserImg /> </div>
           <div className="col-7"> <UserData/> </div>
         </div>
