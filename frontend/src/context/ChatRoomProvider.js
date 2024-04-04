@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import { api } from "../api/api";
 import { ChatRoomContext } from "./ChatRoomContext";
+import ChatRooms from "../components/ChatPage/ChatRooms";
 
 const ChatRoomProvider = ({ children }) => {
     const [chatRoomData,setChatRoomData] = useState(null);
@@ -28,6 +29,7 @@ const ChatRoomProvider = ({ children }) => {
             })
             console.log(obj);
             setChatRoomData(obj.data);
+            console.log(chatRoomData)
         }
         // console.log(res);
         // console.log(obj);
@@ -40,10 +42,10 @@ const ChatRoomProvider = ({ children }) => {
 
       const obj = await res.json();
       if(res.ok){
-        console.log(resUsers);
+        // console.log(resUsers+"HIyui");
         setResUsers(obj.data);
-        console.log(res);
-        console.log(obj);
+        // console.log(res);
+        // console.log(obj);
       }
     }
 
