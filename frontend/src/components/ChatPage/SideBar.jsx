@@ -6,7 +6,7 @@ import ShowSearch from './ShowSearch'
 import { ChatRoomContext } from '../../context/ChatRoomContext'
 import ChatRooms from './ChatRooms'
 
-const SideBar = ({setSelectedPerson}) => {
+const SideBar = ({setSelectedPerson,setShowChat,setStartConversation,setShowStart}) => {
   const {chatRooms,getChatRooms} = useContext(ChatRoomContext);
 
   useEffect(()=>{
@@ -16,8 +16,8 @@ const SideBar = ({setSelectedPerson}) => {
   return (
     <div className='sidebar'>
       <Navbar/>
-      <ShowSearch setSelectedPerson={setSelectedPerson}/>
-      <ChatRooms></ChatRooms>
+      <ShowSearch setSelectedPerson={setSelectedPerson} setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}/>
+      <ChatRooms setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}></ChatRooms>
       
     </div>
   )

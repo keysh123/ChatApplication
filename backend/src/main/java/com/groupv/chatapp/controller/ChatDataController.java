@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(originPatterns = "**",allowCredentials = "true")
 public class ChatDataController {
     @Autowired
     private ChatDataService chatDataService;

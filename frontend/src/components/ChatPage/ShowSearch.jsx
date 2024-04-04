@@ -5,7 +5,7 @@ import { api } from '../../api/api';
 import ChatRoomProvider from '../../context/ChatRoomProvider';
 import { ChatRoomContext } from '../../context/ChatRoomContext';
 
-const ShowSearch = ({setSelectedPerson}) => {
+const ShowSearch = ({setSelectedPerson,setShowChat,setStartConversation,setShowStart}) => {
     const [searchValue, setSearchValue] = useState('');
 
     const {resUsers,searchUsers} = useContext(ChatRoomContext);
@@ -20,7 +20,7 @@ const ShowSearch = ({setSelectedPerson}) => {
     <>
         <Search searchValue={searchValue} setSearchValue={setSearchValue}></Search>
         {
-          <Chats userInfo={resUsers} setSelectedPerson={setSelectedPerson}></Chats>  
+          <Chats userInfo={resUsers} setSelectedPerson={setSelectedPerson} setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}></Chats>  
         } 
     </>
   )

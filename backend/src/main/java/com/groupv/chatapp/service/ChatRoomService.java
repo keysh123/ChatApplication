@@ -43,6 +43,7 @@ public class ChatRoomService {
         return list;
     }
     public ChatRoom findChatRoomsByBoth(String sender, String receiver) {
+        System.out.println(sender+" hiiii  "+receiver);
         return chatRoomRepository.findByUser1AndUser2(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User Not Found")),
                         userRepository.findById(receiver).orElseThrow(() -> new IllegalArgumentException("User not found")))
                 .orElse(chatRoomRepository.findByUser2AndUser1(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User Not Found")),
@@ -70,5 +71,6 @@ public class ChatRoomService {
 
         return chatRoomRepository.justFind(user1,user2);
     }
+
 
 }

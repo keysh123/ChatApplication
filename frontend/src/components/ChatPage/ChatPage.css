@@ -76,8 +76,10 @@
 .sidebar {
   flex: 2;
   height: 100vh;
-  /* border: 1px solid black; */
-  background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgba(131, 33, 243, 1) 100%);
+  border: 1px solid black;
+  background-color: rgb(177, 65, 252);
+  overflow-y: auto; /* Set overflow-y to auto to enable vertical scrolling */
+  scroll-behavior: auto;
 }
 
 .search {
@@ -258,11 +260,6 @@
   cursor: pointer;
 }
 
-.chatUserName{
-  font-size: 30px;
-  color: white;
-  margin-left: 5px;
-}
 
 .searchbtn{
   height: 30px;
