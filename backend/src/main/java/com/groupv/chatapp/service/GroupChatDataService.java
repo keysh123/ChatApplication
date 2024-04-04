@@ -8,6 +8,7 @@ import com.groupv.chatapp.model.GroupChatData;
 import com.groupv.chatapp.repository.GroupChatDataRepository;
 import com.groupv.chatapp.repository.GroupRepository;
 import com.groupv.chatapp.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GroupChatDataService {
-    @Autowired
-    private GroupChatDataRepository groupChatDataRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final GroupChatDataRepository groupChatDataRepository;
+    private final GroupRepository groupRepository;
+    private final UserRepository userRepository;
     public GroupChatData saveChat(GroupChatData chatData){
      chatData.setTime(LocalDateTime.now());
         return groupChatDataRepository.save(chatData);

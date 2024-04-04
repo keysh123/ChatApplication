@@ -7,7 +7,7 @@ import com.groupv.chatapp.repository.GroupParticipantRepository;
 import com.groupv.chatapp.repository.GroupRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +15,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class GroupController {
-    @Autowired
-    private GroupService groupService;
-
-    @Autowired
-    private GroupRepository groupRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private GroupParticipantRepository groupParticipantRepository;
+    private final GroupService groupService;
+    private final GroupRepository groupRepository;
+    private final UserRepository userRepository;
+    private final GroupParticipantRepository groupParticipantRepository;
 
     @PostMapping("/group")
     public Group saveGroup(

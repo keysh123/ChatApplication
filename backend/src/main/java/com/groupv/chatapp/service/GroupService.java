@@ -24,11 +24,11 @@ public class GroupService {
     public Group addGroup(Group group,String username){
         System.out.println(username);
         group.setCreator(userRepository.findById(username)
-                .orElseThrow(()-> new IllegalArgumentException("User not found")));
+                .orElseThrow(()-> new IllegalArgumentException("User:"+username+" not found")));
         Group group1= groupRepository.save(group);
       GroupParticipant  participant = GroupParticipant.builder()
                 .groupId(group1)
-                .username(userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User Not Found")))
+                .username(userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User:"+username+" Not Found")))
                 .role(GroupRole.ADMIN)
                 .joinedAt(LocalDateTime.now())
                 .build();
@@ -38,18 +38,18 @@ return  group1;
     }
 
     public Group updateDescription(Integer groupId,String description){
-        Group group=groupRepository.getReferenceById(groupId);
+        Group group=groupRepository.findById(groupId).orElseThrow(()-> new IllegalArgumentException("Group not found"));
         group.setDescription(description);
         return groupRepository.save(group);
     }
     public Group updateName(Integer groupId,String name){
-        Group group=groupRepository.getReferenceById(groupId);
+        Group group=groupRepository.findById(groupId).orElseThrow(()-> new IllegalArgumentException("Group not found"));
         group.setGroupName(name);
         return groupRepository.save(group);
     }
 
     public Group addGroupPhoto(Integer groupId, Content contentId){
-        Group group=groupRepository.getReferenceById(groupId);
+        Group group=groupRepository.findById(groupId).orElseThrow(()-> new IllegalArgumentException("Group not found"));
         group.setGroupImg(contentId);
         return groupRepository.save(group);
     }

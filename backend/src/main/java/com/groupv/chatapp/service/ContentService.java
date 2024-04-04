@@ -5,10 +5,9 @@ import com.groupv.chatapp.repository.ContentRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+
 
 @Service
 @AllArgsConstructor

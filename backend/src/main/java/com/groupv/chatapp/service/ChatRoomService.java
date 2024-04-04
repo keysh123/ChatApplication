@@ -27,11 +27,11 @@ public class ChatRoomService {
 
     public List<ChatRoom> findChatRoomsBySenderOrReceiver(String username) {
         List<ChatRoom> list = chatRoomRepository.findByUser1(
-                userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User Not Found"))
+                userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User "+username+"Not Found"))
         );
         if (list.isEmpty()) {
             list = chatRoomRepository.findByUser2(
-                    userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User Not Found"))
+                    userRepository.findById(username).orElseThrow(() -> new IllegalArgumentException("User"+username+" Not Found"))
             );
         }
         return list;
@@ -39,15 +39,14 @@ public class ChatRoomService {
 
     public List<ChatRoomResponseDto> findByUser(String username){
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Username not found"));
-        List<ChatRoomResponseDto> list = chatRoomRepository.findInUser1OrUser2(user,username);
-        return list;
+        return chatRoomRepository.findInUser1OrUser2(user,username);
     }
     public ChatRoom findChatRoomsByBoth(String sender, String receiver) {
         System.out.println(sender+" hiiii  "+receiver);
-        return chatRoomRepository.findByUser1AndUser2(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User Not Found")),
-                        userRepository.findById(receiver).orElseThrow(() -> new IllegalArgumentException("User not found")))
-                .orElse(chatRoomRepository.findByUser2AndUser1(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User Not Found")),
-                        userRepository.findById(receiver).orElseThrow(() -> new IllegalArgumentException("User not found"))).orElseThrow(() -> new IllegalArgumentException("ChatRoom Not found")));
+        return chatRoomRepository.findByUser1AndUser2(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User:"+sender+" Not Found")),
+                        userRepository.findById(receiver).orElseThrow(() -> new IllegalArgumentException("User:"+receiver+" not found")))
+                .orElse(chatRoomRepository.findByUser2AndUser1(userRepository.findById(sender).orElseThrow(() -> new IllegalArgumentException("User"+sender+" Not Found")),
+                        userRepository.findById(receiver).orElseThrow(() -> new IllegalArgumentException("User "+receiver+"not found"))).orElseThrow(() -> new IllegalArgumentException("ChatRoom Not found")));
     }
 
     public void deleteChatRoom(Integer id) {
