@@ -2,14 +2,12 @@ package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.dto.GroupChatDto;
 import com.groupv.chatapp.exception.DoesNotExistException;
-import com.groupv.chatapp.model.ChatData;
 import com.groupv.chatapp.model.ChatDataStatus;
 import com.groupv.chatapp.model.GroupChatData;
 import com.groupv.chatapp.repository.GroupChatDataRepository;
 import com.groupv.chatapp.repository.GroupRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

@@ -7,7 +7,6 @@ import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ChatRoomService;
-import com.groupv.chatapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
