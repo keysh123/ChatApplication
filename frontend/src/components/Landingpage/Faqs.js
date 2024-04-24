@@ -38,7 +38,7 @@ export default function Faqs() {
     </h2>
     <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-         Our chat application is designed to accommodate a large number of users and messages. However, there may be certain limitations depending on your subscription plan or the server capacity. Please refer to our pricing and terms of service for more information.
+         Our chat application is designed to accommodate a large number of users and messages. However, there may be certain limitations depending on the server capacity.
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default function Faqs() {
     </h2>
     <div id="collapseOne1" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-         Yes, we offer customer support to assist you with any questions or issues you may encounter while using the chat application. You can reach out to our support team through email, live chat, or by submitting a support ticket.
+         Yes, we offer customer support to assist you with any questions or issues you may encounter while using the chat application. You can reach out to our support team through email.
       </div>
     </div>
   </div>
@@ -65,19 +65,19 @@ export default function Faqs() {
     </h2>
     <div id="collapseTwo1" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-         Our chat application imposes certain limits on the size and type of files that can be shared to ensure smooth performance and prevent misuse. Please refer to our documentation or terms of service for specific details regarding file upload limitations.
+         Our chat application imposes certain limits on the size and type of files that can be shared to ensure smooth performance and prevent misuse.
       </div>
     </div>
   </div>
   <div className="accordion-item mt-4">
     <h2 className="accordion-header" id="headingThree1">
       <button className="accordion-button collapsed aitem fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
-      Is there a feature to search for past messages or conversations?
+      Is there a feature to search for people on ChatNest?
       </button>
     </h2>
     <div id="collapseThree1" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-         Yes, our chat application includes a search feature that allows users to easily search for past messages or conversations. You can search by keywords, dates, or specific users to quickly locate relevant information within the chat history.
+         Yes, our chat application includes a search feature that allows users to easily search for people on ChatNest. You can search by keywords to quickly locate relevant users.
       </div>
     </div>
   </div>
