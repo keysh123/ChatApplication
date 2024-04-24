@@ -3,14 +3,14 @@ import React from 'react'
 export default function Footer() {
   return (
  <>
- <footer className="footer">
+ <footer className="footer" id="footerid">
   <div className="footer__addr">
     <h1 className="footer__logo">ChatNest</h1>
         
     <h2>Contact</h2>
     
     <address>
-      5534 Somewhere In. The World 22193-10212<br/>
+      ChatNest-team: 22193-10212<br/>
           
       <a className="footer__btn" href="mailto:example@gmail.com">Email Us</a>
     </address>
@@ -36,7 +36,7 @@ export default function Footer() {
           <a href="#">Karm Soni</a>
         </li>
         <li>
-          <a href="#">Chattrasinh Parmar</a>
+          <a href="#">Chhatrasinh Parmar</a>
         </li>
       </ul>
     </li>
@@ -91,7 +91,7 @@ export default function Footer() {
   </ul>
   
   <div className="legal">
-    <p>&copy; 2019 Something. All rights reserved.</p>
+    <p>&copy; 2024 Something. All rights reserved.</p>
     
     <div className="legal__links">
       <span>Made with <span className="heart">♥</span> remotely from India</span>

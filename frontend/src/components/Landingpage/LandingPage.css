@@ -23,7 +23,10 @@ body {
 
 nav {
   background-color: transparent;
+}
 
+.navbar{
+  border: none;
 }
 
 .buttons {
@@ -36,6 +39,10 @@ nav {
 .buttons:hover {
   border: 1px solid white;
   box-shadow: 0 0 2px 1px white;
+}
+
+.img-fluid{
+  height: 100%;
 }
 
 .hero {
@@ -69,6 +76,7 @@ nav {
   /* background-color: rgb(227, 142, 165); */
   border: 0px;
   box-shadow: 10px 5px 5px 5px lightblue;
+  /* font-size: 50px; */
 
 }
 
@@ -92,11 +100,11 @@ nav {
   display: flex;
   flex-flow: row wrap;
   padding: 30px 30px 20px 30px;
-  color: #2f2f2f;
-  background-color: #fff;
-  /* background-color: #393838; */
+  /* color: #2f2f2f; */
+  color: white;
+  background-color: #45007d;
   border-top: 1px solid #e5e5e5;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 .footer>* {
@@ -110,9 +118,8 @@ nav {
 
 .footer__logo {
   font-family: 'Pacifico', cursive;
-  font-weight: 400;
-  text-transform: lowercase;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 2rem;
 }
 
 .footer__addr h2 {
@@ -128,7 +135,7 @@ nav {
 
 .footer address {
   font-style: normal;
-  color: #999;
+  color: rgba(245, 222, 179, 0.8);
 }
 
 .footer__btn {
@@ -137,9 +144,9 @@ nav {
   justify-content: center;
   height: 36px;
   max-width: max-content;
-  background-color: rgb(33, 33, 33, 0.07);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 100px;
-  color: #2f2f2f;
+  color: black;
   line-height: 0;
   margin: 0.6em 0;
   font-size: 1rem;
@@ -170,7 +177,8 @@ nav {
 }
 
 .nav__ul a {
-  color: #999;
+  /* color: #999; */
+  color: rgba(245, 222, 179, 0.8);
 }
 
 .nav__ul--extra {
@@ -181,7 +189,7 @@ nav {
 .legal {
   display: flex;
   flex-wrap: wrap;
-  color: #999;
+  color: rgba(245, 222, 179, 0.8);
 }
 
 .legal__links {
@@ -190,7 +198,8 @@ nav {
 }
 
 .heart {
-  color: #2f2f2f;
+  /* color: #2f2f2f; */
+  color: white;
 }
 
 .feedback{
@@ -222,11 +231,8 @@ nav {
   }
 }
 
-
-
 .floating-component {
   animation: floatAnimation 2s infinite ease-in-out;
-
 }
 
 .boxfeatures {
@@ -263,6 +269,7 @@ nav {
   padding: 10px;
   background-color: rgba(44, 44, 44, 0.123);
   margin-top: 10px;
+  font-size: 20px;
   /* background: linear-gradient(145deg, rgba(140, 167, 255, 1) 0, rgba(139, 84, 249, 1) 50%, rgb(136, 119, 156) 100%); */
 }
 
@@ -275,9 +282,12 @@ nav {
 
 }
 
+.accordion-button{
+  font-size: 20px;
+}
+
 .about {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: large;
   /* margin: 20px; */
   margin-left: -79px;
   margin-top: -80px;
@@ -285,7 +295,7 @@ nav {
   /* background-color: #ebf5f5;
     color: black;
     padding: 30px; */
-
+  font-size: 20px;
 }
 
 .card-title {
