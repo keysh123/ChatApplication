@@ -163,6 +163,10 @@
   float: right;
 }
 
+.chatUserName{
+  font-size: 30px;
+}
+
 
 .messages {
   background-color: #ddddf7;
@@ -265,4 +269,45 @@
 .searchbtn{
   height: 30px;
   margin-left: 10px;
+}
+
+/* .btnstart2div{
+  background: url("../img/msgimg.jpeg") no-repeat center;
+  height: 40%;
+  border-radius: 50px;
+} */
+
+.btnstart2div, .btnstart1div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btnstart1{
+  padding: 20px;
+  font-weight: bold;
+  font-size: 50px;
+  color: rgb(133, 0, 222);
+}
+
+.btnstart2{
+  padding: 40px 20px;
+  font-weight: bold;
+  font-size: 40px;
+  border: 5px solid rgb(79, 0, 132);
+  box-shadow: 0 0 5px 4px rgb(211, 144, 255);
+  border-radius: 60px 60px 0 60px;
+  background-color: rgb(165, 30, 255);
+  color: white;
+}
+
+.chatpageimg{
+  height: 40%;
+  border-radius: 50px;
+}
+
+.msgimg{
+  height: 40%;
+  border-radius: 50px;
 }
