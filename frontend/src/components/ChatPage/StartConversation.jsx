@@ -22,8 +22,8 @@ export default function StartConversation({selectedPerson,setShowChat,setStartCo
 
   }
   return (
-    <div className='chat'>
-        <button className='btnstart' onClick={create_room}>Get_Started</button>
+    <div className='chat btnstart2div'>
+        <button className='btnstart2 animate__animated animate__fadeInDown' onClick={create_room}>Start Conversation</button>
     </div>
   )
 }
