@@ -1,13 +1,10 @@
 package com.groupv.chatapp.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.groupv.chatapp.model.ChatData;
+
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
-import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Getter
 @Setter

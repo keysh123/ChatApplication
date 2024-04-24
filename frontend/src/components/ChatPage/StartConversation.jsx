@@ -8,6 +8,7 @@ export default function StartConversation({selectedPerson,setShowChat,setStartCo
   // const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
   const {user,signout} = useContext(AuthContext);
   const create_room = () =>{
+    
     createRoom({
       "user1" :user?.username,
       "user2":selectedPerson
@@ -17,6 +18,8 @@ export default function StartConversation({selectedPerson,setShowChat,setStartCo
     setShowStart(false);
     setStartConversation(false);
     setChatUser(selectedPerson);
+
+
   }
   return (
     <div className='chat'>

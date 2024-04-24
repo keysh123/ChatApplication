@@ -2,7 +2,6 @@ package com.groupv.chatapp.repository;
 
 import com.groupv.chatapp.dto.ChatDto;
 import com.groupv.chatapp.model.ChatData;
-import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.Content;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

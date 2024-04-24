@@ -71,7 +71,7 @@ const AuthContextProvider = ({ children }) => {
         console.log(obj);
       }
       setUser(obj.data); // Assuming setUser is a state updater function passed as an argument
-      console.log(user); // This will not print the updated user immediately due to closure, use setUser instead
+      console.log(user+"  iyug"); // This will not print the updated user immediately due to closure, use setUser instead
     }
   };
 

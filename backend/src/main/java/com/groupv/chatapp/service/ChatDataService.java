@@ -7,26 +7,20 @@ import com.groupv.chatapp.repository.ChatDataRepository;
 import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.ContentRepository;
 import com.groupv.chatapp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Service
+@RequiredArgsConstructor
 public class ChatDataService {
-    @Autowired
-    private ChatDataRepository chatDataRepository;
-
-    @Autowired
-    private ChatRoomRepository chatRoomRepository;
-    @Autowired
-    private ChatRoomService chatRoomService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private ContentRepository contentRepository;
+    private final ChatDataRepository chatDataRepository;
+    private final ChatRoomRepository chatRoomRepository;
+    private final UserRepository userRepository;
+    private final ContentRepository contentRepository;
 
     public ChatData saveChatData(ChatData chatData) {
         chatData.setTime(LocalDateTime.now());

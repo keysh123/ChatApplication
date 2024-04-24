@@ -1,6 +1,5 @@
 package com.groupv.chatapp.controller;
 
-import com.groupv.chatapp.model.ChatData;
 import com.groupv.chatapp.model.GroupChatData;
 import com.groupv.chatapp.service.GroupChatDataService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,6 @@ package com.groupv.chatapp.service;
 
 import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

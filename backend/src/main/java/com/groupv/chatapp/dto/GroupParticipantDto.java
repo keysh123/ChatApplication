@@ -1,6 +1,5 @@
 package com.groupv.chatapp.dto;
 
-import com.groupv.chatapp.model.GroupRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

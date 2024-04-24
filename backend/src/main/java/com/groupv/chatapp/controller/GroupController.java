@@ -1,58 +1,24 @@
 package com.groupv.chatapp.controller;
 
 import com.groupv.chatapp.dto.GroupDto;
-import com.groupv.chatapp.exception.DoesNotExistException;
 import com.groupv.chatapp.model.*;
-import com.groupv.chatapp.repository.GroupParticipantRepository;
-import com.groupv.chatapp.repository.GroupRepository;
-import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class GroupController {
-    @Autowired
-    private GroupService groupService;
-
-    @Autowired
-    private GroupRepository groupRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private GroupParticipantRepository groupParticipantRepository;
+    private final GroupService groupService;
 
     @PostMapping("/group")
     public Group saveGroup(
             @RequestBody GroupDto groupDto,
             @RequestAttribute("username") String username
-    ) throws DoesNotExistException {
-        User creator = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username + " is not found"));
-        Group group = Group.builder()
-                .groupName(groupDto.getName())
-                .description(groupDto.getDescription())
-                .creator(
-                      creator
-                )
-                .build();
-        Group savedGroup = groupService.addGroup(group,username);
-        GroupParticipant groupParticipant = GroupParticipant.builder()
-                .groupId(savedGroup)
-                .username(creator)
-                .role(GroupRole.ADMIN)
-                .joinedAt(LocalDateTime.now())
-                .build();
-        GroupParticipant p = groupParticipantRepository.save(
-                groupParticipant
-        );
-        savedGroup = groupRepository.findById(savedGroup.getGroupId()).orElseThrow(()->new DoesNotExistException("Does not exist"));
-        System.out.println(savedGroup.getCreator());
-        return savedGroup;
+    ) {
+        return groupService.addGroup(groupDto,username);
     }
 
     @GetMapping("/group")

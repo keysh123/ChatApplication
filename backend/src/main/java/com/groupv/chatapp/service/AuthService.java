@@ -1,34 +1,29 @@
 
 package com.groupv.chatapp.service;
 
-import com.groupv.chatapp.config.CustomAuthProvider;
+
 import com.groupv.chatapp.dto.AuthenticationRequest;
 import com.groupv.chatapp.dto.AuthenticationResponse;
 import com.groupv.chatapp.dto.RegisterRequest;
-import com.groupv.chatapp.exception.UserDoesNotExistException;
 import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.dto.UserDto;
 import com.groupv.chatapp.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.function.Supplier;
+
 
 @Service
 @RequiredArgsConstructor
@@ -37,10 +32,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final CustomAuthProvider authProvider;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
 
     public UserDto saveUser(User user) throws DuplicateKeyException {

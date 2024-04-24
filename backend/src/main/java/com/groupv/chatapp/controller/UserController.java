@@ -9,7 +9,7 @@ import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.repository.ContentRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ContentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,16 +22,13 @@ import java.util.List;
 
 @CrossOrigin(originPatterns = "**",allowCredentials = "true")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
 public class UserController {
-    @Autowired
-    private ContentService contentService;
-    @Autowired
-    private ContentRepository contentRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final ContentService contentService;
+    private final ContentRepository contentRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PutMapping("/profile-img")
     public ResponseEntity<?> setProfileImg(

@@ -1,8 +1,7 @@
 package com.groupv.chatapp.dto;
 
-import com.groupv.chatapp.model.Content;
+
 import com.groupv.chatapp.model.User;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

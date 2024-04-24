@@ -5,28 +5,26 @@ import com.groupv.chatapp.model.*;
 import com.groupv.chatapp.repository.GroupParticipantRepository;
 import com.groupv.chatapp.repository.GroupRepository;
 import com.groupv.chatapp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GroupParticipantService {
-    @Autowired
-    private GroupParticipantRepository groupParticipantRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final GroupParticipantRepository groupParticipantRepository;
+    private final GroupRepository groupRepository;
+    private final UserRepository userRepository;
     public void saveParticipants(GroupParticipantDto groupParticipant){
-        GroupParticipant participant=null;
+        GroupParticipant participant;
         Integer groupId= groupParticipant.getGroupId();
         List<String> username=groupParticipant.getUsername();
         for (String s : username) {
             participant = GroupParticipant.builder()
                     .groupId(groupRepository.findById(groupId).orElseThrow(() -> new IllegalArgumentException("Group Not Found")))
-                    .username(userRepository.findById(s).orElseThrow(() -> new IllegalArgumentException("User Not Found")))
+                    .username(userRepository.findById(s).orElseThrow(() -> new IllegalArgumentException("User:"+username+" Not Found")))
                     .role(GroupRole.PARTICIPANT)
                     .joinedAt(LocalDateTime.now())
                     .build();
