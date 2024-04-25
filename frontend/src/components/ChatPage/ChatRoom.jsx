@@ -18,7 +18,7 @@ const ChatRoom = ({
     setShowChat(true);
     setShowStart(false);
     setStartConversation(false);
-    localStorage.setItem("currentChatRoomId",chatRoom.chatRoomId+"");
+    localStorage.setItem("currentChatRoomId", chatRoom.chatRoomId + "");
     setChatUser(chatRoom);
     console.log(chatRoom.chatRoomId);
     console.log(chatRoom);
@@ -44,6 +44,7 @@ const ChatRoom = ({
         <span>{chatRoom?.user?.username}</span>
         {/* <p>Hello</p> */}
       </div>
+      <div className="unreadCount">{chatRoom?.countUnread}</div>
     </div>
   );
 };

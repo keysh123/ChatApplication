@@ -14,27 +14,28 @@ import WSContextProvider from "./context/WSContextProvider";
 import DBProvider from "./context/DBProvider";
 
 function App() {
+  // const [loading,setLoading] = useState(false);
   return (
     <>
       <DBProvider>
-        <AuthContextProvider>
-          <WSContextProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route exact path={"/"} element={<MainPage />}></Route>
-                <Route path={"/sign-in"} element={<SignIn />}></Route>
-                <Route path={"/sign-up"} element={<SignUp />}></Route>
-                <Route path={"/chat-page"} element={<HomeApp />}></Route>
-                <Route path={"/info"} element={<LandingPage />}></Route>
-                <Route path={"/user-info"} element={<UserInfo />}></Route>
-                <Route
-                  path={"/user-friend-info"}
-                  element={<UserFriendInfo />}
-                ></Route>
-              </Routes>
-            </BrowserRouter>
-          </WSContextProvider>
-        </AuthContextProvider>
+          <AuthContextProvider>
+            <WSContextProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route exact path={"/"} element={<MainPage />}></Route>
+                  <Route path={"/sign-in"} element={<SignIn />}></Route>
+                  <Route path={"/sign-up"} element={<SignUp />}></Route>
+                  <Route path={"/chat-page"} element={<HomeApp />}></Route>
+                  <Route path={"/info"} element={<LandingPage />}></Route>
+                  <Route path={"/user-info"} element={<UserInfo />}></Route>
+                  <Route
+                    path={"/user-friend-info"}
+                    element={<UserFriendInfo />}
+                  ></Route>
+                </Routes>
+              </BrowserRouter>
+            </WSContextProvider>
+          </AuthContextProvider>
       </DBProvider>
     </>
   );

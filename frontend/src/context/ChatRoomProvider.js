@@ -10,18 +10,16 @@ const ChatRoomProvider = ({ children }) => {
   const [chatRoomData, setChatRoomData] = useState(null);
   const [resUsers, setResUsers] = useState(null);
   const { addRooms, getChatRoomsDB } = useContext(DBContext);
+  const [changedChatRooms,setChangedChatRooms] = useState("toggle");
 
   const getChatRooms = async () => {
     // const res = await fetch(api.GET_CHAT_ROOMS, {
     //   credentials: "include",
     // });
-
     // if (!res.ok) {
     //     throw new Error('Failed to fetch chat rooms');
     // }
-
     // const obj = await res.json();
-
     // // Process the chat rooms data
     // const processedRooms = await Promise.all(obj.data.map(async (chatRoom) => {
     //     if (chatRoom.user.profileImg != null) {
@@ -44,23 +42,19 @@ const ChatRoomProvider = ({ children }) => {
     // }));
     // const arr = processedRooms;
     // await initDB(arr);
-    const rooms = await getChatRoomsDB();
-    setChatRoomData(rooms);
   };
 
   useEffect(() => {
-    if (user) {
-      console.log("Into the wild .....................................hello");
-      getChatRoomsDB()
-        .then((rooms) => {
-          console.log(rooms,"hello");
-          setChatRoomData(rooms);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [user]);
+    console.log("Into the wild .....................................hello");
+    getChatRoomsDB()
+      .then((rooms) => {
+        console.log(rooms, "hello");
+        setChatRoomData(rooms);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [changedChatRooms]);
 
   const searchUsers = async (query) => {
     const res = await fetch(api.SEARCH_USER + "?query=" + query, {
@@ -85,6 +79,8 @@ const ChatRoomProvider = ({ children }) => {
         resUsers,
         setResUsers,
         searchUsers,
+        setChangedChatRooms,
+        changedChatRooms
       }}
     >
       {children}

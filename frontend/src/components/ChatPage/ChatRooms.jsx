@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ChatRoomContext } from "../../context/ChatRoomContext";
 import ChatRoom from "./ChatRoom";
 
 const ChatRooms = ({ setShowChat, setStartConversation, setShowStart }) => {
   const { chatRoomData } = useContext(ChatRoomContext);
+  useEffect(()=>{
+    console.log(chatRoomData);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
+  }
+  ,[chatRoomData])
   return (
     <div className="chat-room">
       {chatRoomData?.map((chatRoom) => {

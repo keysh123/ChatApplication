@@ -140,6 +140,10 @@
   color: lightgray;
 }
 
+.unreadCount{
+  align-self: flex-end;
+}
+
 .chatInfo {
   background-color: rgb(150, 17, 238);
   height: 10%;

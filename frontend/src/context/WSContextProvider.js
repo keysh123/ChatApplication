@@ -8,43 +8,89 @@ import Message from "../components/ChatPage/Message";
 
 const WSContextProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
+  const { addChat } = useContext(DBContext);
+  const [func, setFunc] = useState(null);
   const messagesRef = useRef(null);
-  const [wsObject, setWsObject] = useState({
-    socket: null,
-    stompClient: null,
-  });
+  const socket = new window.SockJS("http://localhost:4000/ws");
+  const stompClient = window.Stomp.over(socket);
 
-  const init = (username) => {
-    if (!wsObject.socket && !wsObject.stompClient) {
-      let socket = new window.SockJS("http://localhost:4000/ws");
-      let stompClient = window.Stomp.over(socket);
-      stompClient.connect(
-        {},
-        function onConnected() {
-          console.log("Connected to WebSocket server-------------------");
-        },
-        function onError(error) {
-          console.error("WebSocket error:", error);
-        }
-      );
+  // const init = (username) => {
+  //   if (!wsObject.socket && !wsObject.stompClient) {
+  //     let socket = new window.SockJS("http://localhost:4000/ws");
+  //     let stompClient = window.Stomp.over(socket);
+  //     // stompClient.connect(
+  //     //   {},
+  //     //   function onConnected(e) {
+  //     //     console.log("Connected to WebSocket server-------------------");
+  //     //     stompClient.subscribe(
+  //     //       `/user/${user.username}/queue/message`,
+  //     //       async function (message) {
+  //     //         let obj = JSON.parse(message.body);
+  //     //         const date = new Date(...obj.time);
 
-      setWsObject({ socket, stompClient });
-    }
-  };
+  //     //         const year = date.getFullYear();
+  //     //         const month = String(date.getMonth() + 1).padStart(2, "0");
+  //     //         const day = String(date.getDate()).padStart(2, "0");
+  //     //         const hours = String(date.getHours()).padStart(2, "0");
+  //     //         const minutes = String(date.getMinutes()).padStart(2, "0");
+  //     //         const seconds = String(date.getSeconds()).padStart(2, "0");
+  //     //         const milliseconds = String(date.getMilliseconds()).padStart(
+  //     //           3,
+  //     //           "0"
+  //     //         );
+
+  //     //         const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+  //     //         console.log(formattedDate);
+  //     //         obj.time = formattedDate;
+  //     //         // if(obj.receiver!=username){
+  //     //         //   const component = <Message isOwner={false} message={obj}/>
+  //     //         //   console.log("hello"+component);
+  //     //         //   const containerNode = document.createElement('div');
+  //     //         //   ReactDOM.render(component, containerNode);
+  //     //         //   messagesRef.current.appendChild(containerNode);
+  //     //         console.log("0000000000000000");
+  //     //         // }
+  //     //         // console.log(chatUser);
+  //     //         console.log(obj);
+  //     //         console.log("0000000000000000");
+  //     //         console.log(
+  //     //           localStorage.getItem("currentChatRoomId") +
+  //     //             "||||||||||||||||||||"
+  //     //         );
+  //     //         await addChat(obj);
+  //     //         if (
+  //     //           parseInt(localStorage.getItem("currentChatRoomId")) ===
+  //     //           obj.chatRoomId
+  //     //         ) {
+  //     //           await func(obj.chatRoomId);
+  //     //         }
+  //     //         // Process the received message
+  //     //       }
+  //     //     );
+  //     //   },
+  //     //   function onError(error) {
+  //     //     console.error("WebSocket error:", error);
+  //     //   }
+  //     // );
+
+  //     setWsObject({ socket, stompClient });
+  //   }
+  // };
 
   function destroy() {
-    if(wsObject.socket && wsObject.stompClient){
-      wsObject?.stompClient?.disconnect();
+    if (socket && stompClient) {
+      stompClient?.disconnect();
     }
   }
 
   useEffect(() => {
-    if(user){
-      init();
+    if (user) {
+      // init();
     }
 
     return () => {
-      destroy();
+      // destroy();
       // setWsObject({
       //   socket: null,
       //   stompClient: null,
@@ -104,11 +150,11 @@ const WSContextProvider = ({ children }) => {
   //   }
 
   const send = (obj) => {
-    wsObject?.stompClient?.send("/app/chat", {}, JSON.stringify(obj));
+    stompClient?.send("/app/chat", {}, JSON.stringify(obj));
   };
 
   return (
-    <WSContext.Provider value={{ wsObject, send, init, messagesRef }}>
+    <WSContext.Provider value={{ socket,stompClient, send, messagesRef, setFunc }}>
       {children}
     </WSContext.Provider>
   );
