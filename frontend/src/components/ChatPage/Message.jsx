@@ -35,11 +35,15 @@
 
 // export default Message;
 
-import React from 'react';
-
+import React,{useContext} from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
 const Message = ({ isOwner, message }) => {
+  const {chatUser} = useContext(ChatContext);
+  const {user,signout,setUser} = useContext(AuthContext);
   const messageClass = isOwner ? 'message owner' : 'message';
-
+  const imageUrl = isOwner ? user?.profileImg.url : chatUser?.user?.profileImg.url;
+console.log(user?.profileImg.url+"url");
   return (
     // // <div className={messageClass}>
     //   <div className="messageInfo">
@@ -52,7 +56,7 @@ const Message = ({ isOwner, message }) => {
     // // </div>
     <div className={messageClass}>
         <div className="messageInfo">
-          <img src="" alt="" />
+          <img src={imageUrl} alt="" />
            {/* <span>{message.time}</span> */}
            {/* <div className='message'> */}
   <span>{new Date(message.time).toLocaleDateString()}</span><br />
