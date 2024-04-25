@@ -82,15 +82,28 @@
 // };
 
 // export default Messages;
-import React, { useContext } from 'react';
+import React, { useContext,useRef,useEffect } from 'react';
 import { ChatContext1 } from '../../context/ChatProvider';
 import Message from './Message';
 
 const Messages = ({ currentUser }) => {
   const { chats, loading } = useContext(ChatContext1);
+  const messagesContainerRef = useRef(null);
 
+  useEffect(() => {
+    // Scroll to the bottom of the messages container whenever it updates
+    scrollToBottom();
+  }, [chats]);
+
+  const scrollToBottom = () => {
+    // Ensure the messages container reference exists
+    if (messagesContainerRef.current) {
+      // Scroll to the bottom of the messages container
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
   return (
-    <div className='messages'>
+    <div className='messages' ref={messagesContainerRef}>
       {loading ? (
         <p>Loading messages...</p>
       ) : (
