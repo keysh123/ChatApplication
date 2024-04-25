@@ -37,6 +37,7 @@ import Input from './Input';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
 import { Link } from 'react-router-dom'; 
+import FileDiv from './FileDiv';
 
 const Chat = ({ selectedPerson }) => {
   const [messages, setMessages] = useState([]);
