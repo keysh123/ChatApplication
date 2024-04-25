@@ -66,6 +66,7 @@ console.log(user?.profileImg.url+"url");
        </div>
         <div className="messageContent">
           <p>{message.text}</p>
+          {/* <p>{message.status}status</p> */}
         </div>
         </div>
   );
