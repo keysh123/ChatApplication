@@ -3,10 +3,12 @@ import { api } from "../api/api";
 import { AuthContext } from "./AuthContext";
 import { defaultImg } from "../defaultImg/defaultImg";
 import { WSContext } from "./WSContext";
+import { DBContext } from "./DBContext";
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const { init } = useContext(WSContext);
+  // const { init } = useContext(WSContext);
+  const { destroy,initDB } = useContext(DBContext);
   //   const navigate = useNavigate();
 
   const getImg = async (id) => {
@@ -39,6 +41,7 @@ const AuthContextProvider = ({ children }) => {
         }
         // init(obj.data.username);
         setUser(obj.data);
+        await initDB();
         return true;
       }
       return false;
@@ -88,10 +91,8 @@ const AuthContextProvider = ({ children }) => {
       });
 
       const obj = await res.json();
-      if (obj.success) {
-        setUser(null);
-        return true;
-      }
+      setUser(null);
+      await destroy();
       return false;
     } catch (error) {
       console.log(error);
@@ -122,23 +123,25 @@ const AuthContextProvider = ({ children }) => {
         // init(data.data.username);
         setUser(data.data); // Assuming setUser is a state updater function passed as an argument
         console.log(user); // This will not print the updated user immediately due to closure, use setUser instead
+        await initDB();
         return true;
       } else {
-        return false;
+        // throw new Error(data.error);
       }
+      return false;
     } catch (err) {
       console.log(err);
       return false;
     }
   };
 
-  useEffect(() => {
-    // Initialize WebSocket connection when the component mounts
-    if(user){
-      init(user.username); // Initialize WebSocket with the username if user is available
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  // useEffect(() => {
+  //   // Initialize WebSocket connection when the component mounts
+  //   if (user) {
+  //     init(user.username); // Initialize WebSocket with the username if user is available
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user]);
 
   return (
     <AuthContext.Provider

@@ -18,6 +18,7 @@ const ChatRoom = ({
     setShowChat(true);
     setShowStart(false);
     setStartConversation(false);
+    localStorage.setItem("currentChatRoomId",chatRoom.chatRoomId+"");
     setChatUser(chatRoom);
     console.log(chatRoom.chatRoomId);
     console.log(chatRoom);

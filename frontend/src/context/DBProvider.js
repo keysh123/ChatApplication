@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { api } from "../api/api";
 import { DBContext } from "./DBContext";
 
 const DBProvider = ({ children }) => {
   console.log("he--------------------------------------------");
-
-  
-
+  const dbName = "my_database";
   let dbPromise = new Promise((resolve, reject) => {
-    let request = window.indexedDB.open("my_database", 1);
+    let request = window.indexedDB.open(dbName, 1);
 
     request.onerror = function (event) {
       console.log("errcccccccccccccccccccccccc");
@@ -31,7 +29,48 @@ const DBProvider = ({ children }) => {
     };
   });
 
-  const getChatRooms = async () => {
+  // const getChatRooms = async () => {
+  //   const res = await fetch(api.GET_CHAT_ROOMS, {
+  //     credentials: "include",
+  //   });
+
+  //   if (!res.ok) {
+  //     throw new Error("Failed to fetch chat rooms");
+  //   }
+
+  //   const obj = await res.json();
+
+  //   // Process the chat rooms data
+  //   const processedRooms = await Promise.all(
+  //     obj.data.map(async (chatRoom) => {
+  //       if (chatRoom.user.profileImg != null) {
+  //         const contentRes = await fetch(
+  //           api.GET_CONTENT + chatRoom.user.profileImg.id,
+  //           {
+  //             credentials: "include",
+  //           }
+  //         );
+  //         if (!contentRes.ok) {
+  //           throw new Error("Failed to fetch profile image");
+  //         }
+  //         const blob = await contentRes.blob();
+  //         const profileImgUrl = URL.createObjectURL(blob);
+  //         console.log("Image URL: " + profileImgUrl);
+  //         chatRoom.user.profileImg.url = profileImgUrl;
+  //       } else {
+  //         chatRoom.user.profileImg = {
+  //           url: "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+  //         };
+  //       }
+  //       return chatRoom; // Return the processed chat room
+  //     })
+  //   );
+
+  //   console.log(processedRooms);
+  //   return processedRooms;
+  // };
+
+  const _getChatRooms = async () => {
     const res = await fetch(api.GET_CHAT_ROOMS, {
       credentials: "include",
     });
@@ -67,28 +106,51 @@ const DBProvider = ({ children }) => {
         return chatRoom; // Return the processed chat room
       })
     );
-
-    console.log(processedRooms);
     return processedRooms;
   };
 
-  async function init(rooms) {
-    await addRooms(rooms);
-    let db = await dbPromise;
+  async function initDB() {
+    try {
+      let db = await dbPromise;
+      const rooms = await _getChatRooms();
+      console.log(rooms, "This is rooms");
 
-    const queryTransaction = db.transaction(["chatRooms"], "readonly");
-    const queryObjectStore = queryTransaction.objectStore("chatRooms");
-
-    const queryRequest = queryObjectStore.getAll();
-    queryRequest.onsuccess = (event) => {
-      const rooms = event.target.result;
-      rooms.forEach(async (room) => {
+      for (const room of rooms) {
         let chats = await _getChats(room.chatRoomId);
+        let countUnread = 0;
+        for (let i = chats.length - 1; i >= 0; i--) {
+          if (chats[i].status === "UNREAD") {
+            countUnread++;
+          } else {
+            break;
+          }
+        }
+        console.log("{{{{{{{{{{{{{{{{{{{{");
+        console.log(chats);
+        room["countUnread"] = countUnread;
+        room["latestChatTime"] = chats[0]?.time;
+
         await addChat(chats);
-      });
+      }
+      await addRooms(rooms);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function destroy() {
+    const db = await dbPromise;
+    db.close();
+
+    // Delete the database
+    const deleteRequest = indexedDB.deleteDatabase(dbName);
+
+    deleteRequest.onerror = function (event) {
+      console.error("Failed to delete database:", event.target.error);
     };
-    queryRequest.onerror = (event) => {
-      console.error("Error querying rooms:", event.target.error);
+
+    deleteRequest.onsuccess = function (event) {
+      console.log("Database deleted successfully.");
     };
   }
 
@@ -201,9 +263,51 @@ const DBProvider = ({ children }) => {
     });
   }
 
+  async function getChatRoomsDB(chatRoomId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const db = await dbPromise;
+        const transaction = db.transaction(["chatRooms"], "readonly");
+        const objectStore = transaction.objectStore("chatRooms");
+
+        // Retrieve all chats for the specified chatRoomId using getAll()
+        const getAllRequest = objectStore.getAll();
+        getAllRequest.onsuccess = function (event) {
+          const chatRooms = event.target.result;
+          console.log(
+            "All chats with chat room ID " + chatRoomId + ":",
+            chatRooms
+          );
+          resolve(chatRooms); // Resolve the Promise with the chats array
+        };
+        getAllRequest.onerror = function (event) {
+          console.error(
+            "Error retrieving all chatRooms by chat room ID:",
+            event.target.error
+          );
+          reject(event.target.error); // Reject the Promise with the error
+        };
+      } catch (error) {
+        console.error(
+          "Error querying all chatRooms by chat room ID:",
+          error.message
+        );
+        reject(error); // Reject the Promise with the error
+      }
+    });
+  }
+
   return (
     <DBContext.Provider
-      value={{ dbPromise, addRooms, addChat, init, getChatsDB }}
+      value={{
+        dbPromise,
+        addRooms,
+        addChat,
+        initDB,
+        getChatsDB,
+        destroy,
+        getChatRoomsDB,
+      }}
     >
       {children}
     </DBContext.Provider>

@@ -17,8 +17,8 @@ function App() {
   return (
     <>
       <DBProvider>
-        <WSContextProvider>
-          <AuthContextProvider>
+        <AuthContextProvider>
+          <WSContextProvider>
             <BrowserRouter>
               <Routes>
                 <Route exact path={"/"} element={<MainPage />}></Route>
@@ -33,8 +33,8 @@ function App() {
                 ></Route>
               </Routes>
             </BrowserRouter>
-          </AuthContextProvider>
-        </WSContextProvider>
+          </WSContextProvider>
+        </AuthContextProvider>
       </DBProvider>
     </>
   );

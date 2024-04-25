@@ -1,15 +1,14 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { api } from "../api/api";
 import { WSContext } from "./WSContext";
 import { DBContext } from "./DBContext";
 import { AuthContext } from "./AuthContext";
-import ReactDOM from 'react-dom/client'
+import ReactDOM from "react-dom/client";
 import Message from "../components/ChatPage/Message";
 
 const WSContextProvider = ({ children }) => {
-  const { addChat } = useContext(DBContext);
-  //   const { user } = useContext(AuthContext);
-    const messagesRef = useRef(null);
+  const { user } = useContext(AuthContext);
+  const messagesRef = useRef(null);
   const [wsObject, setWsObject] = useState({
     socket: null,
     stompClient: null,
@@ -23,38 +22,6 @@ const WSContextProvider = ({ children }) => {
         {},
         function onConnected() {
           console.log("Connected to WebSocket server-------------------");
-          stompClient.subscribe(
-            `/user/${username}/queue/message`,
-            async function (message) {
-              let obj = JSON.parse(message.body);
-              const date = new Date(...obj.time);
-
-              const year = date.getFullYear();
-              const month = String(date.getMonth() + 1).padStart(2, "0");
-              const day = String(date.getDate()).padStart(2, "0");
-              const hours = String(date.getHours()).padStart(2, "0");
-              const minutes = String(date.getMinutes()).padStart(2, "0");
-              const seconds = String(date.getSeconds()).padStart(2, "0");
-              const milliseconds = String(date.getMilliseconds()).padStart(
-                3,
-                "0"
-              );
-
-              const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
-
-              console.log(formattedDate);
-              obj.time=formattedDate;
-              if(obj.receiver!=username){
-                const component = <Message isOwner={false} message={obj}/>
-                console.log("hello"+component);
-                const containerNode = document.createElement('div');
-                ReactDOM.render(component, containerNode);
-                messagesRef.current.appendChild(containerNode);
-              }
-              await addChat(obj);
-              // Process the received message
-            }
-          );
         },
         function onError(error) {
           console.error("WebSocket error:", error);
@@ -64,6 +31,26 @@ const WSContextProvider = ({ children }) => {
       setWsObject({ socket, stompClient });
     }
   };
+
+  function destroy() {
+    if(wsObject.socket && wsObject.stompClient){
+      wsObject?.stompClient?.disconnect();
+    }
+  }
+
+  useEffect(() => {
+    if(user){
+      init();
+    }
+
+    return () => {
+      destroy();
+      // setWsObject({
+      //   socket: null,
+      //   stompClient: null,
+      // })
+    };
+  }, [user]);
 
   //   const [isConnected, setIsConnected] = useState(false);
 
@@ -121,7 +108,9 @@ const WSContextProvider = ({ children }) => {
   };
 
   return (
-    <WSContext.Provider value={{ send, init, messagesRef }}>{children}</WSContext.Provider>
+    <WSContext.Provider value={{ wsObject, send, init, messagesRef }}>
+      {children}
+    </WSContext.Provider>
   );
 };
 
