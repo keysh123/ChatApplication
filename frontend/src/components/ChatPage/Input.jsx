@@ -23,6 +23,7 @@ const Input = () => {
         onChange={handleSendBtn}
         type="text"
         placeholder="Type something"
+        title="Type a message"
         value={text}
       />
       <div className="send">

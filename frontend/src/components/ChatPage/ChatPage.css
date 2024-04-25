@@ -163,6 +163,10 @@
   float: right;
 }
 
+.chatUserName{
+  font-size: 30px;
+}
+
 
 .messages {
   background-color: #ddddf7;

@@ -12,7 +12,7 @@ export const SignUpRhs = () => {
     password: "",
   });
 
-  const {signup} = useContext(AuthContext);
+  const { signup }=useContext(AuthContext);
 
   const handleChangeUsername = (e) => {
     setUser({ ...user, username: e.target.value });
@@ -101,13 +101,13 @@ export const SignUpRhs = () => {
               </div>
               <div>
                 <Link to="/sign-in">
-                <button
-                  type="submit"
-                  className="btn button signupbtn"
-                  onClick={handleSubmit}
-                >
-                  Sign Up
-                </button>
+                  <button
+                    type="submit"
+                    className="btn button signupbtn"
+                    onClick={handleSubmit}
+                  >
+                    Sign Up
+                  </button>
                 </Link>
               </div>
               <div className="callout">

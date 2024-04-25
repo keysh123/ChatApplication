@@ -13,7 +13,7 @@ export default function LandingPage() {
    <>
    <div className="maincontent">
     <Navbar/>
-    <div className="row mb-5" >
+    <div className="row p-5" >
         <Lhs/>
         <Rhs/> 
     </div>
