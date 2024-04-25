@@ -83,18 +83,19 @@
 
 // export default Messages;
 import React, { useContext } from 'react';
-import { ChatContext1 } from '../../context/ChatProvider';
+import { ChatContext } from '../../context/ChatProvider';
 import Message from './Message';
+import { WSContext } from '../../context/WSContext';
 
 const Messages = ({ currentUser }) => {
-  const { chats, loading } = useContext(ChatContext1);
-
+  const { chats, loading } = useContext(ChatContext);
+  const {messagesRef} = useContext(WSContext);
   return (
-    <div className='messages'>
+    <div id='messages' ref={messagesRef} className='messages'>
       {loading ? (
         <p>Loading messages...</p>
       ) : (
-        chats.map((message, index) => {
+        chats?.map((message, index) => {
           // Determine if the message is from the current user
           const isOwner = message.sender === currentUser;
 

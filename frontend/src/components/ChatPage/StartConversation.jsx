@@ -1,10 +1,10 @@
 import React,{useContext} from 'react'
 import { CreateRoomContext } from '../../context/CreateRoom'
-import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatProvider';
 export default function StartConversation({selectedPerson,setShowChat,setStartConversation,setShowStart}) {
   const { createRoom } = useContext(CreateRoomContext);
-  const {ChatUser,setChatUser} = useContext(ChatContext);
+  const {chatUser,setChatUser} = useContext(ChatContext);
   // const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
   const {user,signout} = useContext(AuthContext);
   const create_room = () =>{

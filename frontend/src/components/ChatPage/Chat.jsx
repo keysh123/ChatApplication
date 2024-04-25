@@ -35,14 +35,18 @@ import './ChatPage.css';
 import Messages from './Messages';
 import Input from './Input';
 import { AuthContext } from '../../context/AuthContext';
-import { ChatContext } from '../../context/ChatContext';
+import { ChatContext } from '../../context/ChatProvider';
 import { Link } from 'react-router-dom'; 
+import Message from './Message';
 
 const Chat = ({ selectedPerson }) => {
   const [messages, setMessages] = useState([]);
 
   const {chatUser} = useContext(ChatContext);
-  const {user,signout} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
+  const addMessage=(message)=>{
+    const component = <Message message={message} isOwner={true}/>
+  }
 
   // useEffect(() => {
   //   // Fetch messages data from your backend API
@@ -60,7 +64,7 @@ console.log(user?.username)
     <div className='chat'>
       <div className="chatInfo">
         <Link to="/user-friend-info" className='unamelink'>
-          <span className='chatUserName'>{chatUser?.username || "User"}</span>
+          <span className='chatUserName'>{chatUser?.user?.username || "User"}</span>
         </Link>
         <div className="chatIcons">
           <img src={cam} alt="" />

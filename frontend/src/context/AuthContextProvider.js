@@ -1,10 +1,12 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../api/api";
 import { AuthContext } from "./AuthContext";
 import { defaultImg } from "../defaultImg/defaultImg";
+import { WSContext } from "./WSContext";
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const { init } = useContext(WSContext);
   //   const navigate = useNavigate();
 
   const getImg = async (id) => {
@@ -35,6 +37,7 @@ const AuthContextProvider = ({ children }) => {
           obj.data.profileImg = { url: defaultImg.profileImg };
           console.log(obj);
         }
+        // init(obj.data.username);
         setUser(obj.data);
         return true;
       }
@@ -71,20 +74,19 @@ const AuthContextProvider = ({ children }) => {
         console.log(obj);
       }
       setUser(obj.data); // Assuming setUser is a state updater function passed as an argument
-      console.log(user+"  iyug"); // This will not print the updated user immediately due to closure, use setUser instead
+      console.log(user + "  iyug"); // This will not print the updated user immediately due to closure, use setUser instead
     }
   };
 
   const signout = async () => {
     // Implement your logout logic here
     try {
-      
       const res = await fetch(api.SIGNOUT, {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({}),
       });
-      
+
       const obj = await res.json();
       if (obj.success) {
         setUser(null);
@@ -117,6 +119,7 @@ const AuthContextProvider = ({ children }) => {
         } else {
           data.data.profileImg = { url: defaultImg.profileImg };
         }
+        // init(data.data.username);
         setUser(data.data); // Assuming setUser is a state updater function passed as an argument
         console.log(user); // This will not print the updated user immediately due to closure, use setUser instead
         return true;
@@ -128,6 +131,14 @@ const AuthContextProvider = ({ children }) => {
       return false;
     }
   };
+
+  useEffect(() => {
+    // Initialize WebSocket connection when the component mounts
+    if(user){
+      init(user.username); // Initialize WebSocket with the username if user is available
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <AuthContext.Provider

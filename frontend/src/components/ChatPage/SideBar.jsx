@@ -17,8 +17,7 @@ const SideBar = ({setSelectedPerson,setShowChat,setStartConversation,setShowStar
     <div className='sidebar'>
       <Navbar/>
       <ShowSearch setSelectedPerson={setSelectedPerson} setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}/>
-      <ChatRooms setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}></ChatRooms>
-      
+      <ChatRooms setShowChat={setShowChat} setStartConversation={setStartConversation} setShowStart={setShowStart}></ChatRooms>  
     </div>
   )
 }
