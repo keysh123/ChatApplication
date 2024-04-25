@@ -60,7 +60,7 @@ public class ChatDataService {
         return data;
     }
 
-    public List<ChatData> changeToUnread(Integer chatRoomId) {
+    public void changeToUnread(Integer chatRoomId) {
         List<ChatData> chatDataList=chatDataRepository.findByChatRoom(
                 chatRoomRepository.findById(chatRoomId).orElseThrow(()-> new IllegalArgumentException("no chat room found"))
         );
@@ -68,9 +68,9 @@ public class ChatDataService {
             chatData.setStatus(ChatDataStatus.UNREAD);
             chatDataRepository.save(chatData);
         }
-        return chatDataList;
+
     }
-    public List<ChatData> changeToRead(Integer chatRoomId) {
+    public void changeToRead(Integer chatRoomId) {
         List<ChatData> chatDataList=chatDataRepository.findByChatRoom(
                 chatRoomRepository.findById(chatRoomId).orElseThrow(()-> new IllegalArgumentException("no chat room found"))
         );
@@ -78,7 +78,7 @@ public class ChatDataService {
             chatData.setStatus(ChatDataStatus.READ);
             chatDataRepository.save(chatData);
         }
-return chatDataList;
+
     }
 
 //    public List<> getChats(String username, String uname) {
