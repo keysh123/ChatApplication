@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Service
@@ -39,6 +40,7 @@ public class ChatDataService {
                         userRepository.findByUsername(chat.getReceiver()).orElseThrow(() -> new UsernameNotFoundException(chat.getReceiver() + " does not exist"))
                 )
                 .text(chat.getText())
+                .status(ChatDataStatus.SENT)
                 .time(LocalDateTime.now())
                 .build();
 
@@ -58,10 +60,25 @@ public class ChatDataService {
         return data;
     }
 
-    public ChatData updateStatus(Integer chatId, String status) {
-        ChatData chatData = chatDataRepository.findById(chatId).orElseThrow(() -> new IllegalArgumentException("Chat Not Found"));
-        chatData.setStatus(ChatDataStatus.valueOf(status));
-        return chatDataRepository.save(chatData);
+    public List<ChatData> changeToUnread(Integer chatRoomId) {
+        List<ChatData> chatDataList=chatDataRepository.findByChatRoom(
+                chatRoomRepository.findById(chatRoomId).orElseThrow(()-> new IllegalArgumentException("no chat room found"))
+        );
+        for (ChatData chatData:chatDataList){
+            chatData.setStatus(ChatDataStatus.UNREAD);
+            chatDataRepository.save(chatData);
+        }
+        return chatDataList;
+    }
+    public List<ChatData> changeToRead(Integer chatRoomId) {
+        List<ChatData> chatDataList=chatDataRepository.findByChatRoom(
+                chatRoomRepository.findById(chatRoomId).orElseThrow(()-> new IllegalArgumentException("no chat room found"))
+        );
+        for (ChatData chatData:chatDataList){
+            chatData.setStatus(ChatDataStatus.READ);
+            chatDataRepository.save(chatData);
+        }
+return chatDataList;
     }
 
 //    public List<> getChats(String username, String uname) {
