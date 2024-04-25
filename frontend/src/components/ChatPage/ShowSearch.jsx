@@ -13,7 +13,7 @@ const ShowSearch = ({setSelectedPerson,setShowChat,setStartConversation,setShowS
     useEffect(()=>{
       if(searchValue.length>2){
         searchUsers(searchValue);
-        console.log(resUsers);
+        console.log(resUsers+"this are users!!");
       }
     },[searchValue])
     

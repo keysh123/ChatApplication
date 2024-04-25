@@ -4,7 +4,6 @@ import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.repository.ChatDataRepository;
-import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public class ChatRoomController {
     @Autowired
     private ChatDataRepository chatDataRepository;
 
-    @Autowired
-    private ChatRoomRepository chatRoomRepository;
 
     @PostMapping("")
     public ResponseEntity<?> saveChatRoom(
