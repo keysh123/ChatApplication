@@ -68,12 +68,12 @@ setUser(user);
           <span className='chatUserName'>{chatUser?.user?.username || "User"}</span>
         </Link>
         {/* </ChatContext> */}
-        <div className="chatIcons">
+        {/* <div className="chatIcons">
           <img src={cam} alt="" />
           <img src={add} alt="" />
           <img src={more} alt="" />
         
-        </div>
+        </div> */}
       </div>
       {/* {AuthContext.user} */}
       <Messages currentUser={user?.username} selectedPerson={chatUser?.user?.username} />
