@@ -43,7 +43,7 @@ const ChatRoomProvider = ({ children }) => {
       const obj = await res.json();
       if(res.ok){
         // console.log(resUsers+"HIyui");
-        setResUsers(obj.data);
+        setResUsers(obj);
         // console.log(res);
         // console.log(obj);
       }

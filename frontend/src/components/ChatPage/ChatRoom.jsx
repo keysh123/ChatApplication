@@ -6,7 +6,7 @@ import {chatRoomData} from "../../context/ChatRoomContext";
 import { ChatRoomContext } from '../../context/ChatRoomContext'
 // const {chatRooms,getChatRooms} = useContext(ChatRoomContext);
 const ChatRoom = ({ chatRoom,setShowChat,setStartConversation,setShowStart} ) => {
-    const {setChatUser} = useContext(ChatContext);
+    const {setChatUser,chatUser} = useContext(ChatContext);
     const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
     const {user,signout} = useContext(AuthContext);
     const {chatRoomData}=useContext(ChatRoomContext);
@@ -14,10 +14,18 @@ const ChatRoom = ({ chatRoom,setShowChat,setStartConversation,setShowStart} ) =>
       setShowChat(true);
       setShowStart(false);
       setStartConversation(false);
-        setChatUser(chatRoom.user);
+        setChatUser(chatRoom);
         console.log(chatRoom.chatRoomId);
         console.log(chatRoom);
-        console.log(chatRoomData+"HIII");
+        console.log(chatUser?.username+'hii');
+        // const setChatUserAndLog = async (chatRoom) => {
+        //   await setChatUser(chatRoom);
+        //   console.log(chatRoom.chatRoomId);
+        //   console.log(chatRoom);
+         
+        // };
+        // console.log(chatUser?.username + 'hii');
+        // console.log(chatRoomData+"HIII");
       
         // (async () => {
           // await getChats(chatRoom?.user?.username,user?.username);
@@ -36,7 +44,7 @@ const ChatRoom = ({ chatRoom,setShowChat,setStartConversation,setShowStart} ) =>
 
   return (
     <div className="userChat" onClick={handleClick}>
-      <img className="uimgs" src={chatRoom?.user?.profileImg?.url}  alt={chatRoom?.user?.username}/>
+      <img className="uimgs" src={chatRoom?.user?.profileImg?.url}  alt={chatRoom?.username}/>
       <div className="userChatInfo">
         <span>{chatRoom?.user?.username}</span>
         {/* <p>Hello</p> */}

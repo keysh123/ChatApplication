@@ -67,6 +67,7 @@ const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setS
     const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
   const getStarted = (user) =>{
     let t=0;
+    console.log(user+"this is me");
     const chatRoomIds = chatRoomData.map(item => {
       
       if (item.user.username===user?.username) {
@@ -77,17 +78,19 @@ const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setS
     setShowChat(true);
     setShowStart(false);
     // setSelectedPerson(user?.username);
-    setChatUser(user?.username);
+    setChatUser(item);
+    console.log(item+"holl");
     return item.chatRoomId;
       }
       return null; // Or handle if username is not available
     });
 if(t==0){
-  setChatUser(user?.username);
+  // setChatUser(item);
+  console.log(user+"this is me");
     setStartConversation(true);
     setShowChat(false);
     setShowStart(false);
-    setSelectedPerson(user?.username);
+    setSelectedPerson(user);
 }
    
   }

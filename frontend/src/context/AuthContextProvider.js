@@ -4,7 +4,13 @@ import { AuthContext } from "./AuthContext";
 import { defaultImg } from "../defaultImg/defaultImg";
 
 const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    // Retrieve user data from localStorage or sessionStorage
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  console.log(user);
   //   const navigate = useNavigate();
 
   const getImg = async (id) => {
@@ -131,7 +137,7 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, signin, signout, signup, authenticateWithCookies }}
+      value={{ user, signin, signout, signup, authenticateWithCookies,setUser }}
     >
       {children}
     </AuthContext.Provider>

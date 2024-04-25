@@ -42,8 +42,9 @@ const Chat = ({ selectedPerson }) => {
   const [messages, setMessages] = useState([]);
 
   const {chatUser} = useContext(ChatContext);
-  const {user,signout} = useContext(AuthContext);
-
+  const {user,signout,setUser} = useContext(AuthContext);
+console.log(JSON.stringify(chatUser)+"in chat");
+setUser(user);
   // useEffect(() => {
   //   // Fetch messages data from your backend API
   //   fetch('http://localhost:4000/chat-room/chat/'+1) // Adjust URL based on your API endpoint
@@ -55,13 +56,17 @@ const Chat = ({ selectedPerson }) => {
   // }, []);
  
 // console.log("fcghjk"+AuthContext.user)
-console.log(user?.username)
+// console.log(user?.username+"hiiii123")
   return (
+   
     <div className='chat'>
       <div className="chatInfo">
+        {/* <ChatContext> */}
         <Link to="/user-friend-info" className='unamelink'>
-          <span className='chatUserName'>{chatUser?.username || "User"}</span>
+          {/* <span className='chatUserName'>{ chatUser?.username}</span> */}
+          <span className='chatUserName'>{chatUser?.user?.username || "User"}</span>
         </Link>
+        {/* </ChatContext> */}
         <div className="chatIcons">
           <img src={cam} alt="" />
           <img src={add} alt="" />
@@ -70,9 +75,10 @@ console.log(user?.username)
         </div>
       </div>
       {/* {AuthContext.user} */}
-      <Messages currentUser={user?.username} selectedPerson={chatUser.user?.username} />
+      <Messages currentUser={user?.username} selectedPerson={chatUser?.user?.username} />
       <Input />
     </div>
+
   );
 };
 
