@@ -57,7 +57,7 @@ public class AuthController {
     public ResponseEntity<?> authenticate(
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
-            @RequestBody AuthenticationRequest request
+            @RequestBody @Valid AuthenticationRequest request
     ){
 
         AuthenticationResponse authResponse = null;

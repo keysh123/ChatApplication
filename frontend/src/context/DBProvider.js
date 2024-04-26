@@ -148,7 +148,7 @@ const DBProvider = ({ children, loading, setLoading }) => {
     }
   }
 
-  async function destroy() {
+  async function destroyDB() {
     const db = await getDB();
     db.close();
 
@@ -280,15 +280,7 @@ const DBProvider = ({ children, loading, setLoading }) => {
           let x = await _getChatRoom(roomId);
           x.latestChatTime = time;
           x.countUnread = parseInt(1);
-          const putRequest = objectStore.put(x);
-
-          putRequest.onsuccess = function () {
-            console.log("Room time updated successfully");
-          };
-
-          putRequest.onerror = function (event) {
-            console.error("Error updating room time:", event.target.error);
-          };
+          await addRooms([x]);
         }
       };
 
@@ -375,26 +367,26 @@ const DBProvider = ({ children, loading, setLoading }) => {
         const transaction = db.transaction(["chatRooms"], "readonly");
         const objectStore = transaction.objectStore("chatRooms");
 
-        const index = objectStore.index("latestChatTime"); // Replace "name" with the name of the property you want to sort by
+        // const index = objectStore.index("latestChatTime"); // Replace "name" with the name of the property you want to sort by
 
-        let cursorReq = index.openCursor(null, "prev");
-
-        let rooms = new Array();
+        // let cursorReq = index.openCursor(null, "prev");
+        let req = objectStore.getAll();
+        // let rooms = new Array();
         // Open a cursor to retrieve data in sorted order
 
         // Retrieve all chats for the specified chatRoomId using getAll()
-        cursorReq.onsuccess = function (event) {
-          const cursor = event.target.result;
-          if (cursor) {
-            rooms.push(cursor.value);
-            cursor.continue();
-          } else {
-            console.log("All chats with chat room ID " + ":", rooms);
-            resolve(rooms); // Resolve the Promise with the chats array
-          }
+        req.onsuccess = function (event) {
+          const chatRooms = event.target.result;
+          // if (cursor) {
+            
+            // cursor.continue();
+          // } else {
+          //   console.log("All chats with chat room ID " + ":", rooms);
+            resolve(chatRooms); // Resolve the Promise with the chats array
+          // }
         };
 
-        cursorReq.onerror = function (event) {
+        req.onerror = function (event) {
           console.error(
             "Error retrieving all chatRooms by chat room ID:",
             event.target.error
@@ -419,7 +411,7 @@ const DBProvider = ({ children, loading, setLoading }) => {
         addChat,
         initDB,
         getChatsDB,
-        destroy,
+        destroyDB,
         getChatRoomsDB,
         changedChatRooms,
         setChangedChatRooms,

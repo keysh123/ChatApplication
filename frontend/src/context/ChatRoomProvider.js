@@ -57,17 +57,22 @@ const ChatRoomProvider = ({ children }) => {
   }, [changedChatRooms]);
 
   const searchUsers = async (query) => {
-    const res = await fetch(api.SEARCH_USER + "?query=" + query, {
-      credentials: "include",
-    });
+    // if(query.length>2){
 
-    const obj = await res.json();
-    if (res.ok) {
-      // console.log(resUsers+"HIyui");
-      setResUsers(obj.data);
-      // console.log(res);
-      // console.log(obj);
-    }
+      const res = await fetch(api.SEARCH_USER + "?query=" + query, {
+        credentials: "include",
+      });
+
+      const obj = await res.json();
+      if (res.ok) {
+        // console.log(resUsers+"HIyui");
+        setResUsers(obj.data);
+        // console.log(res);
+        // console.log(obj);
+      }
+    // }else{
+      // setResUsers([]);
+    // }
   };
 
   return (

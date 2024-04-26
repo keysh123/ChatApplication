@@ -44,9 +44,9 @@ const Message = ({ isOwner, message }) => {
   const { user, signout, setUser } = useContext(AuthContext);
   const messageClass = isOwner ? "message owner" : "message";
   const imageUrl = isOwner
-    ? user?.profileImg.url
-    : chatUser?.user?.profileImg.url;
-  console.log(user?.profileImg.url + "url");
+    ? user?.profileImg?.url
+    : chatUser?.user?.profileImg?.url;
+  console.log(user?.profileImg?.url + "url");
   return (
     // // <div className={messageClass}>
     //   <div className="messageInfo">
@@ -63,7 +63,7 @@ const Message = ({ isOwner, message }) => {
       ) : (
         <div className={messageClass}>
           <div className="messageInfo">
-            <img src={imageUrl} alt="" />
+            {/* <img src={imageUrl} alt="" /> */}
             {/* <span>{message.time}</span> */}
             {/* <div className='message'> */}
             <span>{new Date(message.time).toLocaleDateString()}</span>

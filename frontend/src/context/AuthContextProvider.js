@@ -4,11 +4,13 @@ import { AuthContext } from "./AuthContext";
 import { defaultImg } from "../defaultImg/defaultImg";
 import { WSContext } from "./WSContext";
 import { DBContext } from "./DBContext";
+import { ToastContext } from "./ToastContext";
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  // const { init } = useContext(WSContext);
-  const { destroy,initDB } = useContext(DBContext);
+  const { destroy } = useContext(WSContext);
+  const { destroyDB,initDB } = useContext(DBContext);
+  const {showToast}= useContext(ToastContext);
   //   const navigate = useNavigate();
 
   const getImg = async (id) => {
@@ -76,8 +78,10 @@ const AuthContextProvider = ({ children }) => {
         obj.data.profileImg = { url: defaultImg.profileImg };
         console.log(obj);
       }
-      setUser(obj.data); // Assuming setUser is a state updater function passed as an argument
+      showToast("Successfully Registered",true);
       console.log(user + "  iyug"); // This will not print the updated user immediately due to closure, use setUser instead
+    }else{
+      showToast(obj.error,false);
     }
   };
 
@@ -91,7 +95,10 @@ const AuthContextProvider = ({ children }) => {
       });
 
       const obj = await res.json();
+      showToast("Signing out...",true);
       setUser(null);
+
+      await destroyDB();
       await destroy();
       return false;
     } catch (error) {
@@ -121,11 +128,13 @@ const AuthContextProvider = ({ children }) => {
           data.data.profileImg = { url: defaultImg.profileImg };
         }
         // init(data.data.username);
+        showToast("Welcome "+data.data.username+".",true);
         setUser(data.data); // Assuming setUser is a state updater function passed as an argument
         console.log(user); // This will not print the updated user immediately due to closure, use setUser instead
         await initDB();
         return true;
       } else {
+        showToast(data.error,false);
         // throw new Error(data.error);
       }
       return false;

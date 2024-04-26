@@ -36,9 +36,9 @@ export default function SignInForm() {
         <Username user={user} setUser={setUser} />
         <Password user={user} setUser={setUser} />
         <div>
-          <div className="rememberbox">
+          {/* <div className="rememberbox">
           <input type="checkbox" name="remember" value="" checked/> Remember Me
-          </div>
+          </div> */}
           <button type="submit" className="signinbtn1" formAction="" onClick={handleSubmit}>
             Sign In
           </button>

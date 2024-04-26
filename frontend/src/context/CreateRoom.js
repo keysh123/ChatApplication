@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import { DBContext } from "./DBContext";
 import { ChatContext } from "./ChatProvider";
 import { AuthContext } from "./AuthContext";
+import { ChatRoomContext } from "./ChatRoomContext";
 // import { api } from './api'; 
 // Create a context for managing room creation
 export const CreateRoomContext = createContext();
@@ -14,6 +15,7 @@ const CreateRoomProvider = ({ children }) => {
   const [room, setRoom] = useState(null);
   const {addRooms} = useContext(DBContext); 
   const {setChatUser} = useContext(ChatContext);
+  const {setChangedChatRooms} = useContext(ChatRoomContext);
   const {user} = useContext(AuthContext);
   const createRoom = async (user2) => {
     try {
@@ -35,9 +37,12 @@ const CreateRoomProvider = ({ children }) => {
 
       if (res.ok) {
         // Update the room state if the room creation is successful
-        console.log(data);
+        console.log(data.data);
+        // data.data.latestChatTime = new Date().now();
+        data.data.countUnread = 0;
         await addRooms([data.data]);
         setChatUser(data.data);
+        setChangedChatRooms(data.data.chatRoomId);
         
         return true;
       } else {

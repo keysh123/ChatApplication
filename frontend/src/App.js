@@ -12,14 +12,19 @@ import UserInfo from "./components/UserInfo/UserInfo";
 import UserFriendInfo from "./components/UserFriendInfo/UserFriendInfo";
 import WSContextProvider from "./context/WSContextProvider";
 import DBProvider from "./context/DBProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastProvider } from "./context/ToastContext";
 
 function App() {
   // const [loading,setLoading] = useState(false);
   return (
     <>
-      <DBProvider>
-          <AuthContextProvider>
-            <WSContextProvider>
+      <ToastProvider>
+        <ToastContainer />
+        <DBProvider>
+          <WSContextProvider>
+            <AuthContextProvider>
               <BrowserRouter>
                 <Routes>
                   <Route exact path={"/"} element={<MainPage />}></Route>
@@ -34,9 +39,10 @@ function App() {
                   ></Route>
                 </Routes>
               </BrowserRouter>
-            </WSContextProvider>
-          </AuthContextProvider>
-      </DBProvider>
+            </AuthContextProvider>
+          </WSContextProvider>
+        </DBProvider>
+      </ToastProvider>
     </>
   );
 }

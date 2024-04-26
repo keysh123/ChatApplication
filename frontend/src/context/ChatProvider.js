@@ -1,5 +1,11 @@
 // ChatContext.js
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+} from "react";
 import { AuthContext } from "./AuthContext";
 import { WSContext } from "./WSContext";
 import { DBContext } from "./DBContext";
@@ -15,7 +21,7 @@ export const ChatProvider = ({ children }) => {
 
   const [chatUser, setChatUser] = useState(null);
   const { user } = useContext(AuthContext);
-  const { send, setFunc } = useContext(WSContext);
+  const { send } = useContext(WSContext);
   const { addChat, getChatsDB } = useContext(DBContext);
 
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -42,7 +48,7 @@ export const ChatProvider = ({ children }) => {
           receiver: chatUser.user.username,
           text: null,
           chatRoomId: chatUser.chatRoomId,
-          content:obj.data
+          content: obj.data,
         });
       }
     }
@@ -78,68 +84,137 @@ export const ChatProvider = ({ children }) => {
 
   const addChatObj = (obj) => {};
 
-  useEffect(() => {
-    if (user) {
-      if (stompClient) {
-        stompClient.connect(
-          {},
-          function onConnected(e) {
-            console.log("Connected to WebSocket server-------------------");
-            stompClient.subscribe(
-              `/user/${user.username}/queue/message`,
-              async function (message) {
-                let obj = JSON.parse(message.body);
-                // console.log(obj);
-                // 2024,4,26,3,20,51,741762400
+  // const { x } = useMemo(() => {
+  //   if (user != null) {
+  //     stompClient.connect(
+  //       {},
+  //       function onConnected(e) {
+  //         console.log("Connected to WebSocket server-------------------");
+  //         stompClient.subscribe(
+  //           `/user/${user.username}/queue/message`,
+  //           async function (message) {
+  //             let obj = JSON.parse(message.body);
+  //             // console.log(obj);
+  //             // 2024,4,26,3,20,51,741762400
 
-                const year = obj.time[0];
-                const month = String(obj.time[1]).padStart(2, "0");
-                const day = String(obj.time[2]).padStart(2, "0");
-                const hours = String(obj.time[3]).padStart(2, "0");
-                const minutes = String(obj.time[4]).padStart(2, "0");
-                const seconds = String(obj.time[5]).padStart(2, "0");
-                const milliseconds = String(obj.time[6]).padStart(3, "0");
+  //             const year = obj.time[0];
+  //             const month = String(obj.time[1]).padStart(2, "0");
+  //             const day = String(obj.time[2]).padStart(2, "0");
+  //             const hours = String(obj.time[3]).padStart(2, "0");
+  //             const minutes = String(obj.time[4]).padStart(2, "0");
+  //             const seconds = String(obj.time[5]).padStart(2, "0");
+  //             const milliseconds = String(obj.time[6]).padStart(3, "0");
 
-                const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+  //             const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
 
-                console.log(formattedDate);
-                obj.time = formattedDate;
-                // if(obj.receiver!=username){
-                //   const component = <Message isOwner={false} message={obj}/>
-                //   console.log("hello"+component);
-                //   const containerNode = document.createElement('div');
-                //   ReactDOM.render(component, containerNode);
-                //   messagesRef.current.appendChild(containerNode);
-                console.log("0000000000000000");
-                // }
-                console.log(chatUser);
-                console.log(obj);
-                console.log("0000000000000000");
-                console.log(
-                  localStorage.getItem("currentChatRoomId") +
-                    "||||||||||||||||||||"
-                );
-                await addChat(obj);
-                if (
-                  parseInt(localStorage.getItem("currentChatRoomId")) ===
-                  obj.chatRoomId
-                ) {
-                  await getChats(obj.chatRoomId);
-                  setChangedChatRooms(obj.chatId);
-                }
-                // Process the received message
+  //             console.log(formattedDate);
+  //             obj.time = formattedDate;
+  //             // if(obj.receiver!=username){
+  //             //   const component = <Message isOwner={false} message={obj}/>
+  //             //   console.log("hello"+component);
+  //             //   const containerNode = document.createElement('div');
+  //             //   ReactDOM.render(component, containerNode);
+  //             //   messagesRef.current.appendChild(containerNode);
+  //             console.log("0000000000000000");
+  //             // }
+  //             console.log(chatUser);
+  //             console.log(obj);
+  //             console.log("0000000000000000");
+  //             console.log(
+  //               localStorage.getItem("currentChatRoomId") +
+  //                 "||||||||||||||||||||"
+  //             );
+  //             await addChat(obj);
+  //             if (
+  //               parseInt(localStorage.getItem("currentChatRoomId")) ===
+  //               obj.chatRoomId
+  //             ) {
+  //               await getChats(obj.chatRoomId);
+  //             }
+  //             setChangedChatRooms(obj.chatId);
+  //             // Process the received message
+  //           }
+  //         );
+  //       },
+  //       function onError(error) {
+  //         console.error("WebSocket error:", error);
+  //       }
+  //     );
+  //     return 1;
+  //   }
+  //   return 0;
+  // }, [user]);
+
+  // useEffect(() => {
+  //   console.log();
+  //   console.log(stompClient, "qwerty");
+  //   if (user) {
+  //     // if (stompClient) {
+  //     // if (!isSubscribed) {
+    useEffect(()=>{
+      stompClient.connect(
+        {},
+        function onConnected(e) {
+          console.log("Connected to WebSocket server-------------------");
+          stompClient.subscribe(
+            `/user/${user.username}/queue/message`,
+            async function (message) {
+              let obj = JSON.parse(message.body);
+              // console.log(obj);
+              // 2024,4,26,3,20,51,741762400
+
+              const year = obj.time[0];
+              const month = String(obj.time[1]).padStart(2, "0");
+              const day = String(obj.time[2]).padStart(2, "0");
+              const hours = String(obj.time[3]).padStart(2, "0");
+              const minutes = String(obj.time[4]).padStart(2, "0");
+              const seconds = String(obj.time[5]).padStart(2, "0");
+              const milliseconds = String(obj.time[6]).padStart(3, "0");
+
+              const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+              console.log(formattedDate);
+              obj.time = formattedDate;
+              // if(obj.receiver!=username){
+              //   const component = <Message isOwner={false} message={obj}/>
+              //   console.log("hello"+component);
+              //   const containerNode = document.createElement('div');
+              //   ReactDOM.render(component, containerNode);
+              //   messagesRef.current.appendChild(containerNode);
+              console.log("0000000000000000");
+              // }
+              console.log(chatUser);
+              console.log(obj);
+              console.log("0000000000000000");
+              console.log(
+                localStorage.getItem("currentChatRoomId") +
+                  "||||||||||||||||||||"
+              );
+              await addChat(obj);
+              if (
+                parseInt(localStorage.getItem("currentChatRoomId")) ===
+                obj.chatRoomId
+              ) {
+                await getChats(obj.chatRoomId);
               }
-            );
-          },
-          function onError(error) {
-            console.error("WebSocket error:", error);
-          }
-        );
-      }
-    }
-    console.log(getChats, 123456789);
-    // setFunc(getChats);
-  }, [user]);
+              setChangedChatRooms(obj.chatId);
+              // Process the received message
+            }
+          );
+        },
+        function onError(error) {
+          console.error("WebSocket error:", error);
+        }
+      );
+    },[user])
+        
+        // setIsSubscribed(true);
+      // }
+    // }
+    // }
+    // console.log(getChats, 123456789);
+  //   // setFunc(getChats);
+  // }, [user]);
 
   useEffect(() => {
     console.log("orip");
@@ -156,15 +231,11 @@ export const ChatProvider = ({ children }) => {
           });
       }
     }
-    console.log(
-      "Chats length:---------------------------------use",
-      chats?.length
-    );
   }, [chatUser]);
 
-  useEffect(() => {
-    console.log("Chats room:", no);
-  }, [no]);
+  // useEffect(() => {
+  //   console.log("Chats room:", no);
+  // }, [no]);
 
   // const getroomno = async (s, r) => {
   //   setLoading(true);
@@ -191,10 +262,6 @@ export const ChatProvider = ({ children }) => {
   //     setLoading(false);
   //   }
   // };
-
-  useEffect(() => {
-    console.log("Chats length:", chats?.length);
-  }, [chats]);
   return (
     <ChatContext.Provider
       value={{
@@ -205,7 +272,7 @@ export const ChatProvider = ({ children }) => {
         setChatUser,
         chatUser,
         sendMessage,
-        sendFile
+        sendFile,
       }}
     >
       {children}

@@ -12,7 +12,7 @@ export const SignUpRhs = () => {
     password: "",
   });
 
-  const { signup }=useContext(AuthContext);
+  const { signup } = useContext(AuthContext);
 
   const handleChangeUsername = (e) => {
     setUser({ ...user, username: e.target.value });
@@ -24,27 +24,38 @@ export const SignUpRhs = () => {
     console.log(user);
   };
 
-  const regPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$");
-  const regEmail = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$");
+  const regPass = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+  );
+  const regEmail = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$");
 
   const handleChangePassword = (e) => {
     setUser({ ...user, password: e.target.value });
     console.log(user);
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(!regEmail.test(user.email)){
+    let isValid = true;
+    if (!regEmail.test(user.email)) {
+      isValid = false;
       alert("Invalid mail");
     }
-    if(!regPass.test(user.password)){
+    if (!regPass.test(user.password)) {
+      isValid = false;
       alert("Invalid password");
     }
     console.log(user);
-    signup(user).then((res)=>{
-      console.log(res);
-    }).catch((err)=>{console.log(err);});
-  }
+    if (isValid) {
+      signup(user)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <>

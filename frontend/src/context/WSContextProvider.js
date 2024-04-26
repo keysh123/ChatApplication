@@ -7,9 +7,6 @@ import ReactDOM from "react-dom/client";
 import Message from "../components/ChatPage/Message";
 
 const WSContextProvider = ({ children }) => {
-  const { user } = useContext(AuthContext);
-  const { addChat } = useContext(DBContext);
-  const [func, setFunc] = useState(null);
   const messagesRef = useRef(null);
   const socket = new window.SockJS("http://localhost:4000/ws");
   const stompClient = window.Stomp.over(socket);
@@ -79,24 +76,8 @@ const WSContextProvider = ({ children }) => {
   // };
 
   function destroy() {
-    if (socket && stompClient) {
-      stompClient?.disconnect();
-    }
+    stompClient.disconnect();
   }
-
-  useEffect(() => {
-    if (user) {
-      // init();
-    }
-
-    return () => {
-      // destroy();
-      // setWsObject({
-      //   socket: null,
-      //   stompClient: null,
-      // })
-    };
-  }, [user]);
 
   //   const [isConnected, setIsConnected] = useState(false);
 
@@ -154,7 +135,9 @@ const WSContextProvider = ({ children }) => {
   };
 
   return (
-    <WSContext.Provider value={{ socket,stompClient, send, messagesRef, setFunc }}>
+    <WSContext.Provider
+      value={{ socket, stompClient, send, messagesRef, destroy }}
+    >
       {children}
     </WSContext.Provider>
   );

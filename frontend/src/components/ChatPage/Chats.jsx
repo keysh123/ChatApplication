@@ -42,6 +42,7 @@ const Chats = ({
   setShowChat,
   setStartConversation,
   setShowStart,
+  searchRef
 }) => {
   // const [users, setUsers] = useState([]);
 
@@ -94,7 +95,7 @@ const Chats = ({
     }
   };
   return (
-    <div className="chats">
+    <div className="chats hidden" ref={searchRef}>
       {userInfo?.map((user) => (
         <div
           className="userChat"
