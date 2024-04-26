@@ -32,19 +32,24 @@ export const SignUpRhs = () => {
     console.log(user);
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(!regEmail.test(user.email)){
-      alert("Invalid mail");
-    }
-    if(!regPass.test(user.password)){
+    if (!regEmail.test(user.email)) {
+      alert("Invalid email");
+    } else if (!regPass.test(user.password)) {
       alert("Invalid password");
+    } else {
+      console.log(user);
+      signup(user)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    console.log(user);
-    signup(user).then((res)=>{
-      console.log(res);
-    }).catch((err)=>{console.log(err);});
-  }
+  };
+  
 
   return (
     <>
