@@ -6,7 +6,7 @@ import { ChatContext } from '../../context/ChatProvider'
 
 const Input = () => {
   const [text, setText] = useState("");
-  const {sendMessage} = useContext(ChatContext);
+  const {sendMessage,sendFile} = useContext(ChatContext);
 
   const handleSendBtn = (e) => {
     const trimmedText = e.target.value.trim();
@@ -28,6 +28,14 @@ const Input = () => {
     }
   }
 
+  const handleChange = async ({ target: { files } })=>{
+    if(files){
+      if(window.confirm("this will send the file")){
+        await sendFile(files);
+      }
+    }
+  }
+
   return (
     <div className="input">
       <input
@@ -39,7 +47,7 @@ const Input = () => {
       />
       <div className="send">
         <img src={Img} alt="" />
-        <input type="file" name="" id="file" style={{ display: "none" }} />
+        <input type="file" name="file-name" id="file" style={{ display: "none" }} onChange={handleChange} />
         <label htmlFor="file">
           <img src={Attach} alt="" />
         </label>

@@ -105,17 +105,17 @@ public class AuthController {
 
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadImg(
-            @RequestParam("file") MultipartFile file
-    ) throws IOException {
-        System.out.println(file.getName());
-//        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
-
-        int id = contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
-
-        return new ResponseEntity<>(new SuccessDto(id,HttpStatus.OK),HttpStatus.OK);
-    }
+//    @PostMapping("/upload")
+//    public ResponseEntity<?> uploadImg(
+//            @RequestParam("file") MultipartFile file
+//    ) throws IOException {
+//        System.out.println(file.getName());
+////        System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
+//
+//        int id = contentService.saveContent(new Content(file.getContentType(), file.getBytes()));
+//
+//        return new ResponseEntity<>(new SuccessDto(id,HttpStatus.OK),HttpStatus.OK);
+//    }
 
 
 }

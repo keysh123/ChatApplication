@@ -44,10 +44,10 @@ public class UserController {
     ) throws IOException {
 
         System.out.println("user holll ");
-        int id = contentService.saveContent(new Content(profileImg.getOriginalFilename(), profileImg.getContentType(), profileImg.getBytes()));
+        Content content = contentService.saveContent(new Content(profileImg.getOriginalFilename(), profileImg.getContentType(), profileImg.getBytes()));
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
         user.setProfileImg(
-                contentRepository.findById(id).orElseThrow()
+                contentRepository.findById(content.getContentId()).orElseThrow()
         );
         System.out.println(user.getProfileImg());
         userRepository.save(user);

@@ -82,6 +82,7 @@ import React, { useContext,useEffect,useRef } from "react";
 import { ChatContext } from "../../context/ChatProvider";
 import Message from "./Message";
 import { WSContext } from "../../context/WSContext";
+import FileDiv from "./FileDiv";
 
 const Messages = ({ currentUser }) => {
   const { chats, loading,chatUser } = useContext(ChatContext);

@@ -235,17 +235,17 @@
 }
 
 .message.owner,
-.filediv {
+.filediv.owner {
   flex-direction: row-reverse;
 }
 
 .message.owner .messageContent,
-.filediv {
+.filediv.owner {
   align-items: flex-end;
 }
 
 .message.owner .messageContent p,
-.filediv {
+.filediv.owner {
   background-color: #8da4f1;
   color: white;
   border-radius: 10px 0px 10px 10px;
@@ -638,4 +638,8 @@
 
 .hidden{
   display: none;
+}
+
+.pointer:hover{
+  cursor: pointer;
 }

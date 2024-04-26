@@ -1,5 +1,6 @@
 package com.groupv.chatapp.controller;
 
+import com.groupv.chatapp.dto.ContentDto;
 import com.groupv.chatapp.dto.SuccessDto;
 import com.groupv.chatapp.exception.DoesNotExistException;
 import com.groupv.chatapp.model.Content;
@@ -49,8 +50,8 @@ public class ContentController {
         System.out.println(file.getOriginalFilename());
         System.out.println("sdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"+file);
 
-        int id = contentService.saveContent(new Content(file.getOriginalFilename(),file.getContentType(), file.getBytes()));
+        Content content = contentService.saveContent(new Content(file.getOriginalFilename(),file.getContentType(), file.getBytes()));
 
-        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),id),HttpStatus.OK);
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),new ContentDto(content)),HttpStatus.OK);
     }
 }

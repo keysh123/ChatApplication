@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthContext";
 import { WSContext } from "./WSContext";
 import { DBContext } from "./DBContext";
 import { ChatRoomContext } from "./ChatRoomContext";
+import { api } from "../api/api";
 
 export const ChatContext = createContext();
 
@@ -14,15 +15,38 @@ export const ChatProvider = ({ children }) => {
 
   const [chatUser, setChatUser] = useState(null);
   const { user } = useContext(AuthContext);
-  const { send,setFunc } = useContext(WSContext);
+  const { send, setFunc } = useContext(WSContext);
   const { addChat, getChatsDB } = useContext(DBContext);
 
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { stompClient } = useContext(WSContext);
-  const {changedChatRooms,setChangedChatRooms}= useContext(ChatRoomContext);
+  const { changedChatRooms, setChangedChatRooms } = useContext(ChatRoomContext);
   const [reRender, setReRender] = useState(false);
 
   console.log(chats + "}}}}}}}}}}}}}}}}}}]");
+
+  const sendFile = async (files) => {
+    let formData = new FormData();
+    formData.append("file", files[0]);
+    const res = await fetch(api.POST_CONTENT, {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    });
+
+    if (res.ok) {
+      const obj = await res.json();
+      if (obj.success) {
+        send({
+          sender: user.username,
+          receiver: chatUser.user.username,
+          text: null,
+          chatRoomId: chatUser.chatRoomId,
+          content:obj.data
+        });
+      }
+    }
+  };
 
   const sendMessage = async (message) => {
     console.log(user);
@@ -38,12 +62,12 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
-  const getChats = async (chatRoomId,id) => {
+  const getChats = async (chatRoomId, id) => {
     // setLoading(true);
     try {
-        const res = await getChatsDB(chatRoomId);
-        // console.log(res+"qqq2534@@@@@@@@@qqqqqqqqqqqq");
-        setChats(res);
+      const res = await getChatsDB(chatRoomId);
+      // console.log(res+"qqq2534@@@@@@@@@qqqqqqqqqqqq");
+      setChats(res);
     } catch (error) {
       // Handle fetch error
       console.error("Error fetching chats:", error);
@@ -55,7 +79,7 @@ export const ChatProvider = ({ children }) => {
   const addChatObj = (obj) => {};
 
   useEffect(() => {
-    if(user){
+    if (user) {
       if (stompClient) {
         stompClient.connect(
           {},
@@ -74,10 +98,7 @@ export const ChatProvider = ({ children }) => {
                 const hours = String(obj.time[3]).padStart(2, "0");
                 const minutes = String(obj.time[4]).padStart(2, "0");
                 const seconds = String(obj.time[5]).padStart(2, "0");
-                const milliseconds = String(obj.time[6]).padStart(
-                  3,
-                  "0"
-                );
+                const milliseconds = String(obj.time[6]).padStart(3, "0");
 
                 const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
 
@@ -116,9 +137,8 @@ export const ChatProvider = ({ children }) => {
         );
       }
     }
-      console.log(getChats,123456789);
-      // setFunc(getChats);
-    
+    console.log(getChats, 123456789);
+    // setFunc(getChats);
   }, [user]);
 
   useEffect(() => {
@@ -185,6 +205,7 @@ export const ChatProvider = ({ children }) => {
         setChatUser,
         chatUser,
         sendMessage,
+        sendFile
       }}
     >
       {children}

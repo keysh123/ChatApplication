@@ -38,6 +38,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatProvider";
+import FileDiv from "./FileDiv";
 const Message = ({ isOwner, message }) => {
   const { chatUser } = useContext(ChatContext);
   const { user, signout, setUser } = useContext(AuthContext);
@@ -56,23 +57,29 @@ const Message = ({ isOwner, message }) => {
     //     <p>{message.content}</p> {/* Assuming `content` contains the message text */}
     //   </div>
     // // </div>
-    <div className={messageClass}>
-      <div className="messageInfo">
-        <img src={imageUrl} alt="" />
-        {/* <span>{message.time}</span> */}
-        {/* <div className='message'> */}
-        <span>{new Date(message.time).toLocaleDateString()}</span>
-        <br />
-        <span style={{ "margin-top": "-26px" }}>
-          {new Date(message.time).toLocaleTimeString()}
-        </span>
-        {/* </div> */}
-      </div>
-      <div className="messageContent">
-        <p>{message.text}</p>
-        {/* <p>{message.status}status</p> */}
-      </div>
-    </div>
+    <>
+      {message.content!=null ? (
+        <FileDiv file={message} isOwner={isOwner} />
+      ) : (
+        <div className={messageClass}>
+          <div className="messageInfo">
+            <img src={imageUrl} alt="" />
+            {/* <span>{message.time}</span> */}
+            {/* <div className='message'> */}
+            <span>{new Date(message.time).toLocaleDateString()}</span>
+            <br />
+            <span style={{ "margin-top": "-26px" }}>
+              {new Date(message.time).toLocaleTimeString()}
+            </span>
+            {/* </div> */}
+          </div>
+          <div className="messageContent">
+            <p>{message.text}</p>
+            {/* <p>{message.status}status</p> */}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
