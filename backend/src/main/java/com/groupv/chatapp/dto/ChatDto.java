@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatDto implements Serializable {
+    private Integer chatId;
 
     private Integer chatRoomId; //fk
 
@@ -30,6 +31,7 @@ public class ChatDto implements Serializable {
     private LocalDateTime time ;
 
     public ChatDto(ChatData chatData){
+        setChatId(chatData.getChatId());
         setChatRoomId(chatData.getChatRoom().getChatRoomId());
         setSender(chatData.getSender().getUsername());
         setReceiver(chatData.getReceiver().getUsername());

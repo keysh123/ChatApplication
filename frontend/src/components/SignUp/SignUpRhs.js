@@ -41,7 +41,9 @@ export const SignUpRhs = () => {
       alert("Invalid password");
     }
     console.log(user);
-    signup(user);
+    signup(user).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{console.log(err);});
   }
 
   return (

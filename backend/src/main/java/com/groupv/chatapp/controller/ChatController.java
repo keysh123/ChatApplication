@@ -51,13 +51,19 @@ public class ChatController {
         if(chat.getContent()==null){
             send = new ChatDto(savedChat);
         }else {
-            send = new ChatDto(savedChat,savedChat.getContent().getFileName());
+            send = new ChatDto(savedChat,savedChat.getContent());
         }
 
         messagingTemplate.convertAndSendToUser(
                     savedChat.getReceiver().getUsername(),
                     "/queue/message",
                     send
+        );
+
+        messagingTemplate.convertAndSendToUser(
+                savedChat.getSender().getUsername(),
+                "/queue/message",
+                send
         );
 
     }

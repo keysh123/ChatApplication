@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import Attach from "../img/attach.png";
-import Img from "../img/img.png";
-import "./ChatPage.css";
+import React, { useContext, useState } from 'react'
+import Attach from '../img/attach.png'
+import Img from '../img/img.png'
+import './ChatPage.css'
+import { ChatContext } from '../../context/ChatProvider'
 
 const Input = () => {
   const [text, setText] = useState("");
+  const {sendMessage} = useContext(ChatContext);
 
   const handleSendBtn = (e) => {
     const trimmedText = e.target.value.trim();
@@ -16,6 +18,15 @@ const Input = () => {
       send.style.backgroundColor = "#8da4f1";
     }
   };
+
+  const sendMessageFunction = (e)=>{
+    e.preventDefault();
+    if(text.length!==0){
+      
+      sendMessage(text);
+      setText("");
+    }
+  }
 
   return (
     <div className="input">
@@ -32,7 +43,7 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Attach} alt="" />
         </label>
-        <button className="sendbtn">Send</button>
+        <button className='sendbtn' onClick={sendMessageFunction}>Send</button>
       </div>
     </div>
   );

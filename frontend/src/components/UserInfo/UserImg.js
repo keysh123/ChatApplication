@@ -63,6 +63,7 @@ const UserImg = () => {
         method: 'PUT',
         headers:headers,
         body: formData,
+        credentials:"include"
       });
       if (response.ok) {
         alert('Photo uploaded successfully');

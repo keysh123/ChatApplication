@@ -35,17 +35,20 @@ import './ChatPage.css';
 import Messages from './Messages';
 import Input from './Input';
 import { AuthContext } from '../../context/AuthContext';
-import { ChatContext } from '../../context/ChatContext';
+import { ChatContext } from '../../context/ChatProvider';
 import { Link } from 'react-router-dom'; 
 import FileDiv from './FileDiv';
+import Message from './Message';
 
 const Chat = ({ selectedPerson }) => {
   const [messages, setMessages] = useState([]);
 
   const {chatUser} = useContext(ChatContext);
-  const {user,signout,setUser} = useContext(AuthContext);
-console.log(JSON.stringify(chatUser)+"in chat");
-setUser(user);
+  const {user} = useContext(AuthContext);
+  const addMessage=(message)=>{
+    const component = <Message message={message} isOwner={true}/>
+  }
+
   // useEffect(() => {
   //   // Fetch messages data from your backend API
   //   fetch('http://localhost:4000/chat-room/chat/'+1) // Adjust URL based on your API endpoint

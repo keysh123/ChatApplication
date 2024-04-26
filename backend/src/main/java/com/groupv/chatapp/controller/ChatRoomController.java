@@ -4,6 +4,7 @@ import com.groupv.chatapp.dto.*;
 import com.groupv.chatapp.model.ChatRoom;
 import com.groupv.chatapp.model.User;
 import com.groupv.chatapp.repository.ChatDataRepository;
+import com.groupv.chatapp.repository.ChatRoomRepository;
 import com.groupv.chatapp.repository.UserRepository;
 import com.groupv.chatapp.service.ChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class ChatRoomController {
     private UserRepository userRepository;
     @Autowired
     private ChatDataRepository chatDataRepository;
+
+    @Autowired
+    private ChatRoomRepository chatRoomRepository;
 
 
     @PostMapping("")
@@ -56,6 +60,17 @@ public class ChatRoomController {
         return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(), chatRoomService.findByUser(username)), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getChatRoom(
+            @PathVariable Integer id,
+            @RequestAttribute String username
+    ){
+        ChatRoomResponseDto room = new ChatRoomResponseDto(chatRoomRepository.findById(id).orElseThrow(),username);
+
+        return new ResponseEntity<>(new SuccessDto(HttpStatus.OK.value(),room), HttpStatus.OK);
+
+    }
+
     @GetMapping("/room/sender/{username}")
     public List<ChatRoom> showChatRoomsBySender(@PathVariable String username) {
         return chatRoomService.findChatRoomsBySenderOrReceiver(username);
@@ -80,7 +95,7 @@ public class ChatRoomController {
         return new ResponseEntity<>(new SuccessDto(HttpStatus.FOUND.value(), chatRoomService.justFind(username, uname)), HttpStatus.FOUND);
     }
 
-    @DeleteMapping("room/{chatRoomId}")
+    @DeleteMapping("/room/{chatRoomId}")
     public void delete(@PathVariable Integer chatRoomId) {
         chatRoomService.deleteChatRoom(chatRoomId);
     }

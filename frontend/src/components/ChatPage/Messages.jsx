@@ -4,8 +4,7 @@
 //   return (
 //     <div className='messages'>
 //       <Message/>
-   
-      
+
 //     </div>
 //   )
 // }
@@ -21,7 +20,7 @@
 //         const isOwner = message.sender === currentUser.username;
 //         console.log(messages+"HIII");
 //         return (
-         
+
 //           <Message  message={message} isOwner={isOwner} />
 //         );
 //       })}
@@ -30,7 +29,6 @@
 // };
 
 // export default Messages;
-
 
 // import React from 'react';
 // import Message from './Message';
@@ -74,20 +72,19 @@
 //           );
 //         })
 //       )}
-      
-      
-   
+
 //     </div>
 //   );
 // };
 
 // export default Messages;
-import React, { useContext,useRef,useEffect } from 'react';
-import { ChatContext1 } from '../../context/ChatProvider';
-import Message from './Message';
+import React, { useContext,useEffect,useRef } from "react";
+import { ChatContext } from "../../context/ChatProvider";
+import Message from "./Message";
+import { WSContext } from "../../context/WSContext";
 
 const Messages = ({ currentUser }) => {
-  const { chats, loading } = useContext(ChatContext1);
+  const { chats, loading,chatUser } = useContext(ChatContext);
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
@@ -99,15 +96,18 @@ const Messages = ({ currentUser }) => {
     // Ensure the messages container reference exists
     if (messagesContainerRef.current) {
       // Scroll to the bottom of the messages container
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
     }
   };
+
+  const { messagesRef } = useContext(WSContext);
   return (
-    <div className='messages' ref={messagesContainerRef}>
+    <div id="messages" ref={messagesRef} className="messages">
       {loading ? (
         <p>Loading messages...</p>
       ) : (
-        chats.map((message, index) => {
+        chats?.map((message, index) => {
           // Determine if the message is from the current user
           const isOwner = message.sender === currentUser;
 

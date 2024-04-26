@@ -462,6 +462,10 @@
   color: lightgray;
 }
 
+.unreadCount{
+  align-self: flex-end;
+}
+
 .chatInfo {
   background-color: rgb(150, 17, 238);
   height: 10%;
@@ -630,4 +634,8 @@
 .msgimg {
   height: 40%;
   border-radius: 50px;
+}
+
+.hidden{
+  display: none;
 }

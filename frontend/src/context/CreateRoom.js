@@ -1,4 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
+import { DBContext } from "./DBContext";
+import { ChatContext } from "./ChatProvider";
+import { AuthContext } from "./AuthContext";
 // import { api } from './api'; 
 // Create a context for managing room creation
 export const CreateRoomContext = createContext();
@@ -9,9 +12,12 @@ export const useCreateRoom = () => {
 
 const CreateRoomProvider = ({ children }) => {
   const [room, setRoom] = useState(null);
-
-  const createRoom = async (roomData) => {
+  const {addRooms} = useContext(DBContext); 
+  const {setChatUser} = useContext(ChatContext);
+  const {user} = useContext(AuthContext);
+  const createRoom = async (user2) => {
     try {
+      console.log(user2);
       // Send a POST request to create a chat room
       const res = await fetch('http://localhost:4000/api/v1/chat-room', {
         method: "POST",
@@ -19,15 +25,20 @@ const CreateRoomProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(roomData),
+        body: JSON.stringify({
+          user1:user.username,
+          user2:user2.username
+        }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
         // Update the room state if the room creation is successful
-        setRoom(data.room);
-        console.log("Room created:", data.room);
+        console.log(data);
+        await addRooms([data.data]);
+        setChatUser(data.data);
+        
         return true;
       } else {
         console.error("Error creating room:", data.message);

@@ -66,6 +66,7 @@ public class AuthController {
         } catch (UsernameNotFoundException e) {
            return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.NOT_FOUND.value()),HttpStatus.NOT_FOUND);
         }catch (BadCredentialsException e){
+            System.out.println(e);
            return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.UNAUTHORIZED.value()),HttpStatus.UNAUTHORIZED);
         }catch (Exception e){
            return new ResponseEntity<>(new ErrorDto(e.getMessage(),HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);

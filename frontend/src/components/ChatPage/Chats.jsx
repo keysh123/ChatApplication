@@ -35,16 +35,21 @@
 import React, { useContext } from "react";
 import "./ChatPage.css";
 import { ChatRoomContext } from "../../context/ChatRoomContext";
-import { ChatContext } from "../../context/ChatContext";
-import { ChatContext1 as ChatContext1 } from '../../context/ChatProvider'
-const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setShowStart}) => {
+import { ChatContext } from "../../context/ChatProvider";
+const Chats = ({
+  setSelectedPerson,
+  userInfo,
+  setShowChat,
+  setStartConversation,
+  setShowStart,
+}) => {
   // const [users, setUsers] = useState([]);
 
   // useEffect(() => {
   //   // Fetch users from the backend API endpoint when the component mounts
   //   fetchUsers();
   // }, []);
-  const {chatRoomData}=useContext(ChatRoomContext);
+  const { chatRoomData } = useContext(ChatRoomContext);
   // const fetchUsers = async () => {
   //   try {
   //     // Make an HTTP GET request using fetch
@@ -61,47 +66,41 @@ const Chats = ({setSelectedPerson,userInfo,setShowChat,setStartConversation,setS
   // const {setChatUser} = useContext(ChatContext);
   // const handleClick = (user)=>{
   //   setChatUser(user);
-    
+
   // }
-  const {setChatUser} = useContext(ChatContext);
-    const { chats, loading, getChats,getroomno,no } = useContext(ChatContext1);
-  const getStarted = (user) =>{
-    let t=0;
-    console.log(user+"this is me");
-    const chatRoomIds = chatRoomData.map(item => {
-      
-      if (item.user.username===user?.username) {
+  const { setChatUser } = useContext(ChatContext);
+  const { chats, loading, getChats, getroomno, no } = useContext(ChatContext);
+  const getStarted = (user) => {
+    let t = 0;
+    const chatRoomIds = chatRoomData.map((item) => {
+      if (item.user.username === user?.username) {
         console.log("prersent");
         getChats(item.chatRoomId);
-        t=1;
+        t = 1;
         setStartConversation(false);
-    setShowChat(true);
-    setShowStart(false);
-    // setSelectedPerson(user?.username);
-    setChatUser(item);
-    console.log(item+"holl");
-    return item.chatRoomId;
+        setShowChat(true);
+        setShowStart(false);
+        // setSelectedPerson(user?.username);
+        setChatUser(item);
+        return item.chatRoomId;
       }
       return null; // Or handle if username is not available
     });
-if(t==0){
-  // setChatUser(item);
-  console.log(user+"this is me");
-    setStartConversation(true);
-    setShowChat(false);
-    setShowStart(false);
-    setSelectedPerson(user);
-}
-   
-  }
+    if (t == 0) {
+      setStartConversation(true);
+      setShowChat(false);
+      setShowStart(false);
+      setSelectedPerson(user);
+    }
+  };
   return (
     <div className="chats">
       {userInfo?.map((user) => (
         <div
           className="userChat"
           key={user?.username}
-          onClick={()=>{
-            getStarted(user)
+          onClick={() => {
+            getStarted(user);
           }}
         >
           <img className="uimgs" src={user?.profileImg?.url} alt="" />

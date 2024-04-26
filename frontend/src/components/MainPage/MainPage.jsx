@@ -18,7 +18,7 @@ const MainPage = () => {
   return (
     <>
         {
-            user!=null?(<Home></Home>):(<LandingPage></LandingPage>)
+            user?(<Home></Home>):(<LandingPage></LandingPage>)
         }
     </>
   )
