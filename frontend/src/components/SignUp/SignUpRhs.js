@@ -36,17 +36,12 @@ export const SignUpRhs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let isValid = true;
     if (!regEmail.test(user.email)) {
-      isValid = false;
-      alert("Invalid mail");
-    }
-    if (!regPass.test(user.password)) {
-      isValid = false;
+      alert("Invalid email");
+    } else if (!regPass.test(user.password)) {
       alert("Invalid password");
-    }
-    console.log(user);
-    if (isValid) {
+    } else {
+      console.log(user);
       signup(user)
         .then((res) => {
           console.log(res);
@@ -56,6 +51,7 @@ export const SignUpRhs = () => {
         });
     }
   };
+  
 
   return (
     <>

@@ -45,7 +45,7 @@
 
 // export default Messages;
 
-// import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect ,useRef} from 'react';
 // import { ChatContext1 } from '../../context/ChatProvider' // Import ChatContext
 // import Message from './Message';
 
@@ -78,14 +78,14 @@
 // };
 
 // export default Messages;
-import React, { useContext,useEffect,useRef } from "react";
+// import React, { useContext, useEffect, useRef } from "react";
 import { ChatContext } from "../../context/ChatProvider";
 import Message from "./Message";
 import { WSContext } from "../../context/WSContext";
 import FileDiv from "./FileDiv";
 
 const Messages = ({ currentUser }) => {
-  const { chats, loading,chatUser } = useContext(ChatContext);
+  const { chats, loading, chatUser } = useContext(ChatContext);
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const Messages = ({ currentUser }) => {
 
   const { messagesRef } = useContext(WSContext);
   return (
-    <div id="messages" ref={messagesRef} className="messages">
+    <div id="messages"  className="messages" ref={messagesContainerRef}>
       {loading ? (
         <p>Loading messages...</p>
       ) : (
