@@ -44,6 +44,7 @@ import { AuthContext } from '../../context/AuthContext';
 const UserData = () => {
     const { user, signout,setUser,authenticateWithCookies} = useContext(AuthContext);
     console.log(user.bio);
+    authenticateWithCookies();
     // console.log(JSON.parse(user?.bio).textDto);
     const [updatedUser, setUpdatedUser] = useState({
         username: user?.username,
@@ -53,7 +54,7 @@ const UserData = () => {
     const [textDto,setTextDto] = useState({
         data:user?.bio
     })
-
+    
     // Function to handle changes in form fields
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -97,7 +98,7 @@ const UserData = () => {
             alert('An error occurred while updating user profile');
         });
         setUser(user);
-        authenticateWithCookies()
+        // authenticateWithCookies()
     };
 
     return (
@@ -105,7 +106,7 @@ const UserData = () => {
             <form className='uiform'>
                 <div className="uridiv">
                     <div className='uiuname uir'>
-                        User Name: <input type='text' name='username' value={updatedUser.username || user?.username} onChange={handleChange} />
+                        User Name: <input type='text' name='username' value={updatedUser.username || user?.username} onChange={handleChange} disabled />
                     </div>
                     <div className='uimail uir'>
                         Mail: <input type='email' name='email' value={updatedUser.email || user?.email} onChange={handleChange} disabled />
