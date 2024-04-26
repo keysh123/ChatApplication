@@ -70,7 +70,7 @@ const UserImg = () => {
         // Clear selected file and preview after successful upload
         setSelectedFile(null);
         setSelectedFilePreview(null);
-        authenticateWithCookies();
+        // authenticateWithCookies();
       } else {
         throw new Error('Failed to upload photo');
       }

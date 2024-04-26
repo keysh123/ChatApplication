@@ -39,7 +39,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const { user, signout,authenticateWithCookies } = useContext(AuthContext);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  authenticateWithCookies();
+  // authenticateWithCookies();
   const handleLogout = () => {
     setShowConfirmation(true);
   };

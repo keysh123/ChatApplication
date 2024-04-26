@@ -44,7 +44,7 @@ import { AuthContext } from '../../context/AuthContext';
 const UserData = () => {
     const { user, signout,setUser,authenticateWithCookies} = useContext(AuthContext);
     console.log(user.bio);
-    authenticateWithCookies();
+    // authenticateWithCookies();
     // console.log(JSON.parse(user?.bio).textDto);
     const [updatedUser, setUpdatedUser] = useState({
         username: user?.username,

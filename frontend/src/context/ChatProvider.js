@@ -59,7 +59,7 @@ export const ChatProvider = ({ children }) => {
     console.log(chatUser);
     if (chatUser != null) {
       let obj = {
-        sender: user.username,
+        sender: user?.username,
         receiver: chatUser.user.username,
         text: message,
         chatRoomId: chatUser.chatRoomId,
@@ -151,7 +151,8 @@ export const ChatProvider = ({ children }) => {
   //   if (user) {
   //     // if (stompClient) {
   //     // if (!isSubscribed) {
-    useEffect(()=>{
+  useEffect(() => {
+    if (user) {
       stompClient.connect(
         {},
         function onConnected(e) {
@@ -206,13 +207,14 @@ export const ChatProvider = ({ children }) => {
           console.error("WebSocket error:", error);
         }
       );
-    },[user])
-        
-        // setIsSubscribed(true);
-      // }
-    // }
-    // }
-    // console.log(getChats, 123456789);
+    }
+  }, [user]);
+
+  // setIsSubscribed(true);
+  // }
+  // }
+  // }
+  // console.log(getChats, 123456789);
   //   // setFunc(getChats);
   // }, [user]);
 
